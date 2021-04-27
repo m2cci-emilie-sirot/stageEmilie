@@ -1,0 +1,140 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Apr 23 15:36:50 2021
+
+@author: Emilie Sirot
+"""
+
+import os
+from pprint import pprint
+from zipfile import ZipFile
+from osgeo import gdal
+
+
+# # Données
+
+# In[ ]:
+
+
+REP_ZIP = "S2_zip"
+REP_ZONE = "S2_zone"
+s2_zip = os.path.join(REP_ZIP, "SENTINEL2A_20170702-104252-984_L2B-SNOW_T31TFJ_D.zip")
+contour_zone = "Parcelles/UE.gpkg"
+
+
+# # Informations détaillées du contenu de l'archive
+
+# In[ ]:
+
+
+with ZipFile(s2_zip, 'r') as archive:
+    pprint(archive.filelist)
+
+
+# # Séléction des images à traiter
+
+# In[ ]:
+
+
+# Liste des fichiers contenus dans l'archive
+zip_files = ZipFile(s2_zip).namelist()
+
+# Sélection des images à garder
+bands = [f for f in zip_files if '.tif' in f and 'FRE' in f]
+mask_cloud = [f for f in zip_files if 'CLM_R1.tif' in f]
+
+
+# # Dossier de sortie
+
+# In[ ]:
+
+
+name_parts = os.path.basename(s2_zip).split("_")
+sat = name_parts[0].replace("SENTINEL", "S")
+date = name_parts[1].split("-")[0]
+
+rep = f"{sat}_{date}_{name_parts[3]}"
+rep_out_extrait = os.path.join(REP_ZONE, rep)
+os.makedirs(rep_out_extrait, exist_ok=True) # création du dossier sur le disque
+
+
+# # Traitement de l'image compressée
+# gdal lit directement des données dans des archives.  
+# Pour des archives au format zip on utilise le protocol vsizip.  
+# Pour lire des données on donne le chemin de l'archive (comme si c'était un dossier) puis le chemin de l'image dans l'archive.
+
+# In[ ]:
+
+
+for img in bands + mask_cloud:
+    band_num = os.path.basename(img).split("_")[-1]
+    name_extrait = f"{rep}_{band_num}"
+    file_extrait = os.path.join(rep_out_extrait, name_extrait) # nom + chemin de l'image
+    out_tif = gdal.Warp(file_extrait,
+                        f"/vsizip/{s2_zip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
+                        creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
+                        cutlineDSName=contour_zone, # découpage en fonction d'un contour
+                        dstNodata=-10000, # valeur de nodata
+                        xRes=10, yRes=-10, # résolution de sortie
+                        targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
+                        cropToCutline=True # on réduit l'image à l"emprise du contour
+                       )
+    if not out_tif:
+        print(f"Erreur : {file_extrait}")
+    out_tif = None
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
