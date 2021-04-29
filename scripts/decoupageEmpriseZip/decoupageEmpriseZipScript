@@ -1,10 +1,12 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Fri Apr 23 15:36:50 2021
 
-@author: Emilie Sirot
+@author: Emilie Sirot d'après le script de Pascal Pichelin
 """
+
+#packages à importer
 
 import os
 from pprint import pprint
@@ -16,33 +18,66 @@ from osgeo import gdal
 
 # In[ ]:
 
+#définition des répertoires
 
-REP_ZIP = "S2_zip"
-REP_ZONE = "S2_zone"
-s2_zip = os.path.join(REP_ZIP, "SENTINEL2A_20170702-104252-984_L2B-SNOW_T31TFJ_D.zip")
-contour_zone = "Parcelles/UE.gpkg"
+repZip = "archive" #répertoire qui contient les dossiers .zip Sentinel
+repEmprise = "emprise" #répertoire qui contient les emprises 
+repSortie = "sortie" #répertoire pour la sortie des fichiers 
+#s2_zip = os.path.join(repZip, "SENTINEL2A_20170702-104252-984_L2B-SNOW_T31TFJ_D.zip")
 
+#définition des emprises
+emp31TFJ = "emprise/emp31TFJ.gpkg"
+emp31TFK = "emprise/emp31TFK.gpkg"
+emp31TGK = "emprise/emp31TGK.gpkg"
+emp31TGL = "emprise/emp31TGL.gpkg"
+emp32TLP = "emprise/emp32TLP.gpkg"
+emp32TLQ = "emprise/emp32TLQ.gpkg"
+emp32TLR = "emprise/emp32TLR.gpkg"
+
+#liste des dossiers des tuiles
+repTuiles = os.listdir("archive")
+
+#liste de tous les dossiers .zip de chaque tuile 
+rep31TFJ = os.listdir("archive/31TFJ")
+rep31TFK = os.listdir("archive/31TFK")
+rep31TGK = os.listdir("archive/31TGK")
+rep31TGL = os.listdir("archive/31TGL")
+rep32TLP = os.listdir("archive/32TLP")
+rep32TLQ = os.listdir("archive/32TLQ")
+rep32TLR = os.listdir("archive/32TLR")
 
 # # Informations détaillées du contenu de l'archive
 
 # In[ ]:
 
+dossierZip = os.path.join(repZip, "31TFJ/"+rep31TFJ[1])
 
-with ZipFile(s2_zip, 'r') as archive:
-    pprint(archive.filelist)
 
+for i in range(len(rep31TFJ)):
+    
+    #accès aux fichiers du sous-répertoire
+    rep31TFJSousRep = ZipFile("archive/31TFJ/"+rep31TFJ[1], 'r')
+    pprint(rep31TFJSousRep.filelist)
+    
+   
+    #création d'une liste de ces fichiers
+    rep31TFJFiles = rep31TFJSousRep.namelist()
+    print(rep31TFJFiles)
+
+    
 
 # # Séléction des images à traiter
 
 # In[ ]:
 
 
-# Liste des fichiers contenus dans l'archive
-zip_files = ZipFile(s2_zip).namelist()
-
 # Sélection des images à garder
-bands = [f for f in zip_files if '.tif' in f and 'FRE' in f]
-mask_cloud = [f for f in zip_files if 'CLM_R1.tif' in f]
+image = [f for f in rep31TFJFiles if 'CMP' in f]
+maskSnow = [f for f in rep31TFJFiles if ('EXS'in f or 'SNW' in f) and '.tif' in f]
+maskSnow2 = [f for f in rep31TFJFiles if 'EXS'in f and '.tif' in f]
+print(image)
+print(maskSnow)
+
 
 
 # # Dossier de sortie
@@ -50,31 +85,31 @@ mask_cloud = [f for f in zip_files if 'CLM_R1.tif' in f]
 # In[ ]:
 
 
-name_parts = os.path.basename(s2_zip).split("_")
+name_parts = os.path.basename("archive/31TFJ/"+rep31TFJ[1]).split("_")
 sat = name_parts[0].replace("SENTINEL", "S")
 date = name_parts[1].split("-")[0]
 
 rep = f"{sat}_{date}_{name_parts[3]}"
-rep_out_extrait = os.path.join(REP_ZONE, rep)
+rep_out_extrait = os.path.join(repSortie, rep)
 os.makedirs(rep_out_extrait, exist_ok=True) # création du dossier sur le disque
 
 
 # # Traitement de l'image compressée
 # gdal lit directement des données dans des archives.  
-# Pour des archives au format zip on utilise le protocol vsizip.  
-# Pour lire des données on donne le chemin de l'archive (comme si c'était un dossier) puis le chemin de l'image dans l'archive.
+# Pour des repZips au format zip on utilise le protocol vsizip.  
+# Pour lire des données on donne le chemin de l'repZip (comme si c'était un dossier) puis le chemin de l'image dans l'repZip.
 
 # In[ ]:
 
 
-for img in bands + mask_cloud:
+for img in image + maskSnow:
     band_num = os.path.basename(img).split("_")[-1]
     name_extrait = f"{rep}_{band_num}"
     file_extrait = os.path.join(rep_out_extrait, name_extrait) # nom + chemin de l'image
     out_tif = gdal.Warp(file_extrait,
-                        f"/vsizip/{s2_zip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
+                        f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                         creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                        cutlineDSName=contour_zone, # découpage en fonction d'un contour
+                        cutlineDSName=emp31TFJ, # découpage en fonction d'un contour
                         dstNodata=-10000, # valeur de nodata
                         xRes=10, yRes=-10, # résolution de sortie
                         targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
