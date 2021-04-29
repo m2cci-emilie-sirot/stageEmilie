@@ -73,7 +73,8 @@ for i in range(len(rep31TFJ)):
 
 # Sélection des images à garder
 image = [f for f in rep31TFJFiles if 'CMP' in f]
-maskSnow = [f for f in rep31TFJFiles if ('EXS'in f or 'SNW' in f) and '.tif' in f]
+#maskSnow = [f for f in rep31TFJFiles if ('EXS'in f or 'SNW' in f) and '.tif' in f]
+maskSnow = [f for f in rep31TFJFiles if 'SNW' in f and '.tif' in f]
 maskSnow2 = [f for f in rep31TFJFiles if 'EXS'in f and '.tif' in f]
 print(image)
 print(maskSnow)
@@ -102,9 +103,9 @@ os.makedirs(rep_out_extrait, exist_ok=True) # création du dossier sur le disque
 # In[ ]:
 
 
-for img in image + maskSnow:
-    band_num = os.path.basename(img).split("_")[-1]
-    name_extrait = f"{rep}_{band_num}"
+for img in image:
+    #band_num = os.path.basename(img).split("_")[-1]
+    name_extrait = f"{rep}_image"
     file_extrait = os.path.join(rep_out_extrait, name_extrait) # nom + chemin de l'image
     out_tif = gdal.Warp(file_extrait,
                         f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
@@ -119,6 +120,41 @@ for img in image + maskSnow:
         print(f"Erreur : {file_extrait}")
     out_tif = None
 
+
+for img in maskSnow:
+    #band_num = os.path.basename(img).split("_")[-1]
+    name_extrait = f"{rep}_mask"
+    file_extrait = os.path.join(rep_out_extrait, name_extrait) # nom + chemin de l'image
+    out_tif = gdal.Warp(file_extrait,
+                        f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
+                        creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
+                        cutlineDSName=emp31TFJ, # découpage en fonction d'un contour
+                        dstNodata=-10000, # valeur de nodata
+                        xRes=10, yRes=-10, # résolution de sortie
+                        targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
+                        cropToCutline=True # on réduit l'image à l"emprise du contour
+                       )
+    if not out_tif:
+        print(f"Erreur : {file_extrait}")
+    out_tif = None
+
+
+for img in maskSnow2:
+    #band_num = os.path.basename(img).split("_")[-1]
+    name_extrait = f"{rep}_mask2"
+    file_extrait = os.path.join(rep_out_extrait, name_extrait) # nom + chemin de l'image
+    out_tif = gdal.Warp(file_extrait,
+                        f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
+                        creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
+                        cutlineDSName=emp31TFJ, # découpage en fonction d'un contour
+                        dstNodata=-10000, # valeur de nodata
+                        xRes=10, yRes=-10, # résolution de sortie
+                        targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
+                        cropToCutline=True # on réduit l'image à l"emprise du contour
+                       )
+    if not out_tif:
+        print(f"Erreur : {file_extrait}")
+    out_tif = None
 
 # In[ ]:
 
