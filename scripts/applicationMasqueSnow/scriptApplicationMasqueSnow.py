@@ -19,7 +19,6 @@ import os
 from osgeo import gdal, gdal_array, gdalnumeric, ogr, osr
 import glob
 import numpy as np
-import zipfile
 import os.path
 from os.path import basename, abspath, dirname, realpath, splitext
 import rasterio
@@ -37,8 +36,12 @@ driverSRTMHGT.Register()
 #ouverture fichiers
 
 cheminRaster = r"donnees/S2A_20170702_T31TFJ_image_CMP_R2"
+cheminMasque = r"donnees/S2A_20170702_T31TFJ_masque_SNW_R2"
 
+masque = gdal.Open(cheminMasque)
 raster = gdal.Open(cheminRaster)
+
+type(masque)
 type(raster)
 raster.GetProjection()
 raster.GetSpatialRef()
@@ -51,6 +54,23 @@ type(rasterSrs)
 
 rasterSpatialRef.ImportFromWkt(raster.GetProjection())
 if not rasterSrs.IsSame(rasterSpatialRef): 
+                        print("Warning : invalid layer, wrong SRS" )
+                        sys.exit(1)
+
+gt = raster.GetGeoTransform()
+pixelSizeX = gt[1]
+
+gtmasque = masque.GetGeoTransform()
+
+
+cheminTest = r"donnees/testLamb.tif"
+rasterTest = gdal.Open(cheminTest)
+type(rasterTest)
+
+rasterTestSrs = rasterTest.GetSpatialRef()
+
+rasterSpatialRef.ImportFromWkt(raster.GetProjection())
+if not rasterTestSrs.IsSame(rasterSpatialRef): 
                         print("Warning : invalid layer, wrong SRS" )
                         sys.exit(1)
 
