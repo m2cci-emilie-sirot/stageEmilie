@@ -27,29 +27,52 @@ import sys
 from osgeo.gdalconst import GA_ReadOnly
 
 #drivers
-driverOGROSR = ogr.GetDriverByName('ESRI Shapefile')
-dataset = driverOGROSR.Open(r'donnees/S2A_20170702_T31TFJ_image_CMP_R2')
 
-rastertest3 = Image.open('donnees/S2A_20170702_T31TFJ_image_CMP_R2')
-rastertest3.show()
-imarray = numpy.array(rastertest3)
-
-raster = dataset.GetLayer()
-rasterSCR = raster.GetSpatialRef()
+driverOGROSR = gdal.GetDriverByName('ESRI Shapefile')
+driverSRTMHGT = gdal.GetDriverByName('SRTMHGT')
+driverSRTMHGT.Register()
 
 
-gdal.AllRegister()
-driver = gdal.GetDriverByName('STRMHGT')
-driver.Register()
 
-raster = rasterio.open("donnees/S2A_20170702_T31TFJ_image_CMP_R2")
+#ouverture fichiers
 
-rasterSCR = raster.GetSpatialRef()
+cheminRaster = r"donnees/S2A_20170702_T31TFJ_image_CMP_R2"
+
+raster = gdal.Open(cheminRaster)
+type(raster)
+raster.GetProjection()
+raster.GetSpatialRef()
+
+rasterSrs = raster.GetSpatialRef()
+rasterSpatialRef = osr.SpatialReference()
+
+type(rasterSpatialRef)
+type(rasterSrs)
+
+rasterSpatialRef.ImportFromWkt(raster.GetProjection())
+if not rasterSrs.IsSame(rasterSpatialRef): 
+                        print("Warning : invalid layer, wrong SRS" )
+                        sys.exit(1)
 
 
-ORaster = gdal.Open(raster, gdal.GA_ReadOnly)
+band = raster.GetRasterBand(1)
+type(band)
 
-repDonnees = "donnees"
+raster.show()
+
+#numpy
+
+raster2 = Image.open(cheminRaster)
+type(raster2)
+raster2.show()
+imarray = numpy.array(raster2)
+print(raster2)
+
+#ouverture fichier rasterio
+
+raster3 = rasterio.open(cheminRaster)
+raster3.crs
+
 
 #vérification du système de coordonnées des images et changement de système si besoin
 
