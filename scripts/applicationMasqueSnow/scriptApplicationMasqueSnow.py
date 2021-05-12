@@ -30,10 +30,10 @@ from osgeo.gdalconst import GA_ReadOnly
 driverOGROSR = gdal.GetDriverByName('ESRI Shapefile')
 driverSRTMHGT = gdal.GetDriverByName('SRTMHGT')
 driverSRTMHGT.Register()
+driverGTiff = gdal.GetDriverByName('GTiff')
+driverGTiff.Register()
 
-
-
-#ouverture fichiers
+#Ouverture fichiers
 
 cheminRaster = r"donnees/S2A_20170702_T31TFJ_image_CMP_R2"
 cheminMasque = r"donnees/S2A_20170702_T31TFJ_masque_SNW_R2"
@@ -43,8 +43,11 @@ raster = gdal.Open(cheminRaster)
 
 type(masque)
 type(raster)
+
 raster.GetProjection()
 raster.GetSpatialRef()
+
+#Vérification Systeme de projection
 
 rasterSrs = raster.GetSpatialRef()
 rasterSpatialRef = osr.SpatialReference()
@@ -52,27 +55,27 @@ rasterSpatialRef = osr.SpatialReference()
 type(rasterSpatialRef)
 type(rasterSrs)
 
+
+
 rasterSpatialRef.ImportFromWkt(raster.GetProjection())
 if not rasterSrs.IsSame(rasterSpatialRef): 
                         print("Warning : invalid layer, wrong SRS" )
                         sys.exit(1)
+#Bandes
+                        
+bande1 = raster.GetRasterBand(1)
+bande2 = raster.GetRasterBand(2)
+bande3 = raster.GetRasterBand(3)
+bande4 = raster.GetRasterBand(4)
+bande5 = raster.GetRasterBand(5)
+bande6 = raster.GetRasterBand(6)
+bande7 = raster.GetRasterBand(7)
+bande8 = raster.GetRasterBand(8)
+bande8a = raster.GetRasterBand(9)
+bande11 = raster.GetRasterBand(12)
+bande12 = raster.GetRasterBand(13)
 
-gt = raster.GetGeoTransform()
-pixelSizeX = gt[1]
 
-gtmasque = masque.GetGeoTransform()
-
-
-cheminTest = r"donnees/testLamb.tif"
-rasterTest = gdal.Open(cheminTest)
-type(rasterTest)
-
-rasterTestSrs = rasterTest.GetSpatialRef()
-
-rasterSpatialRef.ImportFromWkt(raster.GetProjection())
-if not rasterTestSrs.IsSame(rasterSpatialRef): 
-                        print("Warning : invalid layer, wrong SRS" )
-                        sys.exit(1)
 
 
 band = raster.GetRasterBand(1)
