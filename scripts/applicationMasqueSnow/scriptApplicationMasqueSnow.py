@@ -11,7 +11,17 @@ import os
 from pprint import pprint
 from osgeo import gdal
 from PIL import Image
-import numpy
+import PIL
+
+
+import matplotlib.pyplot as plt
+from matplotlib import patches as mpatches, colors
+import earthpy as et
+import earthpy.plot as ep
+import earthpy.mask as em
+from earthpy.mask import mask_pixels 
+
+
 
 from __future__ import absolute_import, print_function, division
 import itertools
@@ -45,18 +55,19 @@ driverGTiff.Register()
 
 #Ouverture fichiers
 
-#se placer dans le répertoire 
+#se placer dans le répertoire "sortie" de la tuile
 
 repDonnees = r"sortie31TFJ"
+repSortie = "/home/sirote/Documents/stageEmilie/scripts/decoupageEmpriseZip/sortie"
 
 #creation liste des sous-répertoires
 
 listeRep = os.listdir(repDonnees)
 
-print(listeRep[0])
+print(listeRep[1])
 
 for i in range (len(listeRep)):
-    repCourant = os.path.join(repDonnees, listeRep[0])
+    repCourant = os.path.join(repDonnees, listeRep[1])
     fichiersRep = os.listdir(repCourant)
     B2 = [f for f in fichiersRep if 'B2' in f]
     B3 = [f for f in fichiersRep if 'B3' in f]
@@ -71,19 +82,49 @@ for i in range (len(listeRep)):
     B12 = [f for f in fichiersRep if 'B12' in f]
     masqueCLM = [f for f in fichiersRep if 'CLM' in f]
     
-    nomPartiesImage = os.path.basename(fichiersRep[0]).split("_")
+    listeBandes = B2+B3+B4+B5+B6+B7+B8+B8A+B11+B12
+    
+    nomPartiesImage = os.path.basename(fichiersRep[1]).split("_")
     sat = nomPartiesImage[0]
     date = nomPartiesImage[1]
     tuile = nomPartiesImage[2]
     bande = nomPartiesImage[3]
     
- 
     
-print(B8A)
+
+#test mask earthpy 
+B2rasterio = Image.open(repCourant+'/'+B2[0])
+masqueRasterio = Image.open(repCourant+'/'+masqueCLM[0])
+
+B2array = numpy.array(B2rasterio)
+masqueArray = numpy.array(masqueRasterio)
+
+print(masqueArray)
+
+
+B2masque = mask_pixels(B2array,masqueArray, vals=[0])
+
+
+B2masqueTif = Image.fromarray(B2masque)
+type(B2masqueTif)
+type(B2rasterio)
+
+
+spatialRefsortie = B2masqueTif.GetSpatialRef()
+sortieTif = B2masqueTif.save("test.tiff")
 
 
 
-
+nomBande = f"{sat}_{date}_{tuile}_{bande}"
+fichierSortie = os.path.join(repSortie, nomBande)
+sortieTif = gdal.Warp(fichierSortie,
+                      "/home/sirote/Documents/stageEmilie/applicationMasqueSnow/donnees/S2A_20170702_T31TFJ_B2",
+                       creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
+                       dstNodata=-10000, # valeur de nodata
+                       xRes=10, yRes=-10, # résolution de sortie
+                       targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
+                       cropToCutline=True 
+                       )
 
 masque = gdal.Open(cheminMasque)
 raster = gdal.Open(cheminRaster)
@@ -107,19 +148,6 @@ rasterSpatialRef.ImportFromWkt(raster.GetProjection())
 if not rasterSrs.IsSame(rasterSpatialRef): 
                         print("Warning : invalid layer, wrong SRS" )
                         sys.exit(1)
-#Bandes
-                        
-bande1 = raster.GetRasterBand(1)
-bande2 = raster.GetRasterBand(2)
-bande3 = raster.GetRasterBand(3)
-bande4 = raster.GetRasterBand(4)
-bande5 = raster.GetRasterBand(5)
-bande6 = raster.GetRasterBand(6)
-bande7 = raster.GetRasterBand(7)
-bande8 = raster.GetRasterBand(8)
-bande8a = raster.GetRasterBand(9)
-bande11 = raster.GetRasterBand(12)
-bande12 = raster.GetRasterBand(13)
 
 
 test = raster.BandReadAsArray()
