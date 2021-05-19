@@ -12,7 +12,8 @@ from pprint import pprint
 from osgeo import gdal
 from PIL import Image
 import PIL
-
+import numpy
+from osgeo.gdalconst import *
 
 import matplotlib.pyplot as plt
 from matplotlib import patches as mpatches, colors
@@ -44,6 +45,9 @@ driverGTiff = gdal.GetDriverByName('GTiff')
 driverGTiff.Register()
 driverGeoTIFF = gdal.GetDriverByName('GeoTIFF')
 driverGTiff.Register()
+
+gdal.AllRegister()
+
 
 
 ####################
@@ -93,16 +97,87 @@ for i in range (len(listeRep)):
     
 
 #test mask earthpy 
-B2rasterio = Image.open(repCourant+'/'+B2[0])
-masqueRasterio = Image.open(repCourant+'/'+masqueCLM[0])
+
+#B2rasterio = Image.open(repCourant+'/'+B2[0])
+
+B2ouverture = gdal.Open(repCourant+'/'+B2[0])
+
+#masqueRasterio = Image.open(repCourant+'/'+masqueCLM[0])
+
+masqueRasterio = gdal.Open(repCourant+'/'+masqueCLM[0])
 
 B2array = numpy.array(B2rasterio)
 masqueArray = numpy.array(masqueRasterio)
 
-print(masqueArray)
+print(B2array)
 
 
 B2masque = mask_pixels(B2array,masqueArray, vals=[0])
+
+print(B2masque)
+
+nrows, ncols = np.shape(B2masque)
+
+
+outputRaster = gdal.GetDriverByName('GTiff').Create('sortieRaster.tiff',ncols, nrows, 1, gdal.GDT_Float32)
+
+srs = osr.SpatialReference()
+srs.ImportFromEPSG(32631)
+
+outputRaster.SetProjection(srs.ExportToWkt())
+outputRaster.GetRasterBand(1).WriteArray(B2masque)
+outputRaster.FlushCache()
+
+####
+
+sortieTest = os.path.join(repSortie, "maskTest.tif")
+with rasterio.open(repCourant+'/'+masqueCLM[0], "r") as src:
+                                mask_cld1=src.read(1)
+                                listb = np.where(mask_cld1==0,1,np.nan)
+                                with rasterio.open(sortieTest,"w",**src.profile) as dest :
+                                    dest.write(listb.astype(rasterio.uint8),1)
+
+
+ with rasterio.open(sortieTest, "r") as src:
+                                mask_cld = src.read(1)
+                                profile = src.profile
+                                profile.update(dtype=rasterio.float64,
+                                       count=1,
+                                       compress='lzw',
+                                       nodata=np.nan)
+                                msk_name = nomPartiesImage[0]
+                        if not os.path.exists(os.path.join(repSortie, msk_name+"_msk_scaling.tif")):
+                            img = (repCourant+'/'+B2[0])
+                            with rasterio.open(img, "r") as src:
+                                band = src.read(1)
+                                band = band.astype(np.float64)
+                                band /= 10000 # band = band / 10000
+                                #band[band == 0] = np.nan
+                                profile = src.profile
+                                profile.update(
+                                        dtype=rasterio.float64,
+                                        count=1,
+                                        compress='lzw',
+                                        nodata=np.nan)
+                                msk2 = np.multiply(mask_cld, band)
+                                msk2[msk2 == 0] = np.nan
+                                with rasterio.open(os.path.join(repSortie, msk_name+"_msk_scaling.tif"), "w", **profile) as dst:
+                                    dst.write(msk2.astype(rasterio.float64), 1)
+
+
+                                x=msk2.shape
+                                y=x[0]*x[1]
+                                it=0
+                                for i in msk2:
+                                    if(i=="nan"):
+                                        it+=1
+
+                                mon_fichier = "open(os.path.join(rep,"liste_images.txt"), "a")"
+                                mon_fichier.write(msk_name + " " + str(it/y) + "\n")
+                                mon_fichier.close()
+
+
+####
 
 
 B2masqueTif = Image.fromarray(B2masque)
