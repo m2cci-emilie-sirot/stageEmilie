@@ -17,6 +17,7 @@ import rasterio
 
 gdal.AllRegister()
 
+#se placer dans le répertoire "applicarionMasque"
 
 #traitements des images(par bande) par tuile
   
@@ -29,7 +30,7 @@ gdal.AllRegister()
 
 #Ouverture fichiers
 
-#se placer dans le répertoire "sortie" de la tuile du découpage des images selon l'emprise
+
 
 repDonnees = r"../decoupageEmpriseZip/sortie/sortieT31TFJ"
 repSortie = "sortie/sortieT31TFJ"
@@ -118,7 +119,6 @@ for i in range (len(listeRep)):
 
 #Ouverture fichiers
 
-#se placer dans le répertoire "sortie" de la tuile du découpage des images selon l'emprise
 
 repDonnees = r"../decoupageEmpriseZip/sortie/sortieT31TFK"
 repSortie = "sortie/sortieT31TFK"
@@ -207,7 +207,6 @@ for i in range (len(listeRep)):
 
 #Ouverture fichiers
 
-#se placer dans le répertoire "sortie" de la tuile du découpage des images selon l'emprise
 
 repDonnees = r"../decoupageEmpriseZip/sortie/sortieT31TGK"
 repSortie = "sortie/sortieT31TGK"
@@ -296,7 +295,6 @@ for i in range (len(listeRep)):
 
 #Ouverture fichiers
 
-#se placer dans le répertoire "sortie" de la tuile du découpage des images selon l'emprise
 
 repDonnees = r"../decoupageEmpriseZip/sortie/sortieT31TGL"
 repSortie = "sortie/sortieT31TGL"
@@ -385,7 +383,6 @@ for i in range (len(listeRep)):
 
 #Ouverture fichiers
 
-#se placer dans le répertoire "sortie" de la tuile du découpage des images selon l'emprise
 
 repDonnees = r"../decoupageEmpriseZip/sortie/sortieT32TLP"
 repSortie = "sortie/sortieT32TLP"
@@ -474,7 +471,6 @@ for i in range (len(listeRep)):
 
 #Ouverture fichiers
 
-#se placer dans le répertoire "sortie" de la tuile du découpage des images selon l'emprise
 
 repDonnees = r"../decoupageEmpriseZip/sortie/sortieT32TLQ"
 repSortie = "sortie/sortieT32TLQ"
@@ -563,7 +559,6 @@ for i in range (len(listeRep)):
 
 #Ouverture fichiers
 
-#se placer dans le répertoire "sortie" de la tuile du découpage des images selon l'emprise
 
 repDonnees = r"../decoupageEmpriseZip/sortie/sortieT32TLR"
 repSortie = "sortie/sortieT32TLR"

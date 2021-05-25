@@ -26,13 +26,13 @@ repSortie = "sortie" #répertoire pour la sortie des fichiers
 
 
 #définition des répertoires de sortie des fichiers selon les tuiles
-repSortie31TFJ = "sortie/T31TFJ"
-repSortie31TFK = "sortie/T31TFK"
-repSortie31TGK = "sortie/T31TGK"
-repSortie31TGL = "sortie/T31TGL"
-repSortie32TLP = "sortie/T32TLP"
-repSortie32TLQ = "sortie/T32TLQ"
-repSortie32TLR = "sortie/T32TLR"
+repSortie31TFJ = "sortie/sortieT31TFJ"
+repSortie31TFK = "sortie/sortieT31TFK"
+repSortie31TGK = "sortie/sortieT31TGK"
+repSortie31TGL = "sortie/sortieT31TGL"
+repSortie32TLP = "sortie/sortieT32TLP"
+repSortie32TLQ = "sortie/sortieT32TLQ"
+repSortie32TLR = "sortie/sortieT32TLR"
 
 #définition des emprises
 emp31TFJ = "emprise/empT31TFJ.gpkg"

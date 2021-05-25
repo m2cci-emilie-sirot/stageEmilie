@@ -101,3 +101,16 @@ print("Size is {} x {} x {}".format(raster.RasterXSize,
 print("Projection is {}".format(raster.GetProjection())) #Information systeme de projection
 print("Band Type={}".format(gdal.GetDataTypeName(bande1.DataType))) #information type bande
 
+#Shapefile
+
+
+point = "TFE/test.shp"
+
+testPoint = ogr.Open(point, update = 0) #ouvrir le shp
+testPointRef = testPoint.GetLayer()
+
+print(testPointRef.GetFeatureCount())#compter le nombre d'objet
+
+#Sélection sur un shapefile
+query='SURFACE > 1000'
+Layer_ref.SetAttributeFilter(query)
