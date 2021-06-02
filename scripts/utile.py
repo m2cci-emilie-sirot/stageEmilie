@@ -54,7 +54,7 @@ rasterRasterio = rasterio.open(chemin])
 #transformer en Array
 
 rasterToArrayRasterio = raster.read(1) #le paramètre est le numéro de bande
-rasterToArrayNumpy = numy.array(raster)
+rasterToArrayNumpy = numpy.array(raster)
 
 #Color interpretation
 

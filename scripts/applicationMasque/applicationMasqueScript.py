@@ -17,7 +17,7 @@ import rasterio
 
 gdal.AllRegister()
 
-#se placer dans le répertoire "applicarionMasque"
+#se placer dans le répertoire "applicationMasque"
 
 #traitements des images(par bande) par tuile
   
