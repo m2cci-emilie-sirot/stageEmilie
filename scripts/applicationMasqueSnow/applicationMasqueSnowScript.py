@@ -51,11 +51,11 @@ for i in range (len(listeRep)):
     
     masqueSnow = [f for f in fichiersRep if 'masque' in f]
     
-#     nomPartiesImage = os.path.basename(masque[0]).split("_")#séparer les parties du fichier en cours de traitement pour les réutiliser pour la sortie
-#     sat = nomPartiesImage[0]
-#     date = nomPartiesImage[1]
-#     tuile = nomPartiesImage[2]
-#     masque = nomPartiesImage[3]+"Snow"
+    nomPartiesImage = os.path.basename(masqueSnow[0]).split("_")#séparer les parties du fichier en cours de traitement pour les réutiliser pour la sortie
+    sat = nomPartiesImage[0]
+    date = nomPartiesImage[1]
+    tuile = nomPartiesImage[2]
+    masque = nomPartiesImage[3]+"Snow"
     
     
 # #définir les répertoires en sortie  
@@ -65,97 +65,63 @@ for i in range (len(listeRep)):
     
 #ouvrir les TFE
 
-     TFEChemin = "TFE/tfe_bio_T31TFJ.shp"    
-     TFE = ogr.Open(TFEChemin)
+    TFEChemin = "TFE/tfe_bio_T31TFJ_WGS84.shp"    
+    # TFE = ogr.Open(TFEChemin)
+    TFE = gpd.read_file(TFEChemin) #ouverture du shp
      
+    listeCoordonnees = []
+     
+    for j in range(len(TFE)):
+        x = TFE.iloc[j].geometry.centroid.x #récupère les coordonnées d'un point
+        y = TFE.iloc[j].geometry.centroid.y
+     
+        listeCoordonnees.append((x,y))
+           
 #ouverture masque avec GDAL
 
-     masque = gdal.Open(repDonnees+'/'+listeRep[i]+'/'+masqueSnow[0])
-     TFELayer = TFEGDAL.GetLayer()  
-     band = masque.GetRasterBand(1)       
-     cols = masque.RasterXSize
-     rows = masque.RasterYSize
-     transform = masque.GetGeoTransform()
-     xOrigin = transform[0]
-     yOrigin = transform[3]
-     pixelWidth = transform[1]
-     pixelHeight = -transform[5]
-     masqueArray = band.ReadAsArray(0, 0, cols, rows)
+    masque = gdal.Open(repDonnees+'/'+listeRep[i]+'/'+masqueSnow[0])
+    # TFELayer = TFEGDAL.GetLayer()  
+    band = masque.GetRasterBand(1)       
+    cols = masque.RasterXSize
+    rows = masque.RasterYSize
+    transform = masque.GetGeoTransform()
+    xOrigin = transform[0]
+    yOrigin = transform[3]
+    pixelWidth = transform[1]
+    pixelHeight = -transform[5]
+    masqueArray = band.ReadAsArray(0, 0, cols, rows)
      
 #lire la valeur des points TFE sur les pixels correspondant du masque
 
-   
- 
-   
+    listePixTFE = []
     
-    
-    
-    
-    
-    # points_list = [ (x, y) ] #list of X,Y coordinates
-    
-    # for point in listeC:
-    #     col = int((point[0] - xOrigin) / pixelWidth)
-    #     row = int((yOrigin - point[1] ) / pixelHeight)
-    
-    
-     for point in listeC:
+    for point in listeCoordonnees:
         col = int((point[0] - xOrigin) / pixelWidth)
         row = int((yOrigin - point[1] ) / pixelHeight)
         
+        listePixTFE.append(masqueArray[row][col])
         
-       
         print(row,col, masqueArray[row][col])
 
+#creer dictionnaire des valeurs des pixels rangés par date
 
-     
     
-       
-
-####
-
-
-
-   
-    TFE = gpd.read_file(TFEChemin) #ouverture du shp
-    listePixTFE = []
+    dico[date] = listePixTFE
     
-    for j in range(len(TFE)):
     
-        x = TFE.iloc[j].geometry.centroid.x #récupère les coordonnées d'un point
-        y = TFE.iloc[j].geometry.centroid.y
-        
-        #conversion des coordonnées (ESPG 3827 vers ESPG 4326)
-        p = Proj("+proj=merc +lon_0=0 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6378137 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs")
-        lon, lat = p(x, y, inverse=True)
-        print(lat, lon)
-        
-        masqueSnow = Image.open(repSortieDate+'/'+masqueSnowConverti[0])
-        pix = masqueSnow.load()
-        listePixTFE.append(pix[lon,lat])
-        
-        splitDate = []
-        
-        for k in range(0, len(date), 2):
-            splitDate.append(date[k : k + 2])
-        
-            
-        nombreNoData = listePixTFE.count(0)
-        pourcentage = (100*nombreNoData)/111
-        
-        dico[date] = listePixTFE
-        dicoPourcentage[date] = pourcentage
-        
-        
-        
-        
-        
-        
-        
-        # plt.bar(range(len(dico)), list(dico.values()), align='center')
-        # plt.xticks(range(len(dico)), list(dico.keys()))
+    NoData = (100*(listePixTFE.count(254)))/111
+    Neige = (100*(listePixTFE.count(100)))/111
+    Nuages = (100*(listePixTFE.count(205)))/111
+    Rien = (100*(listePixTFE.count(0)))/111
+    
+    listePourcentage = [NoData, Neige, Nuages, Rien]
+
+    dicoPourcentage[date] = listePourcentage
 
 
+        
+        
+        
 
 
 
