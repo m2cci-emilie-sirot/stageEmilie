@@ -119,11 +119,51 @@ for i in range (len(listeRep)):
     dicoPourcentage[date] = listePourcentage
 
 
-        
-        
-        
+#graphique
 
 
+listeDate = list(dicoPourcentage)
+ind = [x for x, _ in enumerate(listeDate)]#taille
 
+plt.figure()
+
+plt.rcParams['axes.facecolor']='black'
+
+
+for d in range(len(listeDate)):
+    
+
+    
+    GNoData = np.array(dicoPourcentage[listeDate[d]][0])
+    GNeige = np.array(dicoPourcentage[listeDate[d]][1])
+    GNuages = np.array(dicoPourcentage[listeDate[d]][2])
+    GExploitable = np.array(dicoPourcentage[listeDate[d]][3])
+    
+   
+    
+    
+    plt.bar(d, GNoData, width=0.8,color='#4B4847', bottom=GNeige+GNuages+GExploitable)
+    plt.bar(d, GNeige, width=0.8,color='white', bottom=GNuages+GExploitable)
+    plt.bar(d, GNuages, width=0.8,color='darkgrey', bottom=GExploitable)
+    plt.bar(d, GExploitable, width=0.8,color='lightgreen')
+    
+    
+
+plt.xticks(ind, listeDate)
+plt.ylabel('Pourcentage de points TFE ')
+plt.xlabel('Dates')
+plt.legend(labels=['NoData','Neige','Nuages','Exploitable'],loc="upper right", facecolor="white")
+plt.title("Etat des pixels selon les points de mesure (TFE)")
+    
+plt.ylim = 1.0
+    
+plt.setp(plt.gca().get_xticklabels(),rotation=45, horizontalalignment='right')
+    
+    
+
+        
+plt.savefig('sortie/sortieT31TFJ/graphiqueT31TFJ.png', dpi = 300)
+
+plt.show()
 
 

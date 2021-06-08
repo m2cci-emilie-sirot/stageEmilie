@@ -234,3 +234,51 @@ ys = np.array(y)
 
 masqueRasterio = rasterio.open(repDonnees+'/'+listeRep[i]+'/'+masque[0])
 rows, cols = rasterio.transform.rowcol(masqueRasterio.transform, xs, ys)
+
+
+########
+
+janvier = [[0,50.50,49.50,0],[25.50,65.18,0,9.32]]
+fevrier = [[54.36,0,45.64],[0,50.0,0,50.0]]
+mars = [[23.80,0,0,76.2],[32,45.6,0,22.4]]
+avril = [[0,50.50,49.50,0],[25.50,65.18,0,9.32]]
+mai = [[54.36,0,45.64],[0,50.0,0,50.0]]
+juin = [[23.80,0,0,76.2],[32,45.6,0,22.4]]
+juillet = [[0,50.50,49.50,0],[25.50,65.18,0,9.32]]
+aout = [[54.36,0,45.64],[0,50.0,0,50.0]]
+septembre = [[23.80,0,0,76.2],[32,45.6,0,22.4]]
+octobre = [[0,50.50,49.50,0],[25.50,65.18,0,9.32]]
+novembre = [[54.36,0,45.64],[0,50.0,0,50.0]]
+decembre = [[23.80,0,0,76.2],[32,45.6,0,22.4]]
+
+
+  
+    Gjanvier = janvier
+    Gfevrier = fevrier
+    Gmars = mars
+    Gavril = avril
+    
+    ind = [x for x, _ in enumerate(legendeDates)]#taille
+    
+    
+    plt.bar(ind, GNoData, width=1, label='NoData',color='black', bottom=GNeige+GNuages+GRien)
+    plt.bar(ind, GNeige, width=1, label='Neige',color='silver', bottom=GNuages+GRien)
+    plt.bar(ind, GNuages, width=1, label='Nuages',color='blue', bottom=GRien)
+    plt.bar(ind, GRien, width=1, label='Rien',color='green')
+    
+    
+    
+    plt.xticks(ind, legendeDates)
+    plt.ylabel('dates')
+    plt.xlabel('pourcentage')
+    plt.legend(labels=['NoData','Neige','Nuages','Rien'],loc="upper right")
+    plt.title("TFE masque")
+    
+    plt.ylim = 1.0
+    
+    plt.setp(plt.gca().get_xticklabels(),rotation=45, horizontalalignment='right')
+    
+    
+    plt.show()
+    
+    print(dicoPourcentage[date][3])

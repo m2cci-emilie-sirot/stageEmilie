@@ -15,6 +15,7 @@ from PIL import Image
 import geopandas as gpd
 from pyproj import Proj, transform
 import matplotlib.pyplot as plt
+from pylab import *
 
 #drivers
 
@@ -122,21 +123,72 @@ for i in range (len(listeRep)):
     NoData = (100*(listePixTFE.count(254)))/111
     Neige = (100*(listePixTFE.count(100)))/111
     Nuages = (100*(listePixTFE.count(205)))/111
-    Rien = (100*(listePixTFE.count(0)))/111
+    Exploitable = (100*(listePixTFE.count(0)))/111
     
-    listePourcentage = [NoData, Neige, Nuages, Rien]
+    listePourcentage = [NoData, Neige, Nuages, Exploitable]
 
     dicoPourcentage[date] = listePourcentage
 
 
 #graphiques
 
-    legendeDates = ['Janvier '+annee,'Février '+annee,'Mars '+annee,'Avril '+annee,'Mai '+annee,'Juin '+annee,'Juillet '+annee,'Août '+annee,'Septembre '+annee,'Octobre '+annee,'Novembre '+annee,'Décembre '+annee]
 
-
+# splitDates = []
+#     for k in range(0, len(date), 4):
+#         splitDates.append(date[k : k + 4])
         
-        # plt.bar(range(len(dico)), list(dico.values()), align='center')
-        # plt.xticks(range(len(dico)), list(dico.keys()))
+#     annee = splitDates[0]
+#     # listeDates.append(splitDates[2]) 
 
-gold = np.array(dicoPourcentage[0])
 
+##########
+
+
+listeDate = list(dicoPourcentage)
+ind = [x for x, _ in enumerate(listeDate)]#taille
+
+
+# fig = plt.figure()
+
+plt.rcParams['axes.facecolor']='black'
+
+legendeDates = ['Janvier '+annee,'Février '+annee,'Mars '+annee,'Avril '+annee,'Mai '+annee,'Juin '+annee,'Juillet '+annee,'Août '+annee,'Septembre '+annee,'Octobre '+annee,'Novembre '+annee,'Décembre '+annee]
+    
+for d in range(len(listeDate)):
+    
+
+    
+    GNoData = np.array(dicoPourcentage[listeDate[d]][0])
+    GNeige = np.array(dicoPourcentage[listeDate[d]][1])
+    GNuages = np.array(dicoPourcentage[listeDate[d]][2])
+    GExploitable = np.array(dicoPourcentage[listeDate[d]][3])
+    
+   
+    
+    
+    plt.bar(d, GNoData, width=0.8,color='#4B4847', bottom=GNeige+GNuages+GExploitable)
+    plt.bar(d, GNeige, width=0.8,color='white', bottom=GNuages+GExploitable)
+    plt.bar(d, GNuages, width=0.8,color='darkgrey', bottom=GExploitable)
+    plt.bar(d, GExploitable, width=0.8,color='lightgreen')
+    
+    
+    
+    # plt.bar(ind, np.array(dicoPourcentage[listeDate[d]][0]) , width=0.8,color='black', bottom=GNeige+GNuages+GRien)
+    # plt.bar(ind, np.array(dicoPourcentage[listeDate[d]][1]), width=0.8,color='silver', bottom=GNuages+GRien)
+    # plt.bar(ind, np.array(dicoPourcentage[listeDate[d]][2]), width=0.8,color='blue', bottom=GRien)
+    # plt.bar(ind, np.array(dicoPourcentage[listeDate[d]][3]), width=0.8,color='green')
+    
+# fig.patch.set_facecolor('#E0E0E0')
+plt.xticks(ind, listeDate)
+plt.ylabel('Pourcentage de points TFE ')
+plt.xlabel('Dates')
+plt.legend(labels=['NoData','Neige','Nuages','Exploitable'],loc="upper right", facecolor="white")
+plt.title("Etat des pixels selon les points de mesure (TFE)")
+    
+plt.ylim = 1.0
+    
+plt.setp(plt.gca().get_xticklabels(),rotation=45, horizontalalignment='right')
+    
+    
+plt.show()
+    
