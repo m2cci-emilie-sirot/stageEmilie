@@ -159,7 +159,7 @@ plt.ylim = 1.0
     
 plt.setp(plt.gca().get_xticklabels(),rotation=45, horizontalalignment='right')
     
-    
+plt.tight_layout()
 
         
 plt.savefig('sortie/sortieT31TFJ/graphiqueT31TFJ.png', dpi = 300)
