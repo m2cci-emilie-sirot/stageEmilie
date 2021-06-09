@@ -59,6 +59,11 @@ for i in range (len(listeRep)):
     
     listeBandes = B2+B3+B4+B5+B6+B7+B8+B8A+B11+B12
     
+    
+    
+    
+    
+    
     for j in range(len(listeBandes)):
         nomPartiesImage = os.path.basename(listeBandes[j]).split("_")#séparer les parties du fichier en cours de traitement pour les réutiliser pour la sortie
         sat = nomPartiesImage[0]
