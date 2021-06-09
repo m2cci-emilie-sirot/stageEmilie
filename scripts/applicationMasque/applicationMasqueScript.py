@@ -60,10 +60,6 @@ for i in range (len(listeRep)):
     listeBandes = B2+B3+B4+B5+B6+B7+B8+B8A+B11+B12
     
     
-    
-    
-    
-    
     for j in range(len(listeBandes)):
         nomPartiesImage = os.path.basename(listeBandes[j]).split("_")#séparer les parties du fichier en cours de traitement pour les réutiliser pour la sortie
         sat = nomPartiesImage[0]
@@ -79,7 +75,7 @@ for i in range (len(listeRep)):
 
 
 #convertir le masque pour l'appliquer
-        nomMasque1 = f"masque1_{sat}_{date}_{tuile}_{bande}"
+        nomMasque1 = "masqueConverti"
         masque1Sortie = os.path.join(repSortieDate, nomMasque1+".tiff")
         with rasterio.open(repCourant+'/'+masqueCLM[0], "r") as src:
                                         masque1Array=src.read(1)#creation array
@@ -167,7 +163,7 @@ for i in range (len(listeRep)):
 
 
 #convertir le masque pour l'appliquer
-        nomMasque1 = f"masque1_{sat}_{date}_{tuile}_{bande}"
+        nomMasque1 = "masqueConverti"
         masque1Sortie = os.path.join(repSortieDate, nomMasque1+".tiff")
         with rasterio.open(repCourant+'/'+masqueCLM[0], "r") as src:
                                         masque1Array=src.read(1)#creation array
@@ -255,7 +251,7 @@ for i in range (len(listeRep)):
 
 
 #convertir le masque pour l'appliquer
-        nomMasque1 = f"masque1_{sat}_{date}_{tuile}_{bande}"
+        nomMasque1 = "masqueConverti"
         masque1Sortie = os.path.join(repSortieDate, nomMasque1+".tiff")
         with rasterio.open(repCourant+'/'+masqueCLM[0], "r") as src:
                                         masque1Array=src.read(1)#creation array
@@ -343,7 +339,7 @@ for i in range (len(listeRep)):
 
 
 #convertir le masque pour l'appliquer
-        nomMasque1 = f"masque1_{sat}_{date}_{tuile}_{bande}"
+        nomMasque1 = "masqueConverti"
         masque1Sortie = os.path.join(repSortieDate, nomMasque1+".tiff")
         with rasterio.open(repCourant+'/'+masqueCLM[0], "r") as src:
                                         masque1Array=src.read(1)#creation array
@@ -416,6 +412,8 @@ for i in range (len(listeRep)):
     
     listeBandes = B2+B3+B4+B5+B6+B7+B8+B8A+B11+B12
     
+    
+    
     for j in range(len(listeBandes)):
         nomPartiesImage = os.path.basename(listeBandes[j]).split("_")#séparer les parties du fichier en cours de traitement pour les réutiliser pour la sortie
         sat = nomPartiesImage[0]
@@ -429,15 +427,15 @@ for i in range (len(listeRep)):
         repSortieDate = os.path.join(repSortie, rep)
         os.makedirs(repSortieDate, exist_ok=True) # création du dossier sur le disque
 
-
 #convertir le masque pour l'appliquer
-        nomMasque1 = f"masque1_{sat}_{date}_{tuile}_{bande}"
+        nomMasque1 = "masqueConverti"
         masque1Sortie = os.path.join(repSortieDate, nomMasque1+".tiff")
         with rasterio.open(repCourant+'/'+masqueCLM[0], "r") as src:
                                         masque1Array=src.read(1)#creation array
                                         masque1Final = np.where(masque1Array==0,1,np.nan)
                                         with rasterio.open(masque1Sortie,"w",**src.profile) as dest :
                                             dest.write(masque1Final.astype(rasterio.uint8),1)
+
                               
 #application du masque
         with rasterio.open(masque1Sortie, "r") as src:
@@ -513,7 +511,7 @@ for i in range (len(listeRep)):
     
 
 #définir les répertoires en sortie  
-        rep = f"{sat}_{date}_{tuile}"
+        rep = "masqueConverti"
         repSortieDate = os.path.join(repSortie, rep)
         os.makedirs(repSortieDate, exist_ok=True) # création du dossier sur le disque
 
@@ -607,7 +605,7 @@ for i in range (len(listeRep)):
 
 
 #convertir le masque pour l'appliquer
-        nomMasque1 = f"masque1_{sat}_{date}_{tuile}_{bande}"
+        nomMasque1 = "masqueConverti"
         masque1Sortie = os.path.join(repSortieDate, nomMasque1+".tiff")
         with rasterio.open(repCourant+'/'+masqueCLM[0], "r") as src:
                                         masque1Array=src.read(1)#creation array
