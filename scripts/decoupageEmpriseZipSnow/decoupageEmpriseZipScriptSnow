@@ -78,11 +78,11 @@ for i in range(len(rep31TFJ)):
 
 # # Séléction des images à traiter
 
-    # Sélection des images à garder
-    image_CMP_R2 = [f for f in rep31TFJFichiers if 'CMP' in f]
+    # Sélection du masque à garder
+    # image_CMP_R2 = [f for f in rep31TFJFichiers if 'CMP' in f]
  
     masque_SNW_R2 = [f for f in rep31TFJFichiers if 'SNW' in f and '.tif' in f]
-    masque_EXS_R2 = [f for f in rep31TFJFichiers if 'EXS'in f and '.tif' in f]
+    # masque_EXS_R2 = [f for f in rep31TFJFichiers if 'EXS'in f and '.tif' in f]
  
 # # Dossier de sortie
  
@@ -102,27 +102,27 @@ for i in range(len(rep31TFJ)):
 # Pour des repZips au format zip on utilise le protocol vsizip.  
 # Pour lire des données on donne le chemin de l'repZip (comme si c'était un dossier) puis le chemin de l'image dans l'repZip.
 
-    for img in image_CMP_R2:
+    # for img in image_CMP_R2:
        
-        nomExtrait = f"{rep}_image_CMP_R2"
-        fichierExtrait = os.path.join(repSortieExtrait, nomExtrait) # nom + chemin de l'image
-        sortieTif = gdal.Warp(fichierExtrait,
-                            f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
-                            creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TFJ, # découpage en fonction d'un contour
-                            # dstNodata=-10000, # valeur de nodata -10000
-                            xRes=20, yRes=-20, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True # on réduit l'image à l"emprise du contour
-                           )
-    if not sortieTif:
-        print(f"Erreur : {fichierExtrait}")
-    sortieTif = None
+    #     nomExtrait = f"{rep}_image_CMP_R2"
+    #     fichierExtrait = os.path.join(repSortieExtrait, nomExtrait) # nom + chemin de l'image
+    #     sortieTif = gdal.Warp(fichierExtrait,
+    #                         f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
+    #                         creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
+    #                         cutlineDSName=emp31TFJ, # découpage en fonction d'un contour
+    #                         # dstNodata=-10000, # valeur de nodata -10000
+    #                         xRes=20, yRes=-20, # résolution de sortie
+    #                         targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
+    #                         cropToCutline=True # on réduit l'image à l"emprise du contour
+    #                        )
+    # if not sortieTif:
+    #     print(f"Erreur : {fichierExtrait}")
+    # sortieTif = None
 
 
     for img in masque_SNW_R2:
        
-        nomExtrait = f"{rep}_masque_SNW_R2"
+        nomExtrait = f"{rep}_masque_SNW"
         fichierExtrait = os.path.join(repSortieExtrait, nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
@@ -138,22 +138,22 @@ for i in range(len(rep31TFJ)):
     sortieTif = None
 
 
-    for img in masque_EXS_R2:
+    # for img in masque_EXS_R2:
         
-        nomExtrait = f"{rep}_masque_EXS_R2"
-        fichierExtrait = os.path.join(repSortieExtrait, nomExtrait) # nom + chemin de l'image
-        sortieTif = gdal.Warp(fichierExtrait,
-                            f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
-                            creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TFJ, # découpage en fonction d'un contour
-                            # dstNodata=-10000, # valeur de nodata
-                            xRes=20, yRes=-20, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True # on réduit l'image à l"emprise du contour
-                           )
-    if not sortieTif:
-        print(f"Erreur : {fichierExtrait}")
-    sortieTif = None
+    #     nomExtrait = f"{rep}_masque_EXS_R2"
+    #     fichierExtrait = os.path.join(repSortieExtrait, nomExtrait) # nom + chemin de l'image
+    #     sortieTif = gdal.Warp(fichierExtrait,
+    #                         f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
+    #                         creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
+    #                         cutlineDSName=emp31TFJ, # découpage en fonction d'un contour
+    #                         # dstNodata=-10000, # valeur de nodata
+    #                         xRes=20, yRes=-20, # résolution de sortie
+    #                         targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
+    #                         cropToCutline=True # on réduit l'image à l"emprise du contour
+    #                        )
+    # if not sortieTif:
+    #     print(f"Erreur : {fichierExtrait}")
+    # sortieTif = None
 
 
 ####################
