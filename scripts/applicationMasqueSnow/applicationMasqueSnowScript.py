@@ -195,9 +195,9 @@ for d in range(len(listeDate)):
    
     
     
-    plt.bar(indexDate, GNoData, width=0.8,color='#4B4847', bottom=GNeige+GNuages+GExploitable)
+    plt.bar(indexDate, GNoData, width=0.8,color='red', bottom=GNeige+GNuages+GExploitable)
     plt.bar(indexDate, GNeige, width=0.8,color='white', bottom=GNuages+GExploitable)
-    plt.bar(indexDate, GNuages, width=0.8,color='darkgrey', bottom=GExploitable)
+    plt.bar(indexDate, GNuages, width=0.8,color='#6082EF', bottom=GExploitable)
     plt.bar(indexDate, GExploitable, width=0.8,color='lightgreen')
     
     
@@ -342,9 +342,9 @@ for d in range(len(listeDate)):
    
     
     
-    plt.bar(indexDate, GNoData, width=0.8,color='#4B4847', bottom=GNeige+GNuages+GExploitable)
+    plt.bar(indexDate, GNoData, width=0.8,color='red', bottom=GNeige+GNuages+GExploitable)
     plt.bar(indexDate, GNeige, width=0.8,color='white', bottom=GNuages+GExploitable)
-    plt.bar(indexDate, GNuages, width=0.8,color='darkgrey', bottom=GExploitable)
+    plt.bar(indexDate, GNuages, width=0.8,color='#6082EF', bottom=GExploitable)
     plt.bar(indexDate, GExploitable, width=0.8,color='lightgreen')
     
     
@@ -488,9 +488,9 @@ for d in range(len(listeDate)):
    
     
     
-    plt.bar(indexDate, GNoData, width=0.8,color='#4B4847', bottom=GNeige+GNuages+GExploitable)
+    plt.bar(indexDate, GNoData, width=0.8,color='red', bottom=GNeige+GNuages+GExploitable)
     plt.bar(indexDate, GNeige, width=0.8,color='white', bottom=GNuages+GExploitable)
-    plt.bar(indexDate, GNuages, width=0.8,color='darkgrey', bottom=GExploitable)
+    plt.bar(indexDate, GNuages, width=0.8,color='#6082EF', bottom=GExploitable)
     plt.bar(indexDate, GExploitable, width=0.8,color='lightgreen')
     
     
@@ -633,9 +633,9 @@ for d in range(len(listeDate)):
    
     
     
-    plt.bar(indexDate, GNoData, width=0.8,color='#4B4847', bottom=GNeige+GNuages+GExploitable)
+    plt.bar(indexDate, GNoData, width=0.8,color='red', bottom=GNeige+GNuages+GExploitable)
     plt.bar(indexDate, GNeige, width=0.8,color='white', bottom=GNuages+GExploitable)
-    plt.bar(indexDate, GNuages, width=0.8,color='darkgrey', bottom=GExploitable)
+    plt.bar(indexDate, GNuages, width=0.8,color='#6082EF', bottom=GExploitable)
     plt.bar(indexDate, GExploitable, width=0.8,color='lightgreen')
     
     
@@ -778,9 +778,9 @@ for d in range(len(listeDate)):
    
     
     
-    plt.bar(indexDate, GNoData, width=0.8,color='#4B4847', bottom=GNeige+GNuages+GExploitable)
+    plt.bar(indexDate, GNoData, width=0.8,color='red', bottom=GNeige+GNuages+GExploitable)
     plt.bar(indexDate, GNeige, width=0.8,color='white', bottom=GNuages+GExploitable)
-    plt.bar(indexDate, GNuages, width=0.8,color='darkgrey', bottom=GExploitable)
+    plt.bar(indexDate, GNuages, width=0.8,color='#6082EF', bottom=GExploitable)
     plt.bar(indexDate, GExploitable, width=0.8,color='lightgreen')
     
     
@@ -923,9 +923,9 @@ for d in range(len(listeDate)):
    
     
     
-    plt.bar(indexDate, GNoData, width=0.8,color='#4B4847', bottom=GNeige+GNuages+GExploitable)
+    plt.bar(indexDate, GNoData, width=0.8,color='red', bottom=GNeige+GNuages+GExploitable)
     plt.bar(indexDate, GNeige, width=0.8,color='white', bottom=GNuages+GExploitable)
-    plt.bar(indexDate, GNuages, width=0.8,color='darkgrey', bottom=GExploitable)
+    plt.bar(indexDate, GNuages, width=0.8,color='#6082EF', bottom=GExploitable)
     plt.bar(indexDate, GExploitable, width=0.8,color='lightgreen')
     
     
@@ -1068,9 +1068,9 @@ for d in range(len(listeDate)):
    
     
     
-    plt.bar(indexDate, GNoData, width=0.8,color='#4B4847', bottom=GNeige+GNuages+GExploitable)
+    plt.bar(indexDate, GNoData, width=0.8,color='red', bottom=GNeige+GNuages+GExploitable)
     plt.bar(indexDate, GNeige, width=0.8,color='white', bottom=GNuages+GExploitable)
-    plt.bar(indexDate, GNuages, width=0.8,color='darkgrey', bottom=GExploitable)
+    plt.bar(indexDate, GNuages, width=0.8,color='#6082EF', bottom=GExploitable)
     plt.bar(indexDate, GExploitable, width=0.8,color='lightgreen')
     
     
