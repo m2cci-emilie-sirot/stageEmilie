@@ -51,6 +51,7 @@ for i in range (len(listeRep)):
     B6 = [f for f in fichiersRep if 'B6' in f]
     B7 = [f for f in fichiersRep if 'B7' in f]
     B8 = [f for f in fichiersRep if 'B8' in f]
+    B8.sort()
     del B8[1]
     B8A = [f for f in fichiersRep if 'B8A' in f]
     B11 = [f for f in fichiersRep if 'B11' in f]

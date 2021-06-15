@@ -3,7 +3,7 @@
 """
 Created on Tue Jun  8 16:44:05 2021
 
-@author: sirote
+@author: Emilie Sirot d'après le script de Valentin Barbier
 """
 
 def indices(root,ferme,annee):
@@ -21,34 +21,82 @@ def indices(root,ferme,annee):
     :type annee: string
 
 
-    - author: V. Barbier (Ensai/Agrocampus-Ouest)
-    - date: 06/2018
-    """
-    """
+ 
     Fonction qui permet de créer des indices liés aux bandes colorées qui permettront de déterminer la biomasse dans les prairies
     rep_destination est le répertoire d'enregistrement des données
     li_band est une liste des bandes colorées
 
-    - author: V. Barbier (Ensai/Agrocampus-Ouest)
-    - date: 06/2018
-    """
+ """
+ 
+####################
+####################
+### Tuile 31TFJ ####
+####################
+####################
+
+ 
+ 
+repDonnees = r"../applicationMasque/sortie/sortieT31TFJ"
+repSortie = "sortie/sortieT31TFJ"
+
+
+listeRep = os.listdir(repDonnees)
+
+
+for i in range (len(listeRep)):
+    repCourant = os.path.join(repDonnees, listeRep[i])#se positionner dans le répertoire d'une date
+    fichiersRep = os.listdir(repCourant)#lister les fichiers à savoir les différentes bandes
+    
+    B2 = [f for f in fichiersRep if 'B2' in f]
+    B3 = [f for f in fichiersRep if 'B3' in f]
+    B4 = [f for f in fichiersRep if 'B4' in f]
+    B5 = [f for f in fichiersRep if 'B5' in f]
+    B6 = [f for f in fichiersRep if 'B6' in f]
+    B7 = [f for f in fichiersRep if 'B7' in f]
+    B8 = [f for f in fichiersRep if 'B8' in f]
+    del B8[1]
+    B8A = [f for f in fichiersRep if 'B8A' in f]
+    B11 = [f for f in fichiersRep if 'B11' in f]
+    B12 = [f for f in fichiersRep if 'B12' in f]
+    
+    
+    listeBandes = B2+B3+B4+B5+B6+B7+B8+B8A+B11+B12
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     rep=os.path.join(root,"Traitements")
-    rep_donnees=os.path.join(rep,ferme,"3_images_masquees",annee)
+    repDonnees=os.path.join(rep,ferme,"3_images_masquees",annee)
     rep_destination_finale=os.path.join(rep,ferme,"4_indices",annee)
 
     indices=["3BSI","3BSITian","CVI","mSR","ND","SR","indclass"]
-    for (path,dirs,files) in os.walk(rep_donnees):
+    for (path,dirs,files) in os.walk(repDonnees):
         for dir in dirs:
             for indice in indices:
                 if not os.path.exists(os.path.join(rep_destination_finale,dir,indice)):
                     os.makedirs(os.path.join(rep_destination_finale,dir,indice))
 
 
-    for (path,dirs,files) in os.walk(rep_donnees):
+    for (path,dirs,files) in os.walk(repDonnees):
         for dir in dirs:
             li_band2=[]
             rep_destination_finale1=os.path.join(rep_destination_finale,dir)
-            for (path1,dirs1,files1) in os.walk(rep_donnees):
+            for (path1,dirs1,files1) in os.walk(repDonnees):
                 for file1 in files1:
                     if((dir in path1) and ("msk" in file1)):
                         li_band2.append(os.path.join(path1,file1))
