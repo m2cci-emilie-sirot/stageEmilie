@@ -6,6 +6,10 @@ Created on Tue Jun  8 16:44:05 2021
 @author: Emilie Sirot d'après le script de Valentin Barbier
 """
 
+import os
+from osgeo import gdal
+
+
 def indices(root,ferme,annee):
     """
     Principe
@@ -54,29 +58,14 @@ for i in range (len(listeRep)):
     B6 = [f for f in fichiersRep if 'B6' in f]
     B7 = [f for f in fichiersRep if 'B7' in f]
     B8 = [f for f in fichiersRep if 'B8' in f]
-    del B8[1]
+    B8.sort()
+    del B8[0]
     B8A = [f for f in fichiersRep if 'B8A' in f]
     B11 = [f for f in fichiersRep if 'B11' in f]
     B12 = [f for f in fichiersRep if 'B12' in f]
     
     
     listeBandes = B2+B3+B4+B5+B6+B7+B8+B8A+B11+B12
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
