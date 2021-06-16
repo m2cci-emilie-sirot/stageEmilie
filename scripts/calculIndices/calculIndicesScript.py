@@ -8,30 +8,10 @@ Created on Tue Jun  8 16:44:05 2021
 
 import os
 from osgeo import gdal
+import itertools
+import rasterio
+import numpy as np 
 
-
-def indices(root,ferme,annee):
-    """
-    Principe
-    ========
-
-    Cette fonction permet de créer des indices liés aux bandes colorées qui permettront de déterminer la biomasse dans les prairies
-
-    :param root: répertoire de travail global
-    :param ferme: ferme étudiée (correspond à la zone d'étude)
-    :param annee: année d'étude
-    :type root: string
-    :type ferme: string
-    :type annee: string
-
-
- 
-    Fonction qui permet de créer des indices liés aux bandes colorées qui permettront de déterminer la biomasse dans les prairies
-    rep_destination est le répertoire d'enregistrement des données
-    li_band est une liste des bandes colorées
-
- """
- 
 ####################
 ####################
 ### Tuile 31TFJ ####
@@ -66,67 +46,69 @@ for i in range (len(listeRep)):
     
     
     listeBandes = B2+B3+B4+B5+B6+B7+B8+B8A+B11+B12
+    
+    #définir le nom des répertoires en sortie
+    
+    nomParties = os.path.basename(B2[0]).split("_")
+    sat = nomParties[0]
+    date = nomParties[1]
+    tuile = nomParties[2]
 
 
-
-    rep=os.path.join(root,"Traitements")
-    repDonnees=os.path.join(rep,ferme,"3_images_masquees",annee)
-    rep_destination_finale=os.path.join(rep,ferme,"4_indices",annee)
 
     indices=["3BSI","3BSITian","CVI","mSR","ND","SR","indclass"]
     for (path,dirs,files) in os.walk(repDonnees):
         for dir in dirs:
             for indice in indices:
-                if not os.path.exists(os.path.join(rep_destination_finale,dir,indice)):
-                    os.makedirs(os.path.join(rep_destination_finale,dir,indice))
+                if not os.path.exists(os.path.join(repSortie,dir,indice)):
+                    os.makedirs(os.path.join(repSortie,dir,indice))
+
+ # for (path,dirs,files) in os.walk(repCourant):
+ #        for dir in dirs:
+ #            li_band2=[]
+ #            rep_destination_finale1=os.path.join(repSortie,dir)
+ #            for (path1,dirs1,files1) in os.walk(repCourant):
+ #                for file1 in files1:
+ #                    if((dir in path1) and ("masque" in file1)):
+ #                        li_band2.append(os.path.join(path1,file1))
+
+ #                        x=file1.split("_")[1].split("-")[0]# a,b,c,d,e,f,g,h,i,j,k=file.split("_") # x,y,z=b.split("-")
+
+ #            #Je trie li_band dans l'ordre de la liste suivante
+ #            li_band1=["B2","B3","B4","B5","B6","B7","B8","B8A","B11","B12"]
+ #            it=0
+ #            li_band=[]
+ #            for i in li_band1:
+ #                for j in li_band2:
+
+ #                    if(j.split("_")[-3]==i):
+ #                        li_band.append(j)
+ #                it+=1
 
 
-    for (path,dirs,files) in os.walk(repDonnees):
-        for dir in dirs:
-            li_band2=[]
-            rep_destination_finale1=os.path.join(rep_destination_finale,dir)
-            for (path1,dirs1,files1) in os.walk(repDonnees):
-                for file1 in files1:
-                    if((dir in path1) and ("msk" in file1)):
-                        li_band2.append(os.path.join(path1,file1))
+            #two bands vegetation indices (normalized difference et simple ratio)
 
-                        x=file1.split("_")[1].split("-")[0]# a,b,c,d,e,f,g,h,i,j,k=file.split("_") # x,y,z=b.split("-")
-
-            #Je trie li_band dans l'ordre de la liste suivante
-            li_band1=["B2","B3","B4","B5","B6","B7","B8","B8A","B11","B12"]
-            it=0
-            li_band=[]
-            for i in li_band1:
-                for j in li_band2:
-
-                    if(j.split("_")[-3]==i):
-                        li_band.append(j)
-                it+=1
-
-
-            # two bands vegetation indices (normalized difference et simple ratio)
-
-            for elt in itertools.permutations(li_band,2):
-                bande1 = elt[0].split("_")[-3]
-                bande2 = elt[1].split("_")[-3]
-                ND_of = "%s_%s_ND_%s.tif" % (bande1, bande2, x )
-                ND_of_inv="%s_%s_ND_%s.tif" % (bande2, bande1, x )
-                SR_of = "%s_%s_SR_%s.tif" % (bande1, bande2, x )
+            for elt in itertools.permutations(listeBandes,2):
+                bande1 = elt[0].split("_")[3]
+                bande2 = elt[1].split("_")[3]
+                ND_of = "%s_%s_ND_%s.tif" % (bande1, bande2, date )
+                ND_of_inv="%s_%s_ND_%s.tif" % (bande2, bande1, date )
+                SR_of = "%s_%s_SR_%s.tif" % (bande1, bande2, date )
                 # SR_of_inv="%s_%s_SR_%s.tif" % (bande2, bande1, x )
-                dst_ND=os.path.join(rep_destination_finale1,"ND", ND_of)
-                dst_SR=os.path.join(rep_destination_finale1,"SR", SR_of)
-                dst_ND_inv=os.path.join(rep_destination_finale1,"ND", ND_of_inv)
+                dst_ND=os.path.join(repSortie+"/"+listeRep[i],"ND", ND_of)
+                dst_SR=os.path.join(repSortie+"/"+listeRep[i],"SR", SR_of)
+                dst_ND_inv=os.path.join(repSortie+"/"+listeRep[i],"ND", ND_of_inv)
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
-                    with rasterio.open(elt[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(elt[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
                         bb = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -374,11 +356,3 @@ for i in range (len(listeRep)):
             if not os.path.exists(os.path.join(rep_destination_finale2,"MCARI_indclass_%s.tif"%(x))):
                 with rasterio.open(os.path.join(rep_destination_finale2,"MCARI_indclass_%s.tif"%(x)), "w", **profile) as dst:
                     dst.write(MCARI.astype(rasterio.float64), 1)
-
-
-if (__name__ == '__main__'):
-    root="/mnt/communPSN/Recherche/Herdect/modeles_VA/"
-    tuile="T30TXS"
-    ferme="85_Etablieres"
-    typosat="FRE"
-    annee="2020"
