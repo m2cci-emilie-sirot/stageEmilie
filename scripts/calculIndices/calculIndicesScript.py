@@ -262,97 +262,97 @@ for i in range (len(listeRep)):
                         dtype=rasterio.float64,
                         count=1,
                         compress='lzw')
-            # rep_destination_finale2=os.path.join(rep_destination_finale1,"indclass")
+            dst_indices=os.path.join(repSortie+"/"+listeRep[i],"indclass")
             ###################################################################
             #Calcul des indices classiques du fichier .xml
             ###################################################################
             #calcul du NDVI
             NDVI = np.divide((1.0*bandeB8 - bandeB4), (bandeB8 + bandeB4))
             NDVI[np.isinf(NDVI)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NDVI_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NDVI_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"NDVI_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"NDVI_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(NDVI.astype(rasterio.float64), 1)
 
             #calcul du GNDVI
             GNDVI = np.divide((1.0*bandeB8 - bandeB3), (bandeB8 + bandeB3))
             GNDVI[np.isinf(GNDVI)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","GNDVI_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","GNDVI_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"GNDVI_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"GNDVI_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(GNDVI.astype(rasterio.float64), 1)
 
             #calcul du NDVIre
             NDVIre = np.divide((1.0*bandeB8a - bandeB4), (bandeB8a + bandeB4))
             NDVIre[np.isinf(NDVIre)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NDVIre_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NDVIre_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"NDVIre_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"NDVIre_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(NDVIre.astype(rasterio.float64), 1)
 
             #calcul du NDI45
             NDI45 = np.divide((1.0*bandeB5 - bandeB4), (bandeB5 + bandeB4))
             NDI45[np.isinf(NDI45)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NDI45_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NDI45_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"NDI45_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"NDI45_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(NDI45.astype(rasterio.float64), 1)
 
             #calcul du NDII
             NDII = np.divide((1.0*bandeB8 - bandeB11), (bandeB8 + bandeB11))
             NDII[np.isinf(NDII)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NDII_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NDII_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"NDII_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"NDII_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(NDII.astype(rasterio.float64), 1)
 
             #calcul du NREDI1
             NREDI1 = np.divide((1.0*bandeB6 - bandeB5), (bandeB6 + bandeB5))
             NREDI1[np.isinf(NREDI1)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NREDI1_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NREDI1_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"NREDI1_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"NREDI1_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(NREDI1.astype(rasterio.float64), 1)
 
             #calcul du NREDI2
             NREDI2 = np.divide((1.0*bandeB7 - bandeB5), (bandeB7 + bandeB5))
             NREDI2[np.isinf(NREDI2)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NREDI2_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NREDI2_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"NREDI2_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"NREDI2_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(NREDI2.astype(rasterio.float64), 1)
 
             #calcul du NREDI3
             NREDI3 = np.divide((1.0*bandeB7 - bandeB6), (bandeB7 + bandeB6))
             NREDI3[np.isinf(NREDI3)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NREDI3_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","NREDI3_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"NREDI3_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"NREDI3_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(NREDI3.astype(rasterio.float64), 1)
 
             #calcul du PSRI
             PSRI = np.divide((1.0*bandeB4 - bandeB3), (bandeB5))
             PSRI[np.isinf(PSRI)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","PSRI_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","PSRI_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"PSRI_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"PSRI_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(PSRI.astype(rasterio.float64), 1)
 
             #calcul du MSI
             MSI = np.divide((1.0*bandeB11), (bandeB8))
             MSI[np.isinf(MSI)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","MSI_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","MSI_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"MSI_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"MSI_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(MSI.astype(rasterio.float64), 1)
 
             #calcul du IRECI
             IRECI = np.divide((1.0*bandeB7 - bandeB4), (np.divide(1.0*bandeB5 , bandeB6)))
             IRECI[np.isinf(IRECI)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","IRECI_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","IRECI_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"IRECI_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"IRECI_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(IRECI.astype(rasterio.float64), 1)
 
             #calcul du MTCI
             MTCI = np.divide((1.0*bandeB8 - bandeB5), (bandeB5 - bandeB4))
             MTCI[np.isinf(MTCI)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","MTCI_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","MTCI_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"MTCI_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"MTCI_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(MTCI.astype(rasterio.float64), 1)
 
             #calcul du MCARI
             MCARI = np.multiply(((bandeB5 - bandeB4) - (0.2*(bandeB5 - bandeB3))), (bandeB5 - bandeB4))
             MCARI[np.isinf(MCARI)]=np.nan
-            if not os.path.exists(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","MCARI_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(repSortie+"/"+listeRep[i]+"/"+"indclass","MCARI_indclass_%s.tif"%(date)), "w", **profile) as dst:
+            if not os.path.exists(os.path.join(dst_indices,"MCARI_indclass_%s.tif"%(date))):
+                with rasterio.open(os.path.join(dst_indices,"MCARI_indclass_%s.tif"%(date)), "w", **profile) as dst:
                     dst.write(MCARI.astype(rasterio.float64), 1)
