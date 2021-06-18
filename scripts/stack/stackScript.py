@@ -62,15 +62,15 @@ for i in range (len(listeRep)):
         
     
     
-            with rasterio.open(repCourant+"/"+listeBandes[0]) as src:
-                meta = src.meta
+            # with rasterio.open(repCourant+"/"+listeBandes[0]) as src:
+            #     meta = src.meta
                 
-            meta.update(count= len(listeBandes))
+            # meta.update(count= len(listeBandes))
             
-            with rasterio.open(repSortieDate+'/stack.tif', 'w', **meta) as dst:
-                for id, layer in enumerate(listeBandes, start=1):
-                    with rasterio.open(repCourant+"/"+layer) as src1:
-                        dst.write_band(id, src1.read(1))
+            # with rasterio.open(repSortieDate+'/stack.tif', 'w', **meta) as dst:
+            #     for id, layer in enumerate(listeBandes, start=1):
+            #         with rasterio.open(repCourant+"/"+layer) as src1:
+            #             dst.write_band(id, src1.read(1))
             
             
     
@@ -85,68 +85,69 @@ for i in range (len(listeRep)):
     
     
 
-#     #ouverture des bandes avec GDAL
-#     B2image = gdal.Open(repCourant+"/"+B2[0])
-#     B3image = gdal.Open(repCourant+"/"+B3[0])
-#     B3image = gdal.Open(repCourant+"/"+B3[0])
-#     B4image = gdal.Open(repCourant+"/"+B4[0])
-#     B5image = gdal.Open(repCourant+"/"+B5[0])
-#     B6image = gdal.Open(repCourant+"/"+B6[0])
-#     B7image = gdal.Open(repCourant+"/"+B7[0])
-#     B8image = gdal.Open(repCourant+"/"+B8[0])
-#     B8Aimage = gdal.Open(repCourant+"/"+B8A[0])
-#     B11image = gdal.Open(repCourant+"/"+B11[0])
-#     B12image = gdal.Open(repCourant+"/"+B12[0])
+    # #ouverture des bandes avec GDAL
+    # B2image = gdal.Open(repCourant+"/"+B2[0])
+    # B3image = gdal.Open(repCourant+"/"+B3[0])
+    # B3image = gdal.Open(repCourant+"/"+B3[0])
+    # B4image = gdal.Open(repCourant+"/"+B4[0])
+    # B5image = gdal.Open(repCourant+"/"+B5[0])
+    # B6image = gdal.Open(repCourant+"/"+B6[0])
+    # B7image = gdal.Open(repCourant+"/"+B7[0])
+    # B8image = gdal.Open(repCourant+"/"+B8[0])
+    # B8Aimage = gdal.Open(repCourant+"/"+B8A[0])
+    # B11image = gdal.Open(repCourant+"/"+B11[0])
+    # B12image = gdal.Open(repCourant+"/"+B12[0])
 
-#     #transformation des bandes en array
+    # #transformation des bandes en array
     
-#     B2Array = B2image.ReadAsArray()
-#     B3Array = B3image.ReadAsArray()
-#     B4Array = B4image.ReadAsArray()
-#     B5Array = B5image.ReadAsArray()
-#     B6Array = B6image.ReadAsArray()
-#     B7Array = B7image.ReadAsArray()
-#     B8Array = B8image.ReadAsArray()
-#     B8AArray = B8Aimage.ReadAsArray()
-#     B11Array = B11image.ReadAsArray()
-#     B12Array = B12image.ReadAsArray()
+    # B2Array = B2image.ReadAsArray()
+    # B3Array = B3image.ReadAsArray()
+    # B4Array = B4image.ReadAsArray()
+    # B5Array = B5image.ReadAsArray()
+    # B6Array = B6image.ReadAsArray()
+    # B7Array = B7image.ReadAsArray()
+    # B8Array = B8image.ReadAsArray()
+    # B8AArray = B8Aimage.ReadAsArray()
+    # B11Array = B11image.ReadAsArray()
+    # B12Array = B12image.ReadAsArray()
 
-#     stack = np.array([B2Array, B3Array, B4Array, B5Array, B5Array, B6Array, B7Array, B8Array, B8AArray, B11Array, B12Array])
+    # stack = np.array([B2Array, B3Array, B4Array, B5Array, B5Array, B6Array, B7Array, B8Array, B8AArray, B11Array, B12Array])
 
-#     gdal_array.SaveArray(stack.astype("int"), "stack.tif", "GTiff")
+    # gdal_array.SaveArray(stack.astype("int"), "stack.tif", "GTiff")
 
 
-#     # rep=os.path.join(root,"Traitements")
-#     # rep_donnees=os.path.join(rep,ferme,"3_images_masquees",annee)
+    # rep=os.path.join(root,"Traitements")
+    # rep_donnees=os.path.join(rep,ferme,"3_images_masquees",annee)
 
-# #     for (path,dirs,files) in os.walk(rep_donnees):
-# #         for dir in dirs:
-# #             li_band=[]
-# # #            print(dir)
-# #             for (path1, dirs1, files1) in os.walk(rep_donnees):
-# #                 for file1 in files1:
-# # #                    print("file1 :", file1)
-# #                     if((dir in path1) and ("msk" in file1)):
-# #                         li_band.append(os.path.join(path1,file1))
-# #                         x=file1.split("_")[1].split("-")[0]# a,b,c,d,e,f,g,h,i,j,k=file.split("_") # x,y,z=b.split("-")
-# # #                    else:
-# # #                        print("\nErreur")
-# # #                        print("dir :", dir)
-# # #                        print("path1 :", path1)
-# # #                        print("file1 :", file1)
+#     for (path,dirs,files) in os.walk(rep_donnees):
+#         for dir in dirs:
+#             listeBandes=[]
+# #            print(dir)
+#             for (path1, dirs1, files1) in os.walk(rep_donnees):
+#                 for file1 in files1:
+# #                    print("file1 :", file1)
+#                     if((dir in path1) and ("msk" in file1)):
+#                         listeBandes.append(os.path.join(path1,file1))
+#                         x=file1.split("_")[1].split("-")[0]# a,b,c,d,e,f,g,h,i,j,k=file.split("_") # x,y,z=b.split("-")
+# #                    else:
+# #                        print("\nErreur")
+# #                        print("dir :", dir)
+# #                        print("path1 :", path1)
+# #                        print("file1 :", file1)
 
-#             if not os.path.exists(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x))):
-# #                print("li_band :", li_band)
-#                 os.system("gdal_merge.py -separate -co PHOTOMETRIC=RGB -o %s %s %s %s %s %s %s %s %s %s %s"
-#                               %(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x)),li_band[0], li_band[1], li_band[2],
-#                                 li_band[3], li_band[4],li_band[5], li_band[6], li_band[7], li_band[8], li_band[9]))
-#                 with rasterio.open(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x)), "r") as src:
-#                     band = src.read(1)
-#                     profile = src.profile
-#                     band[band==0]=np.nan
-#                     os.remove(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x)))
-#                     with rasterio.open(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x)), "w", **profile) as dst:
-#                         dst.write(band.astype(rasterio.float64), 1)
+           
+             if not os.path.exists(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x))):
+#                print("li_band :", li_band)
+                os.system("gdal_merge.py -separate -co PHOTOMETRIC=RGB -o %s %s %s %s %s %s %s %s %s %s %s"
+                              %(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x)),li_band[0], li_band[1], li_band[2],
+                                li_band[3], li_band[4],li_band[5], li_band[6], li_band[7], li_band[8], li_band[9]))
+                with rasterio.open(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x)), "r") as src:
+                    band = src.read(1)
+                    profile = src.profile
+                    band[band==0]=np.nan
+                    os.remove(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x)))
+                    with rasterio.open(os.path.join(rep_donnees,dir, "%s_scaling_stack.tif"%(x)), "w", **profile) as dst:
+                        dst.write(band.astype(rasterio.float64), 1)
                         
                         
                         
