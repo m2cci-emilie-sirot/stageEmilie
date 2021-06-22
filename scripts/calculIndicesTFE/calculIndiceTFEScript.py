@@ -12,6 +12,7 @@ import itertools
 import rasterio
 import numpy as np 
 import geopandas as gpd
+import pandas as pd
 
 ####################
 ####################
@@ -32,6 +33,11 @@ listeRep = os.listdir(repDonnees)
 TFEChemin = "TFE/tfe_bio_T31TFJ_WGS84.shp"    
 TFE = gpd.read_file(TFEChemin) #ouverture du shp
      
+gidTFE = ["indices","bandes"]
+for gid in range(len(TFE.gid)):
+    gidTFE.append(TFE.gid[gid])
+
+
 listeCoordonnees = []
      
 for j in range(len(TFE)):
@@ -83,9 +89,16 @@ for i in range (len(listeRep)):
     pixelHeight = -transform[5]
     
 
+    #creation du tableau
+    
+    tab = pd.DataFrame(columns = gidTFE)
+
+
         
     #calcul des indices
         
+    
+    
     indices=["3BSI","3BSITian","CVI","mSR","ND","SR","indclass"]
     for (path,dirs,files) in os.walk(repDonnees):
         for dir in dirs:
@@ -126,16 +139,23 @@ for i in range (len(listeRep)):
 
                     ND =  np.divide((1.0*ba - bb), (ba + bb))
                     ND[np.isinf(ND)] = np.nan
+                     if not os.path.exists(dst_ND):
+                        if not os.path.exists(dst_ND_inv): #on observe que a/b = 1/(b/a)
+                        ind = ['SR', bande1+"_"+bande2]
                     
-                    listePixTFE = []
+                        val = []
+                
     
-                    for point in listeCoordonnees:
-                        col = int((point[0] - xOrigin) / pixelWidth)
-                        row = int((yOrigin - point[1] ) / pixelHeight)
-        
-                        listePixTFE.append(ND[row][col])
-        
-                    print(row,col, masqueArray[row][col])
+                        for point in listeCoordonnees:
+                            col = int((point[0] - xOrigin) / pixelWidth)
+                            row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                            val.append(ND[row][col])
+                            
+                        concat = ind + val
+                            
+                        tab.loc[0]=concat
+                        
                     
  
     
@@ -158,8 +178,15 @@ for i in range (len(listeRep)):
                     SR[np.isinf(SR)] = np.nan
                     if not os.path.exists(dst_SR):
                             #Pour éviter d'avoir de grosses corrélations entre ces indices, on en créer qu'un sur les deux
-                        with rasterio.open(dst_SR, "w", **profile) as dst:
-                            dst.write(SR.astype(rasterio.float64), 1)
+                     
+
+
+
+
+
+
+
+
 
               # three bands vegetation indices (3BSI / mSR et 3BSI_Tian)
             for elt in itertools.permutations(listeBandes,3):
