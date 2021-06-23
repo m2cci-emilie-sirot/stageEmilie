@@ -79,14 +79,14 @@ for i in range (len(listeRep)):
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -128,21 +128,21 @@ for i in range (len(listeRep)):
                 dst_CVI=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of)
                 dst_CVI_inv=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of_inv)
                 if(not os.path.exists(dst_3BSI) or (not os.path.exists(dst_MSR) and not os.path.exists(dst_MSR_inv)) or (not os.path.exists(dst_BSI_Tian) and not os.path.exists(dst_BSI_Tian_inv))or(not os.path.exists(dst_CVI) and not os.path.exists(dst_CVI_inv))):
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[2], "r") as src:
                         bc1 = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -403,14 +403,14 @@ for i in range (len(listeRep)):
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -452,21 +452,21 @@ for i in range (len(listeRep)):
                 dst_CVI=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of)
                 dst_CVI_inv=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of_inv)
                 if(not os.path.exists(dst_3BSI) or (not os.path.exists(dst_MSR) and not os.path.exists(dst_MSR_inv)) or (not os.path.exists(dst_BSI_Tian) and not os.path.exists(dst_BSI_Tian_inv))or(not os.path.exists(dst_CVI) and not os.path.exists(dst_CVI_inv))):
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[2], "r") as src:
                         bc1 = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -727,14 +727,14 @@ for i in range (len(listeRep)):
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -776,21 +776,21 @@ for i in range (len(listeRep)):
                 dst_CVI=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of)
                 dst_CVI_inv=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of_inv)
                 if(not os.path.exists(dst_3BSI) or (not os.path.exists(dst_MSR) and not os.path.exists(dst_MSR_inv)) or (not os.path.exists(dst_BSI_Tian) and not os.path.exists(dst_BSI_Tian_inv))or(not os.path.exists(dst_CVI) and not os.path.exists(dst_CVI_inv))):
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[2], "r") as src:
                         bc1 = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -1051,14 +1051,14 @@ for i in range (len(listeRep)):
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -1100,21 +1100,21 @@ for i in range (len(listeRep)):
                 dst_CVI=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of)
                 dst_CVI_inv=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of_inv)
                 if(not os.path.exists(dst_3BSI) or (not os.path.exists(dst_MSR) and not os.path.exists(dst_MSR_inv)) or (not os.path.exists(dst_BSI_Tian) and not os.path.exists(dst_BSI_Tian_inv))or(not os.path.exists(dst_CVI) and not os.path.exists(dst_CVI_inv))):
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[2], "r") as src:
                         bc1 = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -1375,14 +1375,14 @@ for i in range (len(listeRep)):
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -1424,21 +1424,21 @@ for i in range (len(listeRep)):
                 dst_CVI=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of)
                 dst_CVI_inv=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of_inv)
                 if(not os.path.exists(dst_3BSI) or (not os.path.exists(dst_MSR) and not os.path.exists(dst_MSR_inv)) or (not os.path.exists(dst_BSI_Tian) and not os.path.exists(dst_BSI_Tian_inv))or(not os.path.exists(dst_CVI) and not os.path.exists(dst_CVI_inv))):
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[2], "r") as src:
                         bc1 = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -1699,14 +1699,14 @@ for i in range (len(listeRep)):
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -1748,21 +1748,21 @@ for i in range (len(listeRep)):
                 dst_CVI=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of)
                 dst_CVI_inv=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of_inv)
                 if(not os.path.exists(dst_3BSI) or (not os.path.exists(dst_MSR) and not os.path.exists(dst_MSR_inv)) or (not os.path.exists(dst_BSI_Tian) and not os.path.exists(dst_BSI_Tian_inv))or(not os.path.exists(dst_CVI) and not os.path.exists(dst_CVI_inv))):
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[2], "r") as src:
                         bc1 = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -2023,14 +2023,14 @@ for i in range (len(listeRep)):
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -2072,21 +2072,21 @@ for i in range (len(listeRep)):
                 dst_CVI=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of)
                 dst_CVI_inv=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of_inv)
                 if(not os.path.exists(dst_3BSI) or (not os.path.exists(dst_MSR) and not os.path.exists(dst_MSR_inv)) or (not os.path.exists(dst_BSI_Tian) and not os.path.exists(dst_BSI_Tian_inv))or(not os.path.exists(dst_CVI) and not os.path.exists(dst_CVI_inv))):
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb1 = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[2], "r") as src:
                         bc1 = src.read(1)
                         profile = src.profile
                         profile.update(

@@ -108,7 +108,7 @@ for i in range (len(listeRep)):
 
 
             #two bands vegetation indices (normalized difference et simple ratio)
-
+            #for index in range(135):
             for elt in itertools.permutations(listeBandes,2):
                 bande1 = elt[0].split("_")[3]
                 bande2 = elt[1].split("_")[3]
@@ -122,14 +122,14 @@ for i in range (len(listeRep)):
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
                         profile.update(
                                 dtype=rasterio.float64,
                                 count=1,
                                 compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    with rasterio.open(repCourant+"/"+elt[1], "r") as src:
                         bb = src.read(1)
                         profile = src.profile
                         profile.update(
@@ -137,38 +137,35 @@ for i in range (len(listeRep)):
                                 count=1,
                                 compress='lzw')
 
-                    ND =  np.divide((1.0*ba - bb), (ba + bb))
-                    ND[np.isinf(ND)] = np.nan
-                     if not os.path.exists(dst_ND):
-                        if not os.path.exists(dst_ND_inv): #on observe que a/b = 1/(b/a)
-                        ind = ['SR', bande1+"_"+bande2]
-                    
-                        val = []
-                
+
+
+                    for index in range(135):
     
-                        for point in listeCoordonnees:
-                            col = int((point[0] - xOrigin) / pixelWidth)
-                            row = int((yOrigin - point[1] ) / pixelHeight)
-            
-                            val.append(ND[row][col])
+                        ND =  np.divide((1.0*ba - bb), (ba + bb))
+                        ND[np.isinf(ND)] = np.nan
+                        if not os.path.exists(dst_ND):
+                            #if not os.path.exists(dst_ND_inv): #on observe que a/b = 1/(b/a)
+                                ind = ['ND', bande1+"_"+bande2]
                             
-                        concat = ind + val
-                            
-                        tab.loc[0]=concat
+                                val = []
                         
+            
+                                for point in listeCoordonnees:
+                                    col = int((point[0] - xOrigin) / pixelWidth)
+                                    row = int((yOrigin - point[1] ) / pixelHeight)
+                    
+                                    val.append(ND[row][col])
+                                    
+                                concat = ind + val
+                                    
+                                tab.loc[index]=concat
+                            
                     
  
     
      
 #lire la valeur des points TFE sur les pixels correspondantà l'indice
 
-  
-                    
-                    
-                    
-                    
-                    
-                    
                     # if not os.path.exists(dst_ND):
                     #     if not os.path.exists(dst_ND_inv): #on observe que a/b = 1/(b/a)
                     #         with rasterio.open(dst_ND, "w", **profile) as dst:
@@ -179,7 +176,20 @@ for i in range (len(listeRep)):
                     if not os.path.exists(dst_SR):
                             #Pour éviter d'avoir de grosses corrélations entre ces indices, on en créer qu'un sur les deux
                      
-
+                        ind = ['ND', bande1+"_"+bande2]
+                    
+                        val = []
+                
+    
+                        for point in listeCoordonnees:
+                            col = int((point[0] - xOrigin) / pixelWidth)
+                            row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                            val.append(SR[row][col])
+                            
+                        concat = ind + val
+                            
+                        tab.loc[index+1]=concat
 
 
 
