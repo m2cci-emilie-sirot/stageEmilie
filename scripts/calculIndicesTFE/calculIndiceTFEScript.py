@@ -97,7 +97,7 @@ for i in range (len(listeRep)):
         
     #calcul des indices
         
-    
+    index = 1
     
     indices=["3BSI","3BSITian","CVI","mSR","ND","SR","indclass"]
     for (path,dirs,files) in os.walk(repDonnees):
@@ -108,7 +108,7 @@ for i in range (len(listeRep)):
 
 
             #two bands vegetation indices (normalized difference et simple ratio)
-            #for index in range(135):
+        
             for elt in itertools.permutations(listeBandes,2):
                 bande1 = elt[0].split("_")[3]
                 bande2 = elt[1].split("_")[3]
@@ -122,6 +122,9 @@ for i in range (len(listeRep)):
                 # dst_SR_inv=os.path.join(rep_destination_finale1,"SR", SR_of_inv)
                 if (not os.path.exists(dst_ND) or (not os.path.exists(dst_SR) and not os.path.exists(dst_ND_inv))): #On évite de lire à chaque fois les fichiers .tif
                     #cette logique regarde si le fichier ND existe ou si il n'existe ni SR ou SR inverse. Si jamais un de ces fichiers existe pas on les recréer
+                    print(bande1)
+                    print(bande2)
+                    print(index)
                     with rasterio.open(repCourant+"/"+elt[0], "r") as src:
                         ba = src.read(1)
                         profile = src.profile
@@ -139,7 +142,7 @@ for i in range (len(listeRep)):
 
 
 
-                    for index in range(135):
+                    
     
                         ND =  np.divide((1.0*ba - bb), (ba + bb))
                         ND[np.isinf(ND)] = np.nan
@@ -159,6 +162,8 @@ for i in range (len(listeRep)):
                                 concat = ind + val
                                     
                                 tab.loc[index]=concat
+                                
+                                index = index
                             
                     
  
@@ -176,7 +181,7 @@ for i in range (len(listeRep)):
                     if not os.path.exists(dst_SR):
                             #Pour éviter d'avoir de grosses corrélations entre ces indices, on en créer qu'un sur les deux
                      
-                        ind = ['ND', bande1+"_"+bande2]
+                        ind = ['SD', bande1+"_"+bande2]
                     
                         val = []
                 
@@ -192,7 +197,7 @@ for i in range (len(listeRep)):
                         tab.loc[index+1]=concat
 
 
-
+                        index = index+2
 
 
 
