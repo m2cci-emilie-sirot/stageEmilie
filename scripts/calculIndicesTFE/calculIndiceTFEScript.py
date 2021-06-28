@@ -74,6 +74,11 @@ for i in range (len(listeRep)):
     date = nomParties[1]
     tuile = nomParties[2]
     
+    nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    
+    repSortieDate = os.path.join(repSortie, listeRep[i]) 
+    if not os.path.exists(repSortieDate):
+        os.makedirs(repSortieDate)
     
     #caracteristiques de l'image
     
@@ -99,101 +104,94 @@ for i in range (len(listeRep)):
    
     
    
-    indices=["3BSI","3BSITian","CVI","mSR","ND","SR","indclass"]
-    for (path,dirs,files) in os.walk(repDonnees):
-        for dir in dirs:
-            for indice in indices:
-                if not os.path.exists(os.path.join(repSortie,dir,indice)):
-                    os.makedirs(os.path.join(repSortie,dir,indice))
-
+    # indices=["3BSI","3BSITian","CVI","mSR","ND","SR","indclass"]
+  
+  
 
             #two bands vegetation indices (normalized difference et simple ratio)
+    
+    for elt in itertools.permutations(listeBandes,2):
+        bande1 = elt[0].split("_")[3]
+        bande2 = elt[1].split("_")[3]
+        
+        print(bande1)
+        print(bande2)
+        print(index)
+        with rasterio.open(repCourant+"/"+elt[0], "r") as src:
+            ba = src.read(1)
+            profile = src.profile
+            profile.update(
+                    dtype=rasterio.float64,
+                    count=1,
+                    compress='lzw')
+        with rasterio.open(repCourant+"/"+elt[1], "r") as src:
+            bb = src.read(1)
+            profile = src.profile
+            profile.update(
+                    dtype=rasterio.float64,
+                    count=1,
+                    compress='lzw')
 
-            for elt in itertools.permutations(listeBandes,2):
-                bande1 = elt[0].split("_")[3]
-                bande2 = elt[1].split("_")[3]
-                
-                print(bande1)
-                print(bande2)
-                print(index)
-                with rasterio.open(repCourant+"/"+elt[0], "r") as src:
-                    ba = src.read(1)
-                    profile = src.profile
-                    profile.update(
-                            dtype=rasterio.float64,
-                            count=1,
-                            compress='lzw')
-                with rasterio.open(repCourant+"/"+elt[1], "r") as src:
-                    bb = src.read(1)
-                    profile = src.profile
-                    profile.update(
-                            dtype=rasterio.float64,
-                            count=1,
-                            compress='lzw')
-        
-        
+
+           
+
+            ND =  np.divide((1.0*ba - bb), (ba + bb))
+            ND[np.isinf(ND)] = np.nan
+            double = tab['bandes']=="ND_"+bande1+"_"+bande2
+            doubleInv = tab['bandes']=="ND_"+bande2+"_"+bande1
+            if any(double) == False :
+                if any(doubleInv)== False :
+            #if not os.path.exists(dst_ND):
+                #if not os.path.exists(dst_ND_inv): #on observe que a/b = 1/(b/a)
+                    ind = ['ND', "ND_"+bande1+"_"+bande2]
                    
-        
-                    ND =  np.divide((1.0*ba - bb), (ba + bb))
-                    ND[np.isinf(ND)] = np.nan
-                    double = tab['bandes']=="ND_"+bande1+"_"+bande2
-                    doubleInv = tab['bandes']=="ND_"+bande2+"_"+bande1
-                    if any(double) == False :
-                        if any(doubleInv)== False :
-                    #if not os.path.exists(dst_ND):
-                        #if not os.path.exists(dst_ND_inv): #on observe que a/b = 1/(b/a)
-                            ind = ['ND', "ND_"+bande1+"_"+bande2]
-                           
-                            val = []
-                    
-        
-                            for point in listeCoordonnees:
-                                col = int((point[0] - xOrigin) / pixelWidth)
-                                row = int((yOrigin - point[1] ) / pixelHeight)
-                
-                                val.append(ND[row][col])
-                                
-                            concat = ind + val
-                                
-                            tab.loc[index]=concat
-                            
-                            index = index + 1
-                            
-                    
-         
-        
-         
-        #lire la valeur des points TFE sur les pixels correspondantà l'indice
-        
-                    # if not os.path.exists(dst_ND):
-                    #     if not os.path.exists(dst_ND_inv): #on observe que a/b = 1/(b/a)
-                    #         with rasterio.open(dst_ND, "w", **profile) as dst:
-                    #             dst.write(ND.astype(rasterio.float64), 1)
-        
-                    SR = np.divide(ba, bb)
-                    SR[np.isinf(SR)] = np.nan
-                    double = tab['bandes']=="ND_"+bande1+"_"+bande2
-                    if any(double) == False:
-                            #Pour éviter d'avoir de grosses corrélations entre ces indices, on en créer qu'un sur les deux
-                     
-                        ind = ['SD', "SD_"+bande1+"_"+bande2]
-                    
-                        val = []
-                
-        
-                        for point in listeCoordonnees:
-                            col = int((point[0] - xOrigin) / pixelWidth)
-                            row = int((yOrigin - point[1] ) / pixelHeight)
+                    val = []
             
-                            val.append(SR[row][col])
-                            
-                        concat = ind + val
-                            
-                        tab.loc[index]=concat
-        
-        
-                        index = index+1
 
+                    for point in listeCoordonnees:
+                        col = int((point[0] - xOrigin) / pixelWidth)
+                        row = int((yOrigin - point[1] ) / pixelHeight)
+        
+                        val.append(ND[row][col])
+                        
+                    concat = ind + val
+                        
+                    tab.loc[index]=concat
+                    
+                    index = index + 1
+                    
+        
+
+            # if not os.path.exists(dst_ND):
+            #     if not os.path.exists(dst_ND_inv): #on observe que a/b = 1/(b/a)
+            #         with rasterio.open(dst_ND, "w", **profile) as dst:
+            #             dst.write(ND.astype(rasterio.float64), 1)
+
+            SR = np.divide(ba, bb)
+            SR[np.isinf(SR)] = np.nan
+            double = tab['bandes']=="SR_"+bande1+"_"+bande2
+            if any(double) == False:
+                    #Pour éviter d'avoir de grosses corrélations entre ces indices, on en créer qu'un sur les deux
+             
+                ind = ['SR', "SR_"+bande1+"_"+bande2]
+            
+                val = []
+        
+
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+    
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+
+
+                index = index+1
+
+    #tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
 
 
 
@@ -203,69 +201,144 @@ for i in range (len(listeRep)):
                 bande1 = elt[0].split("_")[3]
                 bande2 = elt[1].split("_")[3]
                 bande3 = elt[2].split("_")[3]
-                BSI_of = "%s_%s_%s_3BSI_%s.tif" % (bande1, bande2, bande3, date )
-                mSR_of = "%s_%s_%s_mSR_%s.tif" % (bande1, bande2, bande3, date )
-                mSR_of_inv = "%s_%s_%s_mSR_%s.tif" % (bande1, bande3, bande2, date )
-                BSI_Tian_of = "%s_%s_%s_3BSITian_%s.tif" % (bande1, bande2, bande3, date )
-                BSI_Tian_of_inv = "%s_%s_%s_3BSITian_%s.tif" % (bande1, bande3, bande2, date )
-                CVI_of = "%s_%s_%s_CVI_%s.tif" % (bande1, bande2, bande3, date )
-                CVI_of_inv = "%s_%s_%s_CVI_%s.tif" % (bande2, bande1, bande3, date )
-                dst_3BSI=os.path.join(repSortie+"/"+listeRep[i],"3BSI", BSI_of)
-                dst_MSR=os.path.join(repSortie+"/"+listeRep[i],"mSR", mSR_of)
-                dst_MSR_inv=os.path.join(repSortie+"/"+listeRep[i],"mSR", mSR_of_inv)
-                dst_BSI_Tian=os.path.join(repSortie+"/"+listeRep[i],"3BSITian", BSI_Tian_of)
-                dst_BSI_Tian_inv=os.path.join(repSortie+"/"+listeRep[i],"3BSITian", BSI_Tian_of_inv)
-                dst_CVI=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of)
-                dst_CVI_inv=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of_inv)
-                if(not os.path.exists(dst_3BSI) or (not os.path.exists(dst_MSR) and not os.path.exists(dst_MSR_inv)) or (not os.path.exists(dst_BSI_Tian) and not os.path.exists(dst_BSI_Tian_inv))or(not os.path.exists(dst_CVI) and not os.path.exists(dst_CVI_inv))):
-                    with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
-                        ba1 = src.read(1)
-                        profile = src.profile
-                        profile.update(
-                                dtype=rasterio.float64,
-                                count=1,
-                                compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
-                        bb1 = src.read(1)
-                        profile = src.profile
-                        profile.update(
-                                dtype=rasterio.float64,
-                                count=1,
-                                compress='lzw')
-                    with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
-                        bc1 = src.read(1)
-                        profile = src.profile
-                        profile.update(
-                                dtype=rasterio.float64,
-                                count=1,
-                                compress='lzw')
+                # BSI_of = "%s_%s_%s_3BSI_%s.tif" % (bande1, bande2, bande3, date )
+                # mSR_of = "%s_%s_%s_mSR_%s.tif" % (bande1, bande2, bande3, date )
+                # mSR_of_inv = "%s_%s_%s_mSR_%s.tif" % (bande1, bande3, bande2, date )
+                # BSI_Tian_of = "%s_%s_%s_3BSITian_%s.tif" % (bande1, bande2, bande3, date )
+                # BSI_Tian_of_inv = "%s_%s_%s_3BSITian_%s.tif" % (bande1, bande3, bande2, date )
+                # CVI_of = "%s_%s_%s_CVI_%s.tif" % (bande1, bande2, bande3, date )
+                # CVI_of_inv = "%s_%s_%s_CVI_%s.tif" % (bande2, bande1, bande3, date )
+                # dst_3BSI=os.path.join(repSortie+"/"+listeRep[i],"3BSI", BSI_of)
+                # dst_MSR=os.path.join(repSortie+"/"+listeRep[i],"mSR", mSR_of)
+                # dst_MSR_inv=os.path.join(repSortie+"/"+listeRep[i],"mSR", mSR_of_inv)
+                # dst_BSI_Tian=os.path.join(repSortie+"/"+listeRep[i],"3BSITian", BSI_Tian_of)
+                # dst_BSI_Tian_inv=os.path.join(repSortie+"/"+listeRep[i],"3BSITian", BSI_Tian_of_inv)
+                # dst_CVI=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of)
+                # dst_CVI_inv=os.path.join(repSortie+"/"+listeRep[i],"CVI", CVI_of_inv)
+                # if(not os.path.exists(dst_3BSI) or (not os.path.exists(dst_MSR) and not os.path.exists(dst_MSR_inv)) or (not os.path.exists(dst_BSI_Tian) and not os.path.exists(dst_BSI_Tian_inv))or(not os.path.exists(dst_CVI) and not os.path.exists(dst_CVI_inv))):
+                with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                    ba1 = src.read(1)
+                    profile = src.profile
+                    profile.update(
+                            dtype=rasterio.float64,
+                            count=1,
+                            compress='lzw')
+                with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                    bb1 = src.read(1)
+                    profile = src.profile
+                    profile.update(
+                            dtype=rasterio.float64,
+                            count=1,
+                            compress='lzw')
+                with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
+                    bc1 = src.read(1)
+                    profile = src.profile
+                    profile.update(
+                            dtype=rasterio.float64,
+                            count=1,
+                            compress='lzw')
 
-                    BSI =  np.divide((1.0* ba1 - bc1), (bb1 + bc1))
-                    BSI[np.isinf(BSI)] = np.nan
-                    if not os.path.exists(dst_3BSI):
-                        with rasterio.open(dst_3BSI, "w", **profile) as dst:
-                            dst.write(BSI.astype(rasterio.float64), 1)
+                BSI =  np.divide((1.0* ba1 - bc1), (bb1 + bc1))
+                BSI[np.isinf(BSI)] = np.nan
+                double = tab['bandes']=="BSI_"+bande1+"_"+bande2
+                if any(double) == False:
+                        #Pour éviter d'avoir de grosses corrélations entre ces indices, on en créer qu'un sur les deux
+                 
+                    ind = ['BSI', "BSI_"+bande1+"_"+bande2]
+                
+                    val = []
+            
+    
+                    for point in listeCoordonnees:
+                        col = int((point[0] - xOrigin) / pixelWidth)
+                        row = int((yOrigin - point[1] ) / pixelHeight)
+        
+                        val.append(SR[row][col])
+                        
+                    concat = ind + val
+                        
+                    tab.loc[index]=concat
+    
+    
+                    index = index+1
 
-                    mSR =  np.divide((1.0* ba1 - bc1), (bb1 - bc1))
-                    mSR[np.isinf(mSR)] = np.nan
-                    if not os.path.exists(dst_MSR):
-                        if not os.path.exists(dst_MSR_inv):
-                            with rasterio.open(dst_MSR, "w", **profile) as dst:
-                                dst.write(mSR.astype(rasterio.float64), 1)
+                mSR =  np.divide((1.0* ba1 - bc1), (bb1 - bc1))
+                mSR[np.isinf(mSR)] = np.nan
+                double = tab['bandes']=="mSR_"+bande1+"_"+bande2
+                doubleInv = tab['bandes']=="mSR_"+bande2+"_"+bande1
+                if any(double) == False :
+                    if any(doubleInv)== False :
+               
+                        ind = ['mSR', "mSR_"+bande1+"_"+bande2]
+                       
+                        val = []
+                
+    
+                        for point in listeCoordonnees:
+                            col = int((point[0] - xOrigin) / pixelWidth)
+                            row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                            val.append(ND[row][col])
+                            
+                        concat = ind + val
+                            
+                        tab.loc[index]=concat
+                        
+                        index = index + 1
 
-                    BSI_Tian =  np.divide((1.0* ba1 - bb1 - bc1), (ba1 + bb1 + bc1))
-                    BSI_Tian[np.isinf(BSI_Tian)] = np.nan
-                    if not os.path.exists(dst_BSI_Tian):
-                        if not os.path.exists(dst_BSI_Tian_inv):
-                            with rasterio.open(dst_BSI_Tian, "w", **profile) as dst:
-                                dst.write(BSI_Tian.astype(rasterio.float64), 1)
+                BSI_Tian =  np.divide((1.0* ba1 - bb1 - bc1), (ba1 + bb1 + bc1))
+                BSI_Tian[np.isinf(BSI_Tian)] = np.nan
+                double = tab['bandes']=="BSITian_"+bande1+"_"+bande2
+                doubleInv = tab['bandes']=="BSITian_"+bande2+"_"+bande1
+                if any(double) == False :
+                    if any(doubleInv)== False :
+                        ind = ['BSITian', "BSITian_"+bande1+"_"+bande2]
+                       
+                        val = []
+                
+    
+                        for point in listeCoordonnees:
+                            col = int((point[0] - xOrigin) / pixelWidth)
+                            row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                            val.append(ND[row][col])
+                            
+                        concat = ind + val
+                            
+                        tab.loc[index]=concat
+                        
+                        index = index + 1
 
-                    CVI =  np.multiply((ba1 / bc1), (bb1 / bc1))
-                    CVI[np.isinf(CVI)] = np.nan
-                    if not os.path.exists(dst_CVI):
-                        if not os.path.exists(dst_CVI_inv):
-                            with rasterio.open(dst_CVI, "w", **profile) as dst:
-                                dst.write(CVI.astype(rasterio.float64), 1)
+                CVI =  np.multiply((ba1 / bc1), (bb1 / bc1))
+                CVI[np.isinf(CVI)] = np.nan
+                double = tab['bandes']=="CVI_"+bande1+"_"+bande2
+                doubleInv = tab['bandes']=="CVI_"+bande2+"_"+bande1
+                if any(double) == False :
+                    if any(doubleInv)== False :
+               
+                        ind = ['CVI', "CVI_"+bande1+"_"+bande2]
+                       
+                        val = []
+                
+    
+                        for point in listeCoordonnees:
+                            col = int((point[0] - xOrigin) / pixelWidth)
+                            row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                            val.append(ND[row][col])
+                            
+                        concat = ind + val
+                            
+                        tab.loc[index]=concat
+                        
+                        index = index + 1
+    
+    
+    
+    
+    
+    
+    
     ###Création des indices usuels:
             with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
                 bandeB2 = src.read(1)
@@ -330,23 +403,63 @@ for i in range (len(listeRep)):
                         dtype=rasterio.float64,
                         count=1,
                         compress='lzw')
-            dst_indices=os.path.join(repSortie+"/"+listeRep[i],"indclass")
+           
+            
+            
             ###################################################################
             #Calcul des indices classiques du fichier .xml
             ###################################################################
-            #calcul du NDVI
+           
+            
+           #calcul du NDVI
             NDVI = np.divide((1.0*bandeB8 - bandeB4), (bandeB8 + bandeB4))
             NDVI[np.isinf(NDVI)]=np.nan
-            if not os.path.exists(os.path.join(dst_indices,"NDVI_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(dst_indices,"NDVI_indclass_%s.tif"%(date)), "w", **profile) as dst:
-                    dst.write(NDVI.astype(rasterio.float64), 1)
+            double = tab['bandes']=="indclass_NDVI"
+              if any(double) == False:
+                      #Pour éviter d'avoir de grosses corrélations entre ces indices, on en créer qu'un sur les deux
+               
+                  ind = ['indclass', "indclass_NDVI"]
+              
+                  val = []
+          
+  
+                  for point in listeCoordonnees:
+                      col = int((point[0] - xOrigin) / pixelWidth)
+                      row = int((yOrigin - point[1] ) / pixelHeight)
+      
+                      val.append(SR[row][col])
+                      
+                  concat = ind + val
+                      
+                  tab.loc[index]=concat
+  
+  
+                  index = index+1
 
             #calcul du GNDVI
             GNDVI = np.divide((1.0*bandeB8 - bandeB3), (bandeB8 + bandeB3))
             GNDVI[np.isinf(GNDVI)]=np.nan
-            if not os.path.exists(os.path.join(dst_indices,"GNDVI_indclass_%s.tif"%(date))):
-                with rasterio.open(os.path.join(dst_indices,"GNDVI_indclass_%s.tif"%(date)), "w", **profile) as dst:
-                    dst.write(GNDVI.astype(rasterio.float64), 1)
+            double = tab['bandes']=="indclass_GNDVI"
+            if any(double) == False:
+                    #Pour éviter d'avoir de grosses corrélations entre ces indices, on en créer qu'un sur les deux
+             
+                ind = ['indclass', "indclass_GNDVI"]
+            
+                val = []
+        
+
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+    
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+
+
+                index = index+1
 
             #calcul du NDVIre
             NDVIre = np.divide((1.0*bandeB8a - bandeB4), (bandeB8a + bandeB4))
