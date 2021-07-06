@@ -14,18 +14,18 @@ from zipfile import ZipFile
 from osgeo import gdal
 
 
-# # Données
+# # Donnees
 
 # In[ ]:
 
-#définition des répertoires
+#definition des repertoires
 
-repZip = "archive_zip" #répertoire qui contient les dossiers .zip Sentinel2
-repEmprise = "emprise" #répertoire qui contient les emprises 
-repSortie = "sortie" #répertoire pour la sortie des fichiers 
+repZip = "archive_zip" #repertoire qui contient les dossiers .zip Sentinel2
+repEmprise = "emprise" #repertoire qui contient les emprises 
+repSortie = "sortie" #repertoire pour la sortie des fichiers 
 
 
-#définition des répertoires de sortie des fichiers selon les tuiles
+#definition des repertoires de sortie des fichiers selon les tuiles
 repSortie31TFJ = "sortie/sortieT31TFJ"
 repSortie31TFK = "sortie/sortieT31TFK"
 repSortie31TGK = "sortie/sortieT31TGK"
@@ -34,7 +34,7 @@ repSortie32TLP = "sortie/sortieT32TLP"
 repSortie32TLQ = "sortie/sortieT32TLQ"
 repSortie32TLR = "sortie/sortieT32TLR"
 
-#définition des emprises
+#definition des emprises
 emp31TFJ = "emprise/empT31TFJ.gpkg"
 emp31TFK = "emprise/empT31TFK.gpkg"
 emp31TGK = "emprise/empT31TGK.gpkg"
@@ -61,31 +61,31 @@ rep32TLR = os.listdir("archive_zip/T32TLR")
 ####################
 ####################
 
-# # Informations détaillées du contenu de l'archive
+# # Informations detaillees du contenu de l'archive
 
 #boucle de l'extraction des emprises pour toutes les dates de la tuile
 for i in range(len(rep31TFJ)):
     
-    #definir le sous-répertoire en cours
+    #definir le sous-repertoire en cours
     dossierZip = os.path.join(repZip, "T31TFJ/"+rep31TFJ[i])
     
-    #accès aux fichiers du sous-répertoire
+    #accès aux fichiers du sous-repertoire
     rep31TFJSousRep = ZipFile(dossierZip, 'r')
     pprint(rep31TFJSousRep.filelist)
     
-    #création d'une liste de ces fichiers
+    #creation d'une liste de ces fichiers
     rep31TFJFichiers = rep31TFJSousRep.namelist()
 
-# # Séléction des images à traiter
+# # Selection des images à traiter
 
-    # Sélection des images à garder
+    # Selection des images à garder
     images = [f for f in rep31TFJFichiers if 'FRE' in f]
     #masqueSnow = [f for f in rep31TFJFichiers if ('EXS'in f or 'SNW' in f) and '.tif' in f]
     masque = [f for f in rep31TFJFichiers if 'CLM' in f and 'R1' in f ]
     
 # # Dossier et fichiers de sortie
  
-    #définir le nom des répertoires en sortie
+    #definir le nom des repertoires en sortie
     nomParties = os.path.basename(dossierZip).split("_")
     sat = nomParties[0].replace("SENTINEL", "S")
     date = nomParties[1].split("-")[0]
@@ -93,13 +93,13 @@ for i in range(len(rep31TFJ)):
     
     rep = f"{sat}_{date}_{nomParties[3]}"
     repSortieExtrait = os.path.join(repSortie31TFJ, rep)
-    os.makedirs(repSortieExtrait, exist_ok=True) # création du dossier sur le disque
+    os.makedirs(repSortieExtrait, exist_ok=True) # creation du dossier sur le disque
 
 
-# # Traitement de l'image compressée
-# gdal lit directement des données dans des archives.  
+# # Traitement de l'image compressee
+# gdal lit directement des donnees dans des archives.  
 # Pour des repZips au format zip on utilise le protocol vsizip.  
-# Pour lire des données on donne le chemin de l'repZip (comme si c'était un dossier) puis le chemin de l'image dans l'repZip.
+# Pour lire des donnees on donne le chemin de l'repZip (comme si c'etait un dossier) puis le chemin de l'image dans l'repZip.
   
     for img in images:
                
@@ -110,11 +110,11 @@ for i in range(len(rep31TFJ)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TFJ, # découpage en fonction d'un contour
+                            cutlineDSName=emp31TFJ, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata -10000
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True) # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True) # on reduit l'image à l"emprise du contour
                              
                                  
         if not sortieTif:
@@ -131,11 +131,11 @@ for i in range(len(rep31TFJ)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TFJ, # découpage en fonction d'un contour
+                            cutlineDSName=emp31TFJ, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True # on reduit l'image à l"emprise du contour
                             )
     if not sortieTif:
         print(f"Erreur : {fichierExtrait}")
@@ -149,44 +149,44 @@ for i in range(len(rep31TFJ)):
 ####################
 ####################
 
-# # Informations détaillées du contenu de l'archive
+# # Informations detaillees du contenu de l'archive
 
 #boucle de l'extraction des emprises pour toutes les dates de la tuile
 for i in range(len(rep31TFK)):
     
-    #definir le sous-répertoire en cours
+    #definir le sous-repertoire en cours
     dossierZip = os.path.join(repZip, "T31TFK/"+rep31TFK[i])
     
-    #accès aux fichiers du sous-répertoire
+    #accès aux fichiers du sous-repertoire
     rep31TFKSousRep = ZipFile(dossierZip, 'r')
     pprint(rep31TFKSousRep.filelist)
     
-    #création d'une liste de ces fichiers
+    #creation d'une liste de ces fichiers
     rep31TFKFichiers = rep31TFKSousRep.namelist()
 
-# # Séléction des images à traiter
+# # Selection des images à traiter
 
-    # Sélection des images à garder
+    # Selection des images à garder
     images = [f for f in rep31TFKFichiers if 'FRE' in f]
   
     masque = [f for f in rep31TFKFichiers if 'CLM' in f and 'R1' in f ]
     
 # # Dossier de sortie
  
-    #définir le nom des répertoires en sortie
+    #definir le nom des repertoires en sortie
     nomParties = os.path.basename(dossierZip).split("_")
     sat = nomParties[0].replace("SENTINEL", "S")
     date = nomParties[1].split("-")[0]
     
     rep = f"{sat}_{date}_{nomParties[3]}"
     repSortieExtrait = os.path.join(repSortie31TFK, rep)
-    os.makedirs(repSortieExtrait, exist_ok=True) # création du dossier sur le disque
+    os.makedirs(repSortieExtrait, exist_ok=True) # creation du dossier sur le disque
 
 
-# # Traitement de l'image compressée
-# gdal lit directement des données dans des archives.  
+# # Traitement de l'image compressee
+# gdal lit directement des donnees dans des archives.  
 # Pour des repZips au format zip on utilise le protocol vsizip.  
-# Pour lire des données on donne le chemin de l'repZip (comme si c'était un dossier) puis le chemin de l'image dans l'repZip.
+# Pour lire des donnees on donne le chemin de l'repZip (comme si c'etait un dossier) puis le chemin de l'image dans l'repZip.
   
     for img in images:
                
@@ -197,11 +197,11 @@ for i in range(len(rep31TFK)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TFK, # découpage en fonction d'un contour
+                            cutlineDSName=emp31TFK, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata -10000
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True) # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True) # on reduit l'image à l"emprise du contour
                  
 
                  
@@ -219,11 +219,11 @@ for i in range(len(rep31TFK)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TFK, # découpage en fonction d'un contour
+                            cutlineDSName=emp31TFK, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True # on reduit l'image à l"emprise du contour
                               )
     if not sortieTif:
         print(f"Erreur : {fichierExtrait}")
@@ -236,44 +236,44 @@ for i in range(len(rep31TFK)):
 ####################
 ####################
 
-# # Informations détaillées du contenu de l'archive
+# # Informations detaillees du contenu de l'archive
 
 #boucle de l'extraction des emprises pour toutes les dates de la tuile
 for i in range(len(rep31TGK)):
     
-    #definir le sous-répertoire en cours
+    #definir le sous-repertoire en cours
     dossierZip = os.path.join(repZip, "T31TGK/"+rep31TGK[i])
     
-    #accès aux fichiers du sous-répertoire
+    #accès aux fichiers du sous-repertoire
     rep31TGKSousRep = ZipFile(dossierZip, 'r')
     pprint(rep31TGKSousRep.filelist)
     
-    #création d'une liste de ces fichiers
+    #creation d'une liste de ces fichiers
     rep31TGKFichiers = rep31TGKSousRep.namelist()
 
-# # Séléction des images à traiter
+# # Selection des images à traiter
 
-    # Sélection des images à garder
+    # Selection des images à garder
     images = [f for f in rep31TGKFichiers if 'FRE' in f]
   
     masque = [f for f in rep31TGKFichiers if 'CLM' in f and 'R1' in f ]
     
 # # Dossier de sortie
  
-    #définir le nom des répertoires en sortie
+    #definir le nom des repertoires en sortie
     nomParties = os.path.basename(dossierZip).split("_")
     sat = nomParties[0].replace("SENTINEL", "S")
     date = nomParties[1].split("-")[0]
     
     rep = f"{sat}_{date}_{nomParties[3]}"
     repSortieExtrait = os.path.join(repSortie31TGK, rep)
-    os.makedirs(repSortieExtrait, exist_ok=True) # création du dossier sur le disque
+    os.makedirs(repSortieExtrait, exist_ok=True) # creation du dossier sur le disque
 
 
-# # Traitement de l'image compressée
-# gdal lit directement des données dans des archives.  
+# # Traitement de l'image compressee
+# gdal lit directement des donnees dans des archives.  
 # Pour des repZips au format zip on utilise le protocol vsizip.  
-# Pour lire des données on donne le chemin de l'repZip (comme si c'était un dossier) puis le chemin de l'image dans l'repZip.
+# Pour lire des donnees on donne le chemin de l'repZip (comme si c'etait un dossier) puis le chemin de l'image dans l'repZip.
   
     for img in images:
                
@@ -284,11 +284,11 @@ for i in range(len(rep31TGK)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TGK, # découpage en fonction d'un contour
+                            cutlineDSName=emp31TGK, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata -10000
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True) # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True) # on reduit l'image à l"emprise du contour
                  
 
                  
@@ -306,11 +306,11 @@ for i in range(len(rep31TGK)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TGK, # découpage en fonction d'un contour
+                            cutlineDSName=emp31TGK, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True # on reduit l'image à l"emprise du contour
                               )
     if not sortieTif:
         print(f"Erreur : {fichierExtrait}")
@@ -326,44 +326,44 @@ for i in range(len(rep31TGK)):
 ####################
 ####################
 
-# # Informations détaillées du contenu de l'archive
+# # Informations detaillees du contenu de l'archive
 
 #boucle de l'extraction des emprises pour toutes les dates de la tuile
 for i in range(len(rep31TGL)):
     
-    #definir le sous-répertoire en cours
+    #definir le sous-repertoire en cours
     dossierZip = os.path.join(repZip, "T31TGL/"+rep31TGL[i])
     
-    #accès aux fichiers du sous-répertoire
+    #accès aux fichiers du sous-repertoire
     rep31TGLSousRep = ZipFile(dossierZip, 'r')
     pprint(rep31TGLSousRep.filelist)
     
-    #création d'une liste de ces fichiers
+    #creation d'une liste de ces fichiers
     rep31TGLFichiers = rep31TGLSousRep.namelist()
 
-# # Séléction des images à traiter
+# # Selection des images à traiter
 
-    # Sélection des images à garder
+    # Selection des images à garder
     images = [f for f in rep31TGLFichiers if 'FRE' in f]
    
     masque = [f for f in rep31TGLFichiers if 'CLM' in f and 'R1' in f ]
     
 # # Dossier de sortie
  
-    #définir le nom des répertoires en sortie
+    #definir le nom des repertoires en sortie
     nomParties = os.path.basename(dossierZip).split("_")
     sat = nomParties[0].replace("SENTINEL", "S")
     date = nomParties[1].split("-")[0]
     
     rep = f"{sat}_{date}_{nomParties[3]}"
     repSortieExtrait = os.path.join(repSortie31TGL, rep)
-    os.makedirs(repSortieExtrait, exist_ok=True) # création du dossier sur le disque
+    os.makedirs(repSortieExtrait, exist_ok=True) # creation du dossier sur le disque
 
 
-# # Traitement de l'image compressée
-# gdal lit directement des données dans des archives.  
+# # Traitement de l'image compressee
+# gdal lit directement des donnees dans des archives.  
 # Pour des repZips au format zip on utilise le protocol vsizip.  
-# Pour lire des données on donne le chemin de l'repZip (comme si c'était un dossier) puis le chemin de l'image dans l'repZip.
+# Pour lire des donnees on donne le chemin de l'repZip (comme si c'etait un dossier) puis le chemin de l'image dans l'repZip.
   
     for img in images:
              
@@ -374,11 +374,11 @@ for i in range(len(rep31TGL)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TGL, # découpage en fonction d'un contour
+                            cutlineDSName=emp31TGL, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata -10000
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True) # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True) # on reduit l'image à l"emprise du contour
                  
 
                  
@@ -396,11 +396,11 @@ for i in range(len(rep31TGL)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp31TGL, # découpage en fonction d'un contour
+                            cutlineDSName=emp31TGL, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True # on reduit l'image à l"emprise du contour
                               )
     if not sortieTif:
         print(f"Erreur : {fichierExtrait}")
@@ -414,44 +414,44 @@ for i in range(len(rep31TGL)):
 ####################
 ####################
 
-# # Informations détaillées du contenu de l'archive
+# # Informations detaillees du contenu de l'archive
 
 #boucle de l'extraction des emprises pour toutes les dates de la tuile
 for i in range(len(rep32TLP)):
     
-    #definir le sous-répertoire en cours
+    #definir le sous-repertoire en cours
     dossierZip = os.path.join(repZip, "T32TLP/"+rep32TLP[i])
     
-    #accès aux fichiers du sous-répertoire
+    #accès aux fichiers du sous-repertoire
     rep32TLPSousRep = ZipFile(dossierZip, 'r')
     pprint(rep32TLPSousRep.filelist)
     
-    #création d'une liste de ces fichiers
+    #creation d'une liste de ces fichiers
     rep32TLPFichiers = rep32TLPSousRep.namelist()
 
-# # Séléction des images à traiter
+# # Selection des images à traiter
 
-    # Sélection des images à garder
+    # Selection des images à garder
     images = [f for f in rep32TLPFichiers if 'FRE' in f]
  
     masque = [f for f in rep32TLPFichiers if 'CLM' in f and 'R1' in f ]
     
 # # Dossier de sortie
  
-    #définir le nom des répertoires en sortie
+    #definir le nom des repertoires en sortie
     nomParties = os.path.basename(dossierZip).split("_")
     sat = nomParties[0].replace("SENTINEL", "S")
     date = nomParties[1].split("-")[0]
     
     rep = f"{sat}_{date}_{nomParties[3]}"
     repSortieExtrait = os.path.join(repSortie32TLP, rep)
-    os.makedirs(repSortieExtrait, exist_ok=True) # création du dossier sur le disque
+    os.makedirs(repSortieExtrait, exist_ok=True) # creation du dossier sur le disque
 
 
-# # Traitement de l'image compressée
-# gdal lit directement des données dans des archives.  
+# # Traitement de l'image compressee
+# gdal lit directement des donnees dans des archives.  
 # Pour des repZips au format zip on utilise le protocol vsizip.  
-# Pour lire des données on donne le chemin de l'repZip (comme si c'était un dossier) puis le chemin de l'image dans l'repZip.
+# Pour lire des donnees on donne le chemin de l'repZip (comme si c'etait un dossier) puis le chemin de l'image dans l'repZip.
   
     for img in images:
              
@@ -462,11 +462,11 @@ for i in range(len(rep32TLP)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp32TLP, # découpage en fonction d'un contour
+                            cutlineDSName=emp32TLP, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata -10000
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True) # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True) # on reduit l'image à l"emprise du contour
                  
 
                  
@@ -484,11 +484,11 @@ for i in range(len(rep32TLP)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp32TLP, # découpage en fonction d'un contour
+                            cutlineDSName=emp32TLP, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True # on reduit l'image à l"emprise du contour
                               )
     if not sortieTif:
         print(f"Erreur : {fichierExtrait}")
@@ -502,44 +502,44 @@ for i in range(len(rep32TLP)):
 ####################
 ####################
 
-# # Informations détaillées du contenu de l'archive
+# # Informations detaillees du contenu de l'archive
 
 #boucle de l'extraction des emprises pour toutes les dates de la tuile
 for i in range(len(rep32TLQ)):
     
-    #definir le sous-répertoire en cours
+    #definir le sous-repertoire en cours
     dossierZip = os.path.join(repZip, "T32TLQ/"+rep32TLQ[i])
     
-    #accès aux fichiers du sous-répertoire
+    #accès aux fichiers du sous-repertoire
     rep32TLQSousRep = ZipFile(dossierZip, 'r')
     pprint(rep32TLQSousRep.filelist)
     
-    #création d'une liste de ces fichiers
+    #creation d'une liste de ces fichiers
     rep32TLQFichiers = rep32TLQSousRep.namelist()
 
-# # Séléction des images à traiter
+# # Selection des images à traiter
 
-    # Sélection des images à garder
+    # Selection des images à garder
     images = [f for f in rep32TLQFichiers if 'FRE' in f]
  
     masque = [f for f in rep32TLQFichiers if 'CLM' in f and 'R1' in f ]
     
 # # Dossier de sortie
  
-    #définir le nom des répertoires en sortie
+    #definir le nom des repertoires en sortie
     nomParties = os.path.basename(dossierZip).split("_")
     sat = nomParties[0].replace("SENTINEL", "S")
     date = nomParties[1].split("-")[0]
     
     rep = f"{sat}_{date}_{nomParties[3]}"
     repSortieExtrait = os.path.join(repSortie32TLQ, rep)
-    os.makedirs(repSortieExtrait, exist_ok=True) # création du dossier sur le disque
+    os.makedirs(repSortieExtrait, exist_ok=True) # creation du dossier sur le disque
 
 
-# # Traitement de l'image compressée
-# gdal lit directement des données dans des archives.  
+# # Traitement de l'image compressee
+# gdal lit directement des donnees dans des archives.  
 # Pour des repZips au format zip on utilise le protocol vsizip.  
-# Pour lire des données on donne le chemin de l'repZip (comme si c'était un dossier) puis le chemin de l'image dans l'repZip.
+# Pour lire des donnees on donne le chemin de l'repZip (comme si c'etait un dossier) puis le chemin de l'image dans l'repZip.
   
     for img in images:
              
@@ -550,11 +550,11 @@ for i in range(len(rep32TLQ)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp32TLQ, # découpage en fonction d'un contour
+                            cutlineDSName=emp32TLQ, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata -10000
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True) # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True) # on reduit l'image à l"emprise du contour
                  
 
                  
@@ -572,11 +572,11 @@ for i in range(len(rep32TLQ)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp32TLQ, # découpage en fonction d'un contour
+                            cutlineDSName=emp32TLQ, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True # on reduit l'image à l"emprise du contour
                               )
     if not sortieTif:
         print(f"Erreur : {fichierExtrait}")
@@ -589,44 +589,44 @@ for i in range(len(rep32TLQ)):
 ####################
 ####################
 
-# # Informations détaillées du contenu de l'archive
+# # Informations detaillees du contenu de l'archive
 
 #boucle de l'extraction des emprises pour toutes les dates de la tuile
 for i in range(len(rep32TLR)):
     
-    #definir le sous-répertoire en cours
+    #definir le sous-repertoire en cours
     dossierZip = os.path.join(repZip, "T32TLR/"+rep32TLR[i])
     
-    #accès aux fichiers du sous-répertoire
+    #accès aux fichiers du sous-repertoire
     rep32TLRSousRep = ZipFile(dossierZip, 'r')
     pprint(rep32TLRSousRep.filelist)
     
-    #création d'une liste de ces fichiers
+    #creation d'une liste de ces fichiers
     rep32TLRFichiers = rep32TLRSousRep.namelist()
 
-# # Séléction des images à traiter
+# # Selection des images à traiter
 
-    # Sélection des images à garder
+    # Selection des images à garder
     images = [f for f in rep32TLRFichiers if 'FRE' in f]
  
     masque = [f for f in rep32TLRFichiers if 'CLM' in f and 'R1' in f ]
     
 # # Dossier de sortie
  
-    #définir le nom des répertoires en sortie
+    #definir le nom des repertoires en sortie
     nomParties = os.path.basename(dossierZip).split("_")
     sat = nomParties[0].replace("SENTINEL", "S")
     date = nomParties[1].split("-")[0]
     
     rep = f"{sat}_{date}_{nomParties[3]}"
     repSortieExtrait = os.path.join(repSortie32TLR, rep)
-    os.makedirs(repSortieExtrait, exist_ok=True) # création du dossier sur le disque
+    os.makedirs(repSortieExtrait, exist_ok=True) # creation du dossier sur le disque
 
 
-# # Traitement de l'image compressée
-# gdal lit directement des données dans des archives.  
+# # Traitement de l'image compressee
+# gdal lit directement des donnees dans des archives.  
 # Pour des repZips au format zip on utilise le protocol vsizip.  
-# Pour lire des données on donne le chemin de l'repZip (comme si c'était un dossier) puis le chemin de l'image dans l'repZip.
+# Pour lire des donnees on donne le chemin de l'repZip (comme si c'etait un dossier) puis le chemin de l'image dans l'repZip.
   
     for img in images:
             
@@ -637,11 +637,11 @@ for i in range(len(rep32TLR)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp32TLR, # découpage en fonction d'un contour
+                            cutlineDSName=emp32TLR, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata -10000
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True) # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True) # on reduit l'image à l"emprise du contour
                  
 
                  
@@ -659,11 +659,11 @@ for i in range(len(rep32TLR)):
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{dossierZip}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
-                            cutlineDSName=emp32TLR, # découpage en fonction d'un contour
+                            cutlineDSName=emp32TLR, # decoupage en fonction d'un contour
                             dstNodata=-10000, # valeur de nodata
-                            xRes=10, yRes=-10, # résolution de sortie
-                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de départ
-                            cropToCutline=True # on réduit l'image à l"emprise du contour
+                            xRes=10, yRes=-10, # resolution de sortie
+                            targetAlignedPixels=True, # on garde le même emplacement des pixels que l'image de depart
+                            cropToCutline=True # on reduit l'image à l"emprise du contour
                               )
     if not sortieTif:
         print(f"Erreur : {fichierExtrait}")
