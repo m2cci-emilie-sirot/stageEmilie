@@ -33,9 +33,6 @@ listeRep = os.listdir(repDonnees)
 TFEChemin = "TFE/tfe_bio_T31TFJ_WGS84.shp"    
 TFE = gpd.read_file(TFEChemin) #ouverture du shp
      
-gidTFE = ["indices","bandes"]
-for gid in range(len(TFE.gid)):
-    gidTFE.append(TFE.gid[gid])
 
 
 listeCoordonnees = []
@@ -93,10 +90,31 @@ for i in range (len(listeRep)):
     pixelHeight = -transform[5]
     
 
-    #creation du tableau
+    legende = ["indices","bandes"]
+    for gid in range(len(TFE.gid)):
+        legende.append(TFE.gid[gid])
     
-    tab = pd.DataFrame(columns = gidTFE)
-    index = 1
+    Typo_Veget = ["/","/"]
+    for typoveget in range(len(TFE.Typo_Veget)):
+        Typo_Veget.append(TFE.Typo_Veget[typoveget])
+    
+    Id_sitesAS = ["/","/"]
+    for IdsitesAS in range(len(TFE.Id_sitesAS)):
+        Id_sitesAS.append(TFE.Id_sitesAS[IdsitesAS])
+    
+    Releve = ["/","/"]
+    for releve in range(len(TFE.Releve)):
+        Releve.append(TFE.Releve[releve])
+
+
+   #creation du tableau
+    
+    tab = pd.DataFrame(columns = legende)
+    tab.loc[1]=Id_sitesAS
+    tab.loc[2]=Releve
+    tab.loc[3]=Typo_Veget
+
+    index = 4
 
         
     #calcul des indices
