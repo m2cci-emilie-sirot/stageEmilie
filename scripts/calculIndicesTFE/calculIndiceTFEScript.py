@@ -77,17 +77,7 @@ for i in range (len(listeRep)):
     if not os.path.exists(repSortieDate):
         os.makedirs(repSortieDate)
     
-    #caracteristiques de l'image
-    
-                   
-    imageRef = gdal.Open(repCourant+'/'+B2[0])
-    cols = imageRef.RasterXSize
-    rows = imageRef.RasterYSize
-    transform = imageRef.GetGeoTransform()
-    xOrigin = transform[0]
-    yOrigin = transform[3]
-    pixelWidth = transform[1]
-    pixelHeight = -transform[5]
+     
     
 
     legende = ["indices","bandes"]

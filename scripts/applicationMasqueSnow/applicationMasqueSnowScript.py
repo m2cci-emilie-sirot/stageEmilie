@@ -165,6 +165,11 @@ for i in range (len(listeRep)):
 
 #graphique
 
+splitDate = []
+for k in range(0, len(date), 2):
+    splitDate.append(date[k : k + 2])
+
+annee = splitDate[0]+splitDate[1]
 
 listeDate = list(dicoPourcentage)
 
@@ -206,7 +211,7 @@ plt.xticks([0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334], mois)
 plt.ylabel('Pourcentage de points TFE ')
 plt.xlabel('Dates')
 plt.legend(labels=['NoData','Neige','Nuages','Exploitable'],loc="upper right", facecolor="white")
-plt.title("Etat des pixels selon les points de mesure (TFE)")
+plt.title("Etat des pixels selon les points de mesure (TFE) en "+annee)
 plt.xlim = (1,365)
 plt.ylim = 1.0
     
