@@ -23,7 +23,7 @@ import pandas as pd
 
 #Lister les indices souhaités
 
-listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B1_B2_B3","mSR_B1_B2_B3","indclass_NDVI","indclass_NDI45"]
+listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B2_B3_B4","mSR_B2_B3_B4","indclass_NDVI","indclass_NDI45"]
 
 #ouvrir les TFE
 
@@ -303,4 +303,379 @@ for i in range (len(listeRep)):
                 tab.loc[index]=concat
                 
                 index = index + 1
-                        
+                
+
+                
+###Création des indices usuels:
+    
+        if len(nomIndice) == 2:    
+
+            with rasterio.open(repCourant+"/"+listeBandes[0], "r") as src:
+                bandeB2 = src.read(1)
+                profile = src.profile
+                profile.update(
+                     dtype=rasterio.float64,
+                     count=1,
+                     compress='lzw')
+            with rasterio.open(repCourant+"/"+listeBandes[1], "r") as src:
+                bandeB3 = src.read(1)
+                profile = src.profile
+                profile.update(
+                      dtype=rasterio.float64,
+                      count=1,
+                      compress='lzw')
+            with rasterio.open(repCourant+"/"+listeBandes[2], "r") as src:
+                bandeB4 = src.read(1)
+                profile = src.profile
+                profile.update(
+                      dtype=rasterio.float64,
+                      count=1,
+                      compress='lzw')
+            with rasterio.open(repCourant+"/"+listeBandes[3], "r") as src:
+                bandeB5 = src.read(1)
+                profile = src.profile
+                profile.update(
+                      dtype=rasterio.float64,
+                      count=1,
+                      compress='lzw')
+            with rasterio.open(repCourant+"/"+listeBandes[4], "r") as src:
+                bandeB6 = src.read(1)
+                profile = src.profile
+                profile.update(
+                      dtype=rasterio.float64,
+                      count=1,
+                      compress='lzw')
+            with rasterio.open(repCourant+"/"+listeBandes[5], "r") as src:
+                bandeB7 = src.read(1)
+                profile = src.profile
+                profile.update(
+                      dtype=rasterio.float64,
+                      count=1,
+                      compress='lzw')
+            with rasterio.open(repCourant+"/"+listeBandes[6], "r") as src:
+                bandeB8 = src.read(1)
+                profile = src.profile
+                profile.update(
+                      dtype=rasterio.float64,
+                      count=1,
+                      compress='lzw')
+            with rasterio.open(repCourant+"/"+listeBandes[7], "r") as src:
+                bandeB8a = src.read(1)
+                profile = src.profile
+                profile.update(
+                      dtype=rasterio.float64,
+                      count=1,
+                      compress='lzw')
+            with rasterio.open(repCourant+"/"+listeBandes[8], "r") as src:
+                bandeB11 = src.read(1)
+                profile = src.profile
+                profile.update(
+                      dtype=rasterio.float64,
+                      count=1,
+                      compress='lzw')
+
+
+            if nomIndice[1] == "NDVI":
+   
+                NDVI = np.divide((1.0*bandeB8 - bandeB4), (bandeB8 + bandeB4))
+                NDVI[np.isinf(NDVI)]=np.nan
+                
+                ind = ['indclass', "indclass_NDVI"]
+                 
+                val = []
+                 
+                
+                for point in listeCoordonnees:
+                     col = int((point[0] - xOrigin) / pixelWidth)
+                     row = int((yOrigin - point[1] ) / pixelHeight)
+                     val.append(SR[row][col])
+                 
+                concat = ind + val
+                 
+                tab.loc[index]=concat
+
+
+                index = index+1
+                
+            if nomIndice[1] == "GNDVI":
+
+
+                GNDVI = np.divide((1.0*bandeB8 - bandeB3), (bandeB8 + bandeB3))
+                GNDVI[np.isinf(GNDVI)]=np.nan
+                
+                ind = ['indclass', "indclass_GNDVI"]
+                
+                val = []
+                
+                
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+                    val.append(SR[row][col])
+                 
+                concat = ind + val
+                 
+                tab.loc[index]=concat
+            
+                index = index+1
+
+            if nomIndice[1] == "NDVIre":
+                NDVIre = np.divide((1.0*bandeB8a - bandeB4), (bandeB8a + bandeB4))
+                NDVIre[np.isinf(NDVIre)]=np.nan
+               
+                ind = ['indclass', "indclass_NDVIre"]
+            
+                val = []
+            
+            
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+
+            if nomIndice[1] == "NDVI":
+                NDI45 = np.divide((1.0*bandeB5 - bandeB4), (bandeB5 + bandeB4))
+                NDI45[np.isinf(NDI45)]=np.nan
+               
+                ind = ['indclass', "indclass_NDI45"]
+                
+                val = []
+                
+                
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+
+                index = index+1
+
+            if nomIndice[1] == "NDII":
+                NDII = np.divide((1.0*bandeB8 - bandeB11), (bandeB8 + bandeB11))
+                NDII[np.isinf(NDII)]=np.nan
+                
+                ind = ['indclass', "indclass_NDII"]
+                
+                val = []
+                
+                
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+                    val.append(SR[row][col])
+                 
+                concat = ind + val
+                     
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+
+            if nomIndice[1] == "NDREDI1":
+                NREDI1 = np.divide((1.0*bandeB6 - bandeB5), (bandeB6 + bandeB5))
+                NREDI1[np.isinf(NREDI1)]=np.nan
+                 
+                ind = ['indclass', "indclass_NREDI1"]
+            
+                val = []
+            
+            
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+
+
+            if nomIndice[1] == "NDREDI2":
+
+                NREDI2 = np.divide((1.0*bandeB7 - bandeB5), (bandeB7 + bandeB5))
+                NREDI2[np.isinf(NREDI2)]=np.nan
+                
+                 
+                ind = ['indclass', "indclass_NREDI2"]
+            
+                val = []
+            
+            
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+
+
+
+            if nomIndice[1] == "NDREDI3":
+
+                NREDI3 = np.divide((1.0*bandeB7 - bandeB6), (bandeB7 + bandeB6))
+                NREDI3[np.isinf(NREDI3)]=np.nan
+                
+                 
+                ind = ['indclass', "indclass_NREDI3"]
+            
+                val = []
+            
+            
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+
+ 
+
+            if nomIndice[1] == "PSRI":
+
+                PSRI = np.divide((1.0*bandeB4 - bandeB3), (bandeB5))
+                PSRI[np.isinf(PSRI)]=np.nan
+                
+                 
+                ind = ['indclass', "indclass_PSRI"]
+            
+                val = []
+            
+            
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+
+            if nomIndice[1] == "MSI":
+                MSI = np.divide((1.0*bandeB11), (bandeB8))
+                MSI[np.isinf(MSI)]=np.nan
+                
+                 
+                ind = ['indclass', "indclass_MSI"]
+            
+                val = []
+            
+            
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+
+
+            if nomIndice[1] == "IRECI":
+                IRECI = np.divide((1.0*bandeB7 - bandeB4), (np.divide(1.0*bandeB5 , bandeB6)))
+                IRECI[np.isinf(IRECI)]=np.nan
+                
+                 
+                ind = ['indclass', "indclass_IRECI"]
+            
+                val = []
+            
+            
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+
+
+            if nomIndice[1] == "MTCI":
+                MTCI = np.divide((1.0*bandeB8 - bandeB5), (bandeB5 - bandeB4))
+                MTCI[np.isinf(MTCI)]=np.nan
+                
+                 
+                ind = ['indclass', "indclass_MTCI"]
+            
+                val = []
+            
+            
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+
+
+            if nomIndice[1] == "MCARI":
+                MCARI = np.multiply(((bandeB5 - bandeB4) - (0.2*(bandeB5 - bandeB3))), (bandeB5 - bandeB4))
+                MCARI[np.isinf(MCARI)]=np.nan
+               
+                 
+                ind = ['indclass', "indclass_MCARI"]
+            
+                val = []
+            
+            
+                for point in listeCoordonnees:
+                    col = int((point[0] - xOrigin) / pixelWidth)
+                    row = int((yOrigin - point[1] ) / pixelHeight)
+            
+                    val.append(SR[row][col])
+                    
+                concat = ind + val
+                    
+                tab.loc[index]=concat
+            
+            
+                index = index+1
+     
+
+   
+
+    #tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
