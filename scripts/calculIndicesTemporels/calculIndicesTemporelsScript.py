@@ -218,7 +218,7 @@ for i in range (len(listeRep)):
                 BSI =  np.divide((1.0* ba1 - bc1), (bb1 + bc1))
                 BSI[np.isinf(BSI)] = np.nan
                
-                ind = ['BSI', "BSI_"+bande1+"_"+bande2+"_"+bande3]
+                ind = [date,'BSI', "BSI_"+nomIndice[1]+"_"+nomIndice[2]+"_"+nomIndice[3]]
             
                 val = []
         
@@ -242,7 +242,7 @@ for i in range (len(listeRep)):
                 mSR =  np.divide((1.0* ba1 - bc1), (bb1 - bc1))
                 mSR[np.isinf(mSR)] = np.nan
                
-                ind = ['mSR', "mSR_"+bande1+"_"+bande2+"_"+bande3]
+                ind = [date,'mSR', "mSR_"+nomIndice[1]+"_"+nomIndice[2]+"_"+nomIndice[3]]
                
                 val = []
         
@@ -264,7 +264,7 @@ for i in range (len(listeRep)):
                 BSI_Tian =  np.divide((1.0* ba1 - bb1 - bc1), (ba1 + bb1 + bc1))
                 BSI_Tian[np.isinf(BSI_Tian)] = np.nan
                
-                ind = ['BSITian', "BSITian_"+bande1+"_"+bande2+"_"+bande3]
+                ind = [date,'BSITian', "BSITian_"+nomIndice[1]+"_"+nomIndice[2]+"_"+nomIndice[3]]
                
                 val = []
         
@@ -287,7 +287,7 @@ for i in range (len(listeRep)):
                 CVI[np.isinf(CVI)] = np.nan
                 
                
-                ind = ['CVI', "CVI_"+bande1+"_"+bande2+"_"+bande3]
+                ind = [date,'CVI', "CVI_"+nomIndice[1]+"_"+nomIndice[2]+"_"+nomIndice[3]]
                
                 val = []
         
@@ -380,7 +380,7 @@ for i in range (len(listeRep)):
                 NDVI = np.divide((1.0*bandeB8 - bandeB4), (bandeB8 + bandeB4))
                 NDVI[np.isinf(NDVI)]=np.nan
                 
-                ind = ['indclass', "indclass_NDVI"]
+                ind = [date,'indclass', "indclass_NDVI"]
                  
                 val = []
                  
@@ -403,7 +403,7 @@ for i in range (len(listeRep)):
                 GNDVI = np.divide((1.0*bandeB8 - bandeB3), (bandeB8 + bandeB3))
                 GNDVI[np.isinf(GNDVI)]=np.nan
                 
-                ind = ['indclass', "indclass_GNDVI"]
+                ind = [date,'indclass', "indclass_GNDVI"]
                 
                 val = []
                 
@@ -423,7 +423,7 @@ for i in range (len(listeRep)):
                 NDVIre = np.divide((1.0*bandeB8a - bandeB4), (bandeB8a + bandeB4))
                 NDVIre[np.isinf(NDVIre)]=np.nan
                
-                ind = ['indclass', "indclass_NDVIre"]
+                ind = [date,'indclass', "indclass_NDVIre"]
             
                 val = []
             
@@ -444,7 +444,7 @@ for i in range (len(listeRep)):
                 NDI45 = np.divide((1.0*bandeB5 - bandeB4), (bandeB5 + bandeB4))
                 NDI45[np.isinf(NDI45)]=np.nan
                
-                ind = ['indclass', "indclass_NDI45"]
+                ind = [date,'indclass', "indclass_NDI45"]
                 
                 val = []
                 
@@ -464,7 +464,7 @@ for i in range (len(listeRep)):
                 NDII = np.divide((1.0*bandeB8 - bandeB11), (bandeB8 + bandeB11))
                 NDII[np.isinf(NDII)]=np.nan
                 
-                ind = ['indclass', "indclass_NDII"]
+                ind = [date,'indclass', "indclass_NDII"]
                 
                 val = []
                 
@@ -485,7 +485,7 @@ for i in range (len(listeRep)):
                 NREDI1 = np.divide((1.0*bandeB6 - bandeB5), (bandeB6 + bandeB5))
                 NREDI1[np.isinf(NREDI1)]=np.nan
                  
-                ind = ['indclass', "indclass_NREDI1"]
+                ind = [date,'indclass', "indclass_NREDI1"]
             
                 val = []
             
@@ -510,7 +510,7 @@ for i in range (len(listeRep)):
                 NREDI2[np.isinf(NREDI2)]=np.nan
                 
                  
-                ind = ['indclass', "indclass_NREDI2"]
+                ind = [date,'indclass', "indclass_NREDI2"]
             
                 val = []
             
@@ -536,7 +536,7 @@ for i in range (len(listeRep)):
                 NREDI3[np.isinf(NREDI3)]=np.nan
                 
                  
-                ind = ['indclass', "indclass_NREDI3"]
+                ind = [date,'indclass', "indclass_NREDI3"]
             
                 val = []
             
@@ -562,7 +562,7 @@ for i in range (len(listeRep)):
                 PSRI[np.isinf(PSRI)]=np.nan
                 
                  
-                ind = ['indclass', "indclass_PSRI"]
+                ind = [date,'indclass', "indclass_PSRI"]
             
                 val = []
             
@@ -585,7 +585,7 @@ for i in range (len(listeRep)):
                 MSI[np.isinf(MSI)]=np.nan
                 
                  
-                ind = ['indclass', "indclass_MSI"]
+                ind = [date,'indclass', "indclass_MSI"]
             
                 val = []
             
@@ -609,7 +609,7 @@ for i in range (len(listeRep)):
                 IRECI[np.isinf(IRECI)]=np.nan
                 
                  
-                ind = ['indclass', "indclass_IRECI"]
+                ind = [date,'indclass', "indclass_IRECI"]
             
                 val = []
             
@@ -633,7 +633,7 @@ for i in range (len(listeRep)):
                 MTCI[np.isinf(MTCI)]=np.nan
                 
                  
-                ind = ['indclass', "indclass_MTCI"]
+                ind = [date,'indclass', "indclass_MTCI"]
             
                 val = []
             
@@ -657,7 +657,7 @@ for i in range (len(listeRep)):
                 MCARI[np.isinf(MCARI)]=np.nan
                
                  
-                ind = ['indclass', "indclass_MCARI"]
+                ind = [date,'indclass', "indclass_MCARI"]
             
                 val = []
             
