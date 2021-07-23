@@ -11,11 +11,14 @@ import os
 from osgeo import gdal
 import itertools
 import rasterio
-from rasterstats import zonal_stats
+from rasterstats import zonal_stats, point_query
 import numpy as np 
 import geopandas as gpd
 import pandas as pd
 import fiona
+from PIL import Image as im
+from affine import Affine
+
 
 ####################
 ####################
@@ -34,14 +37,14 @@ listeRep = os.listdir(repDonnees)
 #ouvrir les TFE
 
 TFEChemin = "TFE/polygones_T31TFJ.shp"    
-TFE = fiona.open(TFEChemin)
+TFE = gpd.read_file(TFEChemin)
 
 
-stats = zonal_stats(TFE2,repCourant+"/"+B2[0], stats = 'mean')
+#stats = zonal_stats(TFE2,repCourant+"/"+B2[0], stats = 'mean')
         
         
 for i in range (len(listeRep)):
-    repCourant = os.path.join(repDonnees, listeRep[i])#se positionner dans le répertoire d'une date
+    repCourant = os.path.join(repDonnees, listeRep[0])#se positionner dans le répertoire d'une date
     fichiersRep = os.listdir(repCourant)#lister les fichiers à savoir les différentes bandes
     
     B2 = [f for f in fichiersRep if 'B2' in f]
@@ -69,7 +72,7 @@ for i in range (len(listeRep)):
     
     nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
     
-    repSortieDate = os.path.join(repSortie, listeRep[i]) 
+    repSortieDate = os.path.join(repSortie, listeRep[0]) 
     if not os.path.exists(repSortieDate):
         os.makedirs(repSortieDate)
     
@@ -78,7 +81,7 @@ for i in range (len(listeRep)):
 
     legende = ["indices","bandes"]
     entites = len(TFE)
-    for entite in range(entites):
+    for entite in range(1,entites+1):
         legende.append(entite)
  
     
@@ -140,14 +143,11 @@ for i in range (len(listeRep)):
                 #if not os.path.exists(dst_ND_inv): #on observe que a/b = 1/(b/a)
                     ind = ['ND', "ND_"+bande1+"_"+bande2]
                    
-                    val = []
-            
-
-                    for point in listeCoordonnees:
-                        col = int((point[0] - xOrigin) / pixelWidth)
-                        row = int((yOrigin - point[1] ) / pixelHeight)
-        
-                        val.append(ND[row][col])
+                    pts = point_query(TFEChemin,repCourant+"/"+elt[0])
+                    transform = ba.transform
+                    affine = m.affine
+                    stats = zonal_stats(TFEChemin,, stats = 'mean')
+                    val = stats.values()
                         
                     concat = ind + val
                         
