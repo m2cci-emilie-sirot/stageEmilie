@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jul  9 11:38:18 2021
+Created on Mond Jul 26 11:38:18 2021
 
 @author: Emilie Sirot
 """
@@ -11,6 +11,7 @@ import os
 from osgeo import gdal
 import itertools
 import rasterio
+from rasterstats import zonal_stats, point_query
 import numpy as np 
 import geopandas as gpd
 import pandas as pd
@@ -27,19 +28,10 @@ listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B2_B3_B4","mSR_B2_B3_B4","indclass_
 
 #ouvrir les TFE
 
-TFEChemin = "TFE/tfe_bio_T31TFJ_WGS84.shp"    
+TFEChemin = "TFE/polygones_T31TFJ.shp"    
 TFE = gpd.read_file(TFEChemin) #ouverture du shp
    
-listeCoordonnees = []
-     
-for j in range(len(TFE)):
-    x = TFE.iloc[j].geometry.centroid.x #récupère les coordonnées d'un point
-    y = TFE.iloc[j].geometry.centroid.y
-     
-    listeCoordonnees.append((x,y))
-        
          
-
 #ouverture des bandes
   
 repDonnees = r"../applicationMasque/sortie/sortieT31TFJ"
@@ -49,29 +41,28 @@ listeRep = os.listdir(repDonnees)
 
 #creation du tableau
 
-legende = ["date","indices","bandes"]
-for gid in range(len(TFE.gid)):
-       legende.append(TFE.gid[gid])
-    
-Typo_Veget = ["/","/","/"]
-for typoveget in range(len(TFE.Typo_Veget)):
-    Typo_Veget.append(TFE.Typo_Veget[typoveget])
-    
-Id_sitesAS = ["/","/","/"]
-for IdsitesAS in range(len(TFE.Id_sitesAS)):
-    Id_sitesAS.append(TFE.Id_sitesAS[IdsitesAS])
-    
-Releve = ["/","/","/"]
-for releve in range(len(TFE.Releve)):
-    Releve.append(TFE.Releve[releve])
-        
-   
-tab = pd.DataFrame(columns = legende)
-tab.loc[1]=Id_sitesAS
-tab.loc[2]=Releve
-tab.loc[3]=Typo_Veget
 
-index = 4
+legende = ["date","indices","bandes"]
+entites = len(TFE)
+for entite in range(1,entites+1):
+    legende.append(entite)
+ 
+ 
+Typo_AS = ["/","/","/"]
+for typoas in range(len(TFE.typo_AS)):
+    Typo_AS.append(TFE.typo_AS[typoas])
+ 
+Territoire = ["/","/","/"]
+for territoire in range(len(TFE.territoire)):
+    Territoire.append(TFE.territoire[territoire])
+
+#creation du tableau
+ 
+tab = pd.DataFrame(columns = legende)
+tab.loc[1]=Typo_AS
+tab.loc[2]=Territoire
+ 
+index = 3
 
 
 for i in range (len(listeRep)):
@@ -139,7 +130,8 @@ for i in range (len(listeRep)):
                         dtype=rasterio.float64,
                         count=1,
                         compress='lzw')
-
+                
+            affine = src.transform
 
 
 #ND
@@ -150,15 +142,13 @@ for i in range (len(listeRep)):
                
                 ind = [date,'ND', "ND_"+nomIndice[1]+"_"+nomIndice[2]]
                        
+                stats = zonal_stats(TFEChemin, ND, stats = 'mean', affine=affine)
+          
                 val = []
                 
-    
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-    
-                    val.append(ND[row][col])
-                            
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
+                    
                 concat = ind + val
                     
                 tab.loc[index]=concat
@@ -170,17 +160,16 @@ for i in range (len(listeRep)):
               
                 SR = np.divide(ba, bb)
                 SR[np.isinf(SR)] = np.nan
+                
                 ind = [date,'SR', "SR_"+nomIndice[1]+"_"+nomIndice[2]]
                        
+                stats = zonal_stats(TFEChemin, SR, stats = 'mean', affine=affine)
+          
                 val = []
                 
-    
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-    
-                    val.append(SR[row][col])
-                            
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
+                    
                 concat = ind + val
                     
                 tab.loc[index]=concat
@@ -213,6 +202,8 @@ for i in range (len(listeRep)):
                         count=1,
                         compress='lzw')
 
+            affine = src.transform
+
             if nomIndice[0] == "BSI":
                 
                 BSI =  np.divide((1.0* ba1 - bc1), (bb1 + bc1))
@@ -220,21 +211,18 @@ for i in range (len(listeRep)):
                
                 ind = [date,'BSI', "BSI_"+nomIndice[1]+"_"+nomIndice[2]+"_"+nomIndice[3]]
             
+                stats = zonal_stats(TFEChemin, BSI, stats = 'mean', affine=affine)
+          
                 val = []
-        
-        
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-        
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-        
-        
-                index = index+1
+                
+                index = index + 1
                 
             if nomIndice[0] == "mSR":
         
@@ -244,20 +232,18 @@ for i in range (len(listeRep)):
                
                 ind = [date,'mSR', "mSR_"+nomIndice[1]+"_"+nomIndice[2]+"_"+nomIndice[3]]
                
+                stats = zonal_stats(TFEChemin, mSR, stats = 'mean', affine=affine)
+          
                 val = []
-        
-
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-    
-                    val.append(ND[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            index = index + 1
+                
+                index = index + 1
                
             if nomIndice[0] == "BSITian":
 
@@ -266,14 +252,12 @@ for i in range (len(listeRep)):
                
                 ind = [date,'BSITian', "BSITian_"+nomIndice[1]+"_"+nomIndice[2]+"_"+nomIndice[3]]
                
+                stats = zonal_stats(TFEChemin, BSI_Tian, stats = 'mean', affine=affine)
+          
                 val = []
-        
-    
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-    
-                    val.append(ND[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
@@ -289,14 +273,12 @@ for i in range (len(listeRep)):
                
                 ind = [date,'CVI', "CVI_"+nomIndice[1]+"_"+nomIndice[2]+"_"+nomIndice[3]]
                
+                stats = zonal_stats(TFEChemin, CVI, stats = 'mean', affine=affine)
+          
                 val = []
-        
-    
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-    
-                    val.append(ND[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
@@ -374,6 +356,7 @@ for i in range (len(listeRep)):
                       count=1,
                       compress='lzw')
 
+            affine = src.transform
 
             if nomIndice[1] == "NDVI":
    
@@ -382,20 +365,18 @@ for i in range (len(listeRep)):
                 
                 ind = [date,'indclass', "indclass_NDVI"]
                  
+                stats = zonal_stats(TFEChemin, NDVI, stats = 'mean', affine=affine)
+          
                 val = []
-                 
                 
-                for point in listeCoordonnees:
-                     col = int((point[0] - xOrigin) / pixelWidth)
-                     row = int((yOrigin - point[1] ) / pixelHeight)
-                     val.append(SR[row][col])
-                 
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
+                    
                 concat = ind + val
-                 
+                    
                 tab.loc[index]=concat
-
-
-                index = index+1
+                
+                index = index + 1
                 
             if nomIndice[1] == "GNDVI":
 
@@ -405,19 +386,18 @@ for i in range (len(listeRep)):
                 
                 ind = [date,'indclass', "indclass_GNDVI"]
                 
+                stats = zonal_stats(TFEChemin, GNDVI, stats = 'mean', affine=affine)
+          
                 val = []
                 
-                
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
-                 
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
+                    
                 concat = ind + val
-                 
+                    
                 tab.loc[index]=concat
-            
-                index = index+1
+                
+                index = index + 1
 
             if nomIndice[1] == "NDVIre":
                 NDVIre = np.divide((1.0*bandeB8a - bandeB4), (bandeB8a + bandeB4))
@@ -425,20 +405,18 @@ for i in range (len(listeRep)):
                
                 ind = [date,'indclass', "indclass_NDVIre"]
             
+                stats = zonal_stats(TFEChemin, NDVIre, stats = 'mean', affine=affine)
+          
                 val = []
-            
-            
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
 
             if nomIndice[1] == "NDVI":
                 NDI45 = np.divide((1.0*bandeB5 - bandeB4), (bandeB5 + bandeB4))
@@ -446,19 +424,18 @@ for i in range (len(listeRep)):
                
                 ind = [date,'indclass', "indclass_NDI45"]
                 
+                stats = zonal_stats(TFEChemin, NDI45, stats = 'mean', affine=affine)
+          
                 val = []
                 
-                
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-
-                index = index+1
+                
+                index = index + 1
 
             if nomIndice[1] == "NDII":
                 NDII = np.divide((1.0*bandeB8 - bandeB11), (bandeB8 + bandeB11))
@@ -466,20 +443,18 @@ for i in range (len(listeRep)):
                 
                 ind = [date,'indclass', "indclass_NDII"]
                 
+                stats = zonal_stats(TFEChemin, NDII, stats = 'mean', affine=affine)
+          
                 val = []
                 
-                
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
-                 
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
+                    
                 concat = ind + val
-                     
+                    
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
 
             if nomIndice[1] == "NDREDI1":
                 NREDI1 = np.divide((1.0*bandeB6 - bandeB5), (bandeB6 + bandeB5))
@@ -487,21 +462,18 @@ for i in range (len(listeRep)):
                  
                 ind = [date,'indclass', "indclass_NREDI1"]
             
+                stats = zonal_stats(TFEChemin, NREDI1, stats = 'mean', affine=affine)
+          
                 val = []
-            
-            
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-            
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
 
 
             if nomIndice[1] == "NDREDI2":
@@ -512,21 +484,18 @@ for i in range (len(listeRep)):
                  
                 ind = [date,'indclass', "indclass_NREDI2"]
             
+                stats = zonal_stats(TFEChemin, NREDI2, stats = 'mean', affine=affine)
+          
                 val = []
-            
-            
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-            
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
 
 
 
@@ -538,21 +507,18 @@ for i in range (len(listeRep)):
                  
                 ind = [date,'indclass', "indclass_NREDI3"]
             
+                stats = zonal_stats(TFEChemin, NREDI3, stats = 'mean', affine=affine)
+          
                 val = []
-            
-            
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-            
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
 
  
 
@@ -564,21 +530,18 @@ for i in range (len(listeRep)):
                  
                 ind = [date,'indclass', "indclass_PSRI"]
             
+                stats = zonal_stats(TFEChemin, PSRI, stats = 'mean', affine=affine)
+          
                 val = []
-            
-            
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-            
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
 
             if nomIndice[1] == "MSI":
                 MSI = np.divide((1.0*bandeB11), (bandeB8))
@@ -587,21 +550,18 @@ for i in range (len(listeRep)):
                  
                 ind = [date,'indclass', "indclass_MSI"]
             
+                stats = zonal_stats(TFEChemin, MSI, stats = 'mean', affine=affine)
+          
                 val = []
-            
-            
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-            
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
 
 
             if nomIndice[1] == "IRECI":
@@ -611,21 +571,18 @@ for i in range (len(listeRep)):
                  
                 ind = [date,'indclass', "indclass_IRECI"]
             
+                stats = zonal_stats(TFEChemin, IRECI, stats = 'mean', affine=affine)
+          
                 val = []
-            
-            
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-            
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
 
 
             if nomIndice[1] == "MTCI":
@@ -635,21 +592,18 @@ for i in range (len(listeRep)):
                  
                 ind = [date,'indclass', "indclass_MTCI"]
             
+                stats = zonal_stats(TFEChemin, MTCI, stats = 'mean', affine=affine)
+          
                 val = []
-            
-            
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-            
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
 
 
             if nomIndice[1] == "MCARI":
@@ -659,23 +613,20 @@ for i in range (len(listeRep)):
                  
                 ind = [date,'indclass', "indclass_MCARI"]
             
+                stats = zonal_stats(TFEChemin, MCARI, stats = 'mean', affine=affine)
+          
                 val = []
-            
-            
-                for point in listeCoordonnees:
-                    col = int((point[0] - xOrigin) / pixelWidth)
-                    row = int((yOrigin - point[1] ) / pixelHeight)
-            
-                    val.append(SR[row][col])
+                
+                for stat in range(len(stats)):
+                    val.append(stats[stat].get('mean'))
                     
                 concat = ind + val
                     
                 tab.loc[index]=concat
-            
-            
-                index = index+1
+                
+                index = index + 1
      
 
    
 
-    #tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))

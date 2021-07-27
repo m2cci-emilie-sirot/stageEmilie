@@ -257,7 +257,7 @@ for i in range (len(listeRep)):
                     
                 tab.loc[index]=concat
             
-            index = index + 1
+                index = index + 1
                
             if nomIndice[0] == "BSITian":
 
@@ -923,7 +923,7 @@ for i in range (len(listeRep)):
                     
                 tab.loc[index]=concat
             
-            index = index + 1
+                index = index + 1
                
             if nomIndice[0] == "BSITian":
 
@@ -1588,7 +1588,7 @@ for i in range (len(listeRep)):
                     
                 tab.loc[index]=concat
             
-            index = index + 1
+                index = index + 1
                
             if nomIndice[0] == "BSITian":
 
@@ -2253,7 +2253,7 @@ for i in range (len(listeRep)):
                     
                 tab.loc[index]=concat
             
-            index = index + 1
+                index = index + 1
                
             if nomIndice[0] == "BSITian":
 
@@ -2919,7 +2919,7 @@ for i in range (len(listeRep)):
                     
                 tab.loc[index]=concat
             
-            index = index + 1
+                index = index + 1
                
             if nomIndice[0] == "BSITian":
 
@@ -3584,7 +3584,7 @@ for i in range (len(listeRep)):
                     
                 tab.loc[index]=concat
             
-            index = index + 1
+                index = index + 1
                
             if nomIndice[0] == "BSITian":
 
@@ -4250,7 +4250,7 @@ for i in range (len(listeRep)):
                     
                 tab.loc[index]=concat
             
-            index = index + 1
+                index = index + 1
                
             if nomIndice[0] == "BSITian":
 
