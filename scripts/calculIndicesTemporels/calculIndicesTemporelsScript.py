@@ -103,6 +103,11 @@ for i in range (len(listeRep)):
     
     nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
     
+    repSortieDate = os.path.join(repSortie, listeRep[i]) 
+    if not os.path.exists(repSortieDate):
+        os.makedirs(repSortieDate)
+    
+    
 #caracteristiques de l'image
     
                    
@@ -769,6 +774,10 @@ for i in range (len(listeRep)):
     
     nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
     
+    repSortieDate = os.path.join(repSortie, listeRep[i]) 
+    if not os.path.exists(repSortieDate):
+        os.makedirs(repSortieDate)
+    
 #caracteristiques de l'image
     
                    
@@ -1434,6 +1443,10 @@ for i in range (len(listeRep)):
     
     nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
     
+    repSortieDate = os.path.join(repSortie, listeRep[i]) 
+    if not os.path.exists(repSortieDate):
+        os.makedirs(repSortieDate)
+    
 #caracteristiques de l'image
     
                    
@@ -2098,6 +2111,10 @@ for i in range (len(listeRep)):
     tuile = nomParties[2]
     
     nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    
+    repSortieDate = os.path.join(repSortie, listeRep[i]) 
+    if not os.path.exists(repSortieDate):
+        os.makedirs(repSortieDate)
     
 #caracteristiques de l'image
     
@@ -2765,6 +2782,10 @@ for i in range (len(listeRep)):
     
     nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
     
+    repSortieDate = os.path.join(repSortie, listeRep[i]) 
+    if not os.path.exists(repSortieDate):
+        os.makedirs(repSortieDate)
+    
 #caracteristiques de l'image
     
                    
@@ -3429,6 +3450,10 @@ for i in range (len(listeRep)):
     tuile = nomParties[2]
     
     nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    
+    repSortieDate = os.path.join(repSortie, listeRep[i]) 
+    if not os.path.exists(repSortieDate):
+        os.makedirs(repSortieDate)
     
 #caracteristiques de l'image
     
@@ -4095,6 +4120,10 @@ for i in range (len(listeRep)):
     tuile = nomParties[2]
     
     nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    
+    repSortieDate = os.path.join(repSortie, listeRep[i]) 
+    if not os.path.exists(repSortieDate):
+        os.makedirs(repSortieDate)
     
 #caracteristiques de l'image
     
