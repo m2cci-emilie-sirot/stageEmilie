@@ -630,7 +630,7 @@ for i in range (len(listeRep)):
 
    
 
-tab.to_csv(os.path.join(repSortie,nomSortieTab))
+tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
     
 ####################
@@ -1247,7 +1247,7 @@ for i in range (len(listeRep)):
 
    
 
-tab.to_csv(os.path.join(repSortie,nomSortieTab))
+tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
     
     
@@ -1865,7 +1865,7 @@ for i in range (len(listeRep)):
 
    
 
-tab.to_csv(os.path.join(repSortie,nomSortieTab))
+tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
     
 ####################
@@ -2482,7 +2482,7 @@ for i in range (len(listeRep)):
 
    
 
-tab.to_csv(os.path.join(repSortie,nomSortieTab))
+tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
     
 ####################
@@ -3099,7 +3099,7 @@ for i in range (len(listeRep)):
 
    
 
-tab.to_csv(os.path.join(repSortie,nomSortieTab))
+tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
     
     
@@ -3715,7 +3715,7 @@ for i in range (len(listeRep)):
 
    
 
-tab.to_csv(os.path.join(repSortie,nomSortieTab))
+tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
     
 ####################
@@ -4331,4 +4331,4 @@ for i in range (len(listeRep)):
 
    
 
-tab.to_csv(os.path.join(repSortie,nomSortieTab))
+tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
