@@ -101,13 +101,9 @@ for i in range (len(listeRep)):
     date = nomParties[1]
     tuile = nomParties[2]
     
-    nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
-    repSortieDate = os.path.join(repSortie, listeRep[i]) 
-    if not os.path.exists(repSortieDate):
-        os.makedirs(repSortieDate)
-    
-    
+  
 #caracteristiques de l'image
     
                    
@@ -683,7 +679,7 @@ for i in range (len(listeRep)):
 
    
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+tab.to_csv(os.path.join(repSortie,nomSortieTab))
     
     
 ####################
@@ -772,7 +768,7 @@ for i in range (len(listeRep)):
     date = nomParties[1]
     tuile = nomParties[2]
     
-    nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
     repSortieDate = os.path.join(repSortie, listeRep[i]) 
     if not os.path.exists(repSortieDate):
@@ -1353,7 +1349,7 @@ for i in range (len(listeRep)):
 
    
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
     
 ####################
 ####################
@@ -1441,7 +1437,7 @@ for i in range (len(listeRep)):
     date = nomParties[1]
     tuile = nomParties[2]
     
-    nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
     repSortieDate = os.path.join(repSortie, listeRep[i]) 
     if not os.path.exists(repSortieDate):
@@ -2022,7 +2018,7 @@ for i in range (len(listeRep)):
 
    
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
     
 ####################
 ####################
@@ -2110,7 +2106,7 @@ for i in range (len(listeRep)):
     date = nomParties[1]
     tuile = nomParties[2]
     
-    nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
     repSortieDate = os.path.join(repSortie, listeRep[i]) 
     if not os.path.exists(repSortieDate):
@@ -2691,7 +2687,7 @@ for i in range (len(listeRep)):
 
    
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
     
 
 ####################
@@ -2780,7 +2776,7 @@ for i in range (len(listeRep)):
     date = nomParties[1]
     tuile = nomParties[2]
     
-    nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
     repSortieDate = os.path.join(repSortie, listeRep[i]) 
     if not os.path.exists(repSortieDate):
@@ -3361,7 +3357,7 @@ for i in range (len(listeRep)):
 
    
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
     
 ####################
 ####################
@@ -3449,7 +3445,7 @@ for i in range (len(listeRep)):
     date = nomParties[1]
     tuile = nomParties[2]
     
-    nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
     repSortieDate = os.path.join(repSortie, listeRep[i]) 
     if not os.path.exists(repSortieDate):
@@ -4030,7 +4026,7 @@ for i in range (len(listeRep)):
 
    
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
     
 
 ####################
@@ -4119,7 +4115,7 @@ for i in range (len(listeRep)):
     date = nomParties[1]
     tuile = nomParties[2]
     
-    nomSortieTab = f"{sat}_{date}_{tuile}_tableau.csv"
+    nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
     repSortieDate = os.path.join(repSortie, listeRep[i]) 
     if not os.path.exists(repSortieDate):
@@ -4700,4 +4696,4 @@ for i in range (len(listeRep)):
 
    
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
