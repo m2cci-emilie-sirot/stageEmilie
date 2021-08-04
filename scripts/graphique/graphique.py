@@ -33,10 +33,15 @@ for i in range (len(listeRep)):
    
     colonnes = len(csvfile.columns)
     
-    for c in range()
+    listeMEDI = []
+    
+    for c in range(3, len(csvfile.columns)):
+        if csvfile.iloc[2,i] = "MEDI":
+            listeMEDI.append(csvfile.iloc[2,i])
+            
     
    
-    listeMEDI = []
+    
    
    
     mediane = statistics.median(lst)
