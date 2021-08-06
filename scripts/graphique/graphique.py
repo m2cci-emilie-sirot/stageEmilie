@@ -86,11 +86,78 @@ for i in range (len(listeRep)):
     
     
     
+    ##
+    
+    listeMEDI2 = []
+    listeLAND2 = []
+    listeSUB2 = []
+    listeBOIS2 = []
+    listeECOR2 = []
+    listePROD2 = []
     
     
+    row = 9
     
-   test = csvfile["date"].values
+    for c in range(3, len(csvfile.columns)):
+        if csvfile.iloc[2,c] == "MEDI":
+            listeMEDI2.append(csvfile.iloc[row,c])
+            
+            
+        elif csvfile.iloc[2,c] == "LAND":
+            listeLAND2.append(csvfile.iloc[row,c])
+            
+            
+        elif csvfile.iloc[2,c] == "SUB":
+            listeSUB2.append(csvfile.iloc[row,c])
+            
+            
+        elif csvfile.iloc[2,c] == "BOIS":
+            listeBOIS2.append(csvfile.iloc[row,c])
+            
+            
+        elif csvfile.iloc[2,c] == "ECOR":
+            listeECOR2.append(csvfile.iloc[row,c])
+            
+            
+        elif csvfile.iloc[2,c] == "PROD":
+            listePROD2.append(csvfile.iloc[row,c])
+            
+   
+            
+            
+    listeMEDIFloat2 = list(map(float, listeMEDI2))
+    listeLANDFloat2 = list(map(float, listeLAND2))
+    listeSUBFloat2 = list(map(float, listeSUB2))
+    listeBOISFloat2 = list(map(float, listeBOIS2))
+    listeECORFloat2 = list(map(float, listeECOR2))
+    listePRODFloat2 = list(map(float, listePROD2))
+    
+   
+    medianeMEDI2 = statistics.median(listeMEDIFloat2)
+    medianeLAND2 = statistics.median(listeLANDFloat2)
+    medianeSUB2 = statistics.median(listeSUBFloat2)
+    medianeBOIS2 = statistics.median(listeBOISFloat2)
+    medianeECOR2 = statistics.median(listeECORFloat2)
+    medianePROD2 = statistics.median(listePRODFloat2)
+    
+    
+    legende = ["date", "type"]
+    testTab = pd.DataFrame(columns = legende)    
+    testTab.loc[0,"date"] = "20200207"
+    testTab.loc[0, "type"] = medianeMEDI
+    testTab.loc[1,"date"] = "20200204"
+    testTab.loc[1,"type"] = medianeMEDI2
+
+    x = testTab["date"]
+    y = testTab["type"]
+    
     plt.figure()
+    plt.plot(x,y)
+    
+    
+    plt.xlabel("dates")
+    plt.ylabel("valeur pixels")
+    plt.legend(["ND_B2_B3"])
     
     testcolonnes = csvfile.columns
     
