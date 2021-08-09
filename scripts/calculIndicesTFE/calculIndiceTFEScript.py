@@ -722,7 +722,7 @@ for i in range (len(listeRep)):
 
     print(index)
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+    tab.to_csv(os.path.join(repSortieDate,nomSortieTab), index=False)
     
 ####################
 ####################
@@ -1444,7 +1444,7 @@ for i in range (len(listeRep)):
 
     print(index)
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+    tab.to_csv(os.path.join(repSortieDate,nomSortieTab), index=False)
     
     
 ####################
@@ -2170,7 +2170,7 @@ for i in range (len(listeRep)):
 
     print(index)
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+    tab.to_csv(os.path.join(repSortieDate,nomSortieTab), index=False)
     
     
 ####################
@@ -2897,7 +2897,7 @@ for i in range (len(listeRep)):
 
     print(index)
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+    tab.to_csv(os.path.join(repSortieDate,nomSortieTab), index=False)
     
     
 ####################
@@ -3624,7 +3624,7 @@ for i in range (len(listeRep)):
 
     print(index)
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+    tab.to_csv(os.path.join(repSortieDate,nomSortieTab), index=False)
     
     
 ####################
@@ -4350,7 +4350,7 @@ for i in range (len(listeRep)):
 
     print(index)
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+    tab.to_csv(os.path.join(repSortieDate,nomSortieTab), index=False)
     
 ####################
 ####################
@@ -5077,4 +5077,4 @@ for i in range (len(listeRep)):
 
     print(index)
 
-    tab.to_csv(os.path.join(repSortieDate,nomSortieTab))
+    tab.to_csv(os.path.join(repSortieDate,nomSortieTab), index=False)

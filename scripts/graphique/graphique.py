@@ -166,3 +166,50 @@ LAND
 SUB
 BOIS
 ECOR
+
+
+#afficher courbes tous indices pour chaque type de veget
+
+
+repDonnees = r"../calculIndicesTFE/sortie/sortieT31TFJ"
+repSortie = "sortie/sortieT31TFJ"
+listeRep = os.listdir(repDonnees)
+
+for i in range (len(listeRep)):
+    repCourant = os.path.join(repDonnees, listeRep[0])
+    #repCourant = os.path.join(repDonnees, listeRep[i])
+    fichiersRep = os.listdir(repCourant)
+
+csvfile = pd.read_csv(os.path.join(repCourant,fichiersRep[0]), header=0)
+   
+#ordonner le tableau
+csvTrie = csvfile.sort_values(by = 'bandes', ascending = True)
+
+#Premiere boucle : permet de passer à la ligne du dessous pour changer d'indice
+#separer les graphiques par type indice
+
+
+#BSITIan
+for rowBSITian in range(3,362):
+    
+    
+#BSI
+for rowBSI in range(363,1083):
+    
+
+#CVI
+for rowCVI in range(1084,1442):
+    
+#ND
+for rowND in range(1443, 1487):
+    
+#SR
+for rowSR in range(1488, 1577):
+    
+#indclass
+for rowIndclass in range(1578, 1590):
+    
+#mSR
+for rowmSR in range(1590,1951):
+    
+    
