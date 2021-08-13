@@ -192,24 +192,248 @@ csvTrie = csvfile.sort_values(by = 'bandes', ascending = True)
 #BSITIan
 for rowBSITian in range(3,362):
     
+    listeMEDIBSITian = []
+    listeLANDBSITian = []
+    listeSUBBSITian = []
+    listeBOISBSITian = []
+    listeECORBSITian = []
+    listePRODBSITian = []
+    
+    for c in range(3, len(csvTrie.columns)):
+        if csvfile.iloc[2,c] == "MEDI":
+            listeMEDIBSITian.append(csvfile.iloc[rowBSITian,c])
+            
+            
+        elif csvfile.iloc[2,c] == "LAND":
+            listeLANDBSITian.append(csvTrie.iloc[rowBSITian,c])
+            
+            
+        elif csvfile.iloc[2,c] == "SUB":
+            listeSUBBSITian.append(csvTrie.iloc[rowBSITian,c])
+            
+            
+        elif csvfile.iloc[2,c] == "BOIS":
+            listeBOISBSITian.append(csvTrie.iloc[rowBSITian,c])
+            
+            
+        elif csvfile.iloc[2,c] == "ECOR":
+            listeECORBSITian.append(csvTrie.iloc[rowBSITian,c])
+            
+            
+        elif csvfile.iloc[2,c] == "PROD":
+            listePRODBSITian.append(csvTrie.iloc[rowBSITian,c])
+    
     
 #BSI
 for rowBSI in range(363,1083):
+    
+    listeMEDIBSI = []
+    listeLANDBSI = []
+    listeSUBBSI = []
+    listeBOISBSI = []
+    listeECORBSI = []
+    listePRODBSI = []
+    
+    for c in range(3, len(csvTrie.columns)):
+        if csvfile.iloc[2,c] == "MEDI":
+            listeMEDIBSI.append(csvfile.iloc[rowBSI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "LAND":
+            listeLANDBSI.append(csvTrie.iloc[rowBSI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "SUB":
+            listeSUBBSI.append(csvTrie.iloc[rowBSI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "BOIS":
+            listeBOISBSI.append(csvTrie.iloc[rowBSI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "ECOR":
+            listeECORBSI.append(csvTrie.iloc[rowBSI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "PROD":
+            listePRODBSI.append(csvTrie.iloc[rowBSI,c])
+    
     
 
 #CVI
 for rowCVI in range(1084,1442):
     
+    listeMEDICVI = []
+    listeLANDCVI = []
+    listeSUBCVI = []
+    listeBOISCVI = []
+    listeECORCVI = []
+    listePRODCVI = []
+    
+    for c in range(3, len(csvTrie.columns)):
+        if csvfile.iloc[2,c] == "MEDI":
+            listeMEDICVI.append(csvfile.iloc[rowCVI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "LAND":
+            listeLANDCVI.append(csvTrie.iloc[rowCVI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "SUB":
+            listeSUBCVI.append(csvTrie.iloc[rowCVI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "BOIS":
+            listeBOISCVI.append(csvTrie.iloc[rowCVI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "ECOR":
+            listeECORCVI.append(csvTrie.iloc[rowCVI,c])
+            
+            
+        elif csvfile.iloc[2,c] == "PROD":
+            listePRODCVI.append(csvTrie.iloc[rowCVI,c])
+    
+    
+    
 #ND
 for rowND in range(1443, 1487):
+    
+    listeMEDIND = []
+    listeLANDND = []
+    listeSUBND = []
+    listeBOISND = []
+    listeECORND = []
+    listePRODND = []
+    
+    for c in range(3, len(csvTrie.columns)):
+        if csvfile.iloc[2,c] == "MEDI":
+            listeMEDIND.append(csvfile.iloc[rowND,c])
+            
+            
+        elif csvfile.iloc[2,c] == "LAND":
+            listeLANDND.append(csvTrie.iloc[rowND,c])
+            
+            
+        elif csvfile.iloc[2,c] == "SUB":
+            listeSUBND.append(csvTrie.iloc[rowND,c])
+            
+            
+        elif csvfile.iloc[2,c] == "BOIS":
+            listeBOISND.append(csvTrie.iloc[rowND,c])
+            
+            
+        elif csvfile.iloc[2,c] == "ECOR":
+            listeECORND.append(csvTrie.iloc[rowND,c])
+            
+            
+        elif csvfile.iloc[2,c] == "PROD":
+            listePRODND.append(csvTrie.iloc[rowND,c])
+    
+    
     
 #SR
 for rowSR in range(1488, 1577):
     
+    listeMEDIND = []
+    listeLASRSR = []
+    listeSUBSR = []
+    listeBOISSR = []
+    listeECORSR = []
+    listePRODSR = []
+    
+    for c in range(3, len(csvTrie.columns)):
+        if csvfile.iloc[2,c] == "MEDI":
+            listeMEDISR.append(csvfile.iloc[rowSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "LAND":
+            listeLANDSR.append(csvTrie.iloc[rowSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "SUB":
+            listeSUBSR.append(csvTrie.iloc[rowSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "BOIS":
+            listeBOISSR.append(csvTrie.iloc[rowSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "ECOR":
+            listeECORSR.append(csvTrie.iloc[rowSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "PROD":
+            listePRODSR.append(csvTrie.iloc[rowSR,c])
+    
+    
+    
+    
 #indclass
 for rowIndclass in range(1578, 1590):
+    listeMEDIND = []
+    listeLAIndclassIndclass = []
+    listeSUBIndclass = []
+    listeBOISIndclass = []
+    listeECORIndclass = []
+    listePRODIndclass = []
+    
+    for c in range(3, len(csvTrie.columns)):
+        if csvfile.iloc[2,c] == "MEDI":
+            listeMEDIIndclass.append(csvfile.iloc[rowIndclass,c])
+            
+            
+        elif csvfile.iloc[2,c] == "LAND":
+            listeLANDIndclass.append(csvTrie.iloc[rowIndclass,c])
+            
+            
+        elif csvfile.iloc[2,c] == "SUB":
+            listeSUBIndclass.append(csvTrie.iloc[rowIndclass,c])
+            
+            
+        elif csvfile.iloc[2,c] == "BOIS":
+            listeBOISIndclass.append(csvTrie.iloc[rowIndclass,c])
+            
+            
+        elif csvfile.iloc[2,c] == "ECOR":
+            listeECORIndclass.append(csvTrie.iloc[rowIndclass,c])
+            
+            
+        elif csvfile.iloc[2,c] == "PROD":
+            listePRODIndclass.append(csvTrie.iloc[rowIndclass,c])
     
 #mSR
 for rowmSR in range(1590,1951):
+    
+    listeMEDIND = []
+    listeLAmSRmSR = []
+    listeSUBmSR = []
+    listeBOISmSR = []
+    listeECORmSR = []
+    listePRODmSR = []
+    
+    for c in range(3, len(csvTrie.columns)):
+        if csvfile.iloc[2,c] == "MEDI":
+            listeMEDImSR.append(csvfile.iloc[rowmSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "LAND":
+            listeLANDmSR.append(csvTrie.iloc[rowmSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "SUB":
+            listeSUBmSR.append(csvTrie.iloc[rowmSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "BOIS":
+            listeBOISmSR.append(csvTrie.iloc[rowmSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "ECOR":
+            listeECORmSR.append(csvTrie.iloc[rowmSR,c])
+            
+            
+        elif csvfile.iloc[2,c] == "PROD":
+            listePRODmSR.append(csvTrie.iloc[rowmSR,c])
     
     
