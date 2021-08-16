@@ -95,20 +95,6 @@ for i in range (len(listeRep)):
     
 
     
-#caracteristiques de l'image
-    
-                   
-    imageRef = gdal.Open(repCourant+'/'+B2[0])
-    cols = imageRef.RasterXSize
-    rows = imageRef.RasterYSize
-    transform = imageRef.GetGeoTransform()
-    xOrigin = transform[0]
-    yOrigin = transform[3]
-    pixelWidth = transform[1]
-    pixelHeight = -transform[5]
-    
-    
-   
     
     
     for indice in range(len(listeIndices)):
@@ -711,20 +697,6 @@ for i in range (len(listeRep)):
     nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
   
-    
-#caracteristiques de l'image
-    
-                   
-    imageRef = gdal.Open(repCourant+'/'+B2[0])
-    cols = imageRef.RasterXSize
-    rows = imageRef.RasterYSize
-    transform = imageRef.GetGeoTransform()
-    xOrigin = transform[0]
-    yOrigin = transform[3]
-    pixelWidth = transform[1]
-    pixelHeight = -transform[5]
-    
-    
    
     
     
@@ -1330,19 +1302,6 @@ for i in range (len(listeRep)):
     
    
     
-#caracteristiques de l'image
-    
-                   
-    imageRef = gdal.Open(repCourant+'/'+B2[0])
-    cols = imageRef.RasterXSize
-    rows = imageRef.RasterYSize
-    transform = imageRef.GetGeoTransform()
-    xOrigin = transform[0]
-    yOrigin = transform[3]
-    pixelWidth = transform[1]
-    pixelHeight = -transform[5]
-    
-    
    
     
     
@@ -1944,20 +1903,6 @@ for i in range (len(listeRep)):
     tuile = nomParties[2]
     
     nomSortieTab = f"{sat}_{tuile}_tableau.csv"
-    
-    
-    
-#caracteristiques de l'image
-    
-                   
-    imageRef = gdal.Open(repCourant+'/'+B2[0])
-    cols = imageRef.RasterXSize
-    rows = imageRef.RasterYSize
-    transform = imageRef.GetGeoTransform()
-    xOrigin = transform[0]
-    yOrigin = transform[3]
-    pixelWidth = transform[1]
-    pixelHeight = -transform[5]
     
     
    
@@ -2564,20 +2509,6 @@ for i in range (len(listeRep)):
     
 
     
-#caracteristiques de l'image
-    
-                   
-    imageRef = gdal.Open(repCourant+'/'+B2[0])
-    cols = imageRef.RasterXSize
-    rows = imageRef.RasterYSize
-    transform = imageRef.GetGeoTransform()
-    xOrigin = transform[0]
-    yOrigin = transform[3]
-    pixelWidth = transform[1]
-    pixelHeight = -transform[5]
-    
-    
-   
     
     
     for indice in range(len(listeIndices)):
@@ -3182,19 +3113,6 @@ for i in range (len(listeRep)):
     
 
     
-#caracteristiques de l'image
-    
-                   
-    imageRef = gdal.Open(repCourant+'/'+B2[0])
-    cols = imageRef.RasterXSize
-    rows = imageRef.RasterYSize
-    transform = imageRef.GetGeoTransform()
-    xOrigin = transform[0]
-    yOrigin = transform[3]
-    pixelWidth = transform[1]
-    pixelHeight = -transform[5]
-    
-    
    
     for indice in range(len(listeIndices)):
         #nomIndice = listeIndices[0].split("_")
@@ -3796,20 +3714,7 @@ for i in range (len(listeRep)):
     nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
    
-#caracteristiques de l'image
-    
-                   
-    imageRef = gdal.Open(repCourant+'/'+B2[0])
-    cols = imageRef.RasterXSize
-    rows = imageRef.RasterYSize
-    transform = imageRef.GetGeoTransform()
-    xOrigin = transform[0]
-    yOrigin = transform[3]
-    pixelWidth = transform[1]
-    pixelHeight = -transform[5]
-    
-    
-   
+
     
     
     for indice in range(len(listeIndices)):
