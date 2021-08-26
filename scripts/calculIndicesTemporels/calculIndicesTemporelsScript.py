@@ -23,7 +23,7 @@ import pandas as pd
 
 #Lister les indices souhaités
 
-listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B2_B3_B4","mSR_B2_B3_B4","indclass_NDVI","indclass_NDI45"]
+listeIndices = ["indclass_NDVI","indclass_GNDVI","indclass_NDI45","indclass_NDVIre","indclass_NDII","indclass_NREDI1","indclass_NREDI2","indclass_NREDI3","indclass_PSRI","indclass_MSI","indclass_IRECI","indclass_MTCI","indclass_MCARI"]
 
 #ouvrir les TFE
 

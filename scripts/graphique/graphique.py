@@ -9,7 +9,6 @@ Created on Mon Aug  2 14:12:01 2021
 import os
 import matplotlib.pyplot as plt
 import pandas as pd
-#import seaborn as sns
 import statistics
 
 
@@ -19,17 +18,23 @@ repDonnees = r"../calculIndicesTemporels/sortie/sortieT31TFJ"
 repSortie = "sortie/sortieT31TFJ"
 
 
-listeRep = os.listdir(repDonnees)
+fichiersRep = os.listdir(repDonnees)
+csvfile = pd.read_csv(os.path.join(repDonnees,fichiersRep[0]), header=0)
 
-
-for i in range (len(listeRep)):
+#### A ENLEVER ?
+for i in range (len(fichiersRep)):
     #repCourant = os.path.join(repDonnees, listeRep[0])
     #repCourant = os.path.join(repDonnees, listeRep[i])
-    fichiersRep = os.listdir(repDonnees)
+    
 
 
-
-    csvfile = pd.read_csv(os.path.join(repDonnees,fichiersRep[0]), header=0)
+       
+    indices = csvfile['bandes'].unique()
+    indicesListe = list(indices)
+    indicesListe.sort()
+    del indicesListe[0]
+    
+    df.drop(indexNames , inplace=True)
    
      
     listeMEDI = []
@@ -161,11 +166,7 @@ for i in range (len(listeRep)):
     
     testcolonnes = csvfile.columns
     
-MEDI
-LAND
-SUB
-BOIS
-ECOR
+
 
 
 #afficher courbes tous indices pour chaque type de veget
