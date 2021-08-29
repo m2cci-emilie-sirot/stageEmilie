@@ -140,13 +140,13 @@ for ind in range(3, nombreIndices):
 #graphique
     
   
-    
+    tabInd.fillna(value=None, method="ffill", axis=None, inplace=True, limit=None, downcast=None)
     tabInd.plot()
     
     plt.ylabel('Valeur médiane des pixels ')
     plt.xlabel('Dates')
-    plt.title("Profil des types de végétations avec l'indice\n"+nomSortieGraph+"pour l'année "+annee)
-    
+    plt.title("Profil des types de végétations avec l'indice \n"+nomSortieGraph+" pour l'année "+annee)
+    plt.legend(loc="lower right")
     plt.setp(plt.gca().get_xticklabels(),rotation=45, horizontalalignment='right')
     plt.tight_layout()
    

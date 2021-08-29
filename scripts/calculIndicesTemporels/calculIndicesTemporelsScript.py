@@ -228,7 +228,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
         
-                    val.append(SR[row][col])
+                    val.append(BSI[row][col])
                     
                 concat = ind + val
                     
@@ -252,7 +252,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(mSR[row][col])
                     
                 concat = ind + val
                     
@@ -274,7 +274,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(BSI_Tian[row][col])
                     
                 concat = ind + val
                     
@@ -297,7 +297,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(CVI[row][col])
                     
                 concat = ind + val
                     
@@ -389,7 +389,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                      col = int((point[0] - xOrigin) / pixelWidth)
                      row = int((yOrigin - point[1] ) / pixelHeight)
-                     val.append(SR[row][col])
+                     val.append(NDVI[row][col])
                  
                 concat = ind + val
                  
@@ -412,7 +412,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(GNDVI[row][col])
                  
                 concat = ind + val
                  
@@ -432,7 +432,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDVIre[row][col])
                     
                 concat = ind + val
                     
@@ -453,7 +453,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDI45[row][col])
                     
                 concat = ind + val
                     
@@ -473,7 +473,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDII[row][col])
                  
                 concat = ind + val
                      
@@ -495,7 +495,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI1[row][col])
                     
                 concat = ind + val
                     
@@ -520,7 +520,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI2[row][col])
                     
                 concat = ind + val
                     
@@ -546,7 +546,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI3[row][col])
                     
                 concat = ind + val
                     
@@ -572,7 +572,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(PSRI[row][col])
                     
                 concat = ind + val
                     
@@ -595,7 +595,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MSI[row][col])
                     
                 concat = ind + val
                     
@@ -619,7 +619,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(IRECI[row][col])
                     
                 concat = ind + val
                     
@@ -643,7 +643,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MTCI[row][col])
                     
                 concat = ind + val
                     
@@ -667,7 +667,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MCARI[row][col])
                     
                 concat = ind + val
                     
@@ -681,7 +681,7 @@ for i in range (len(listeRep)):
 
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
-    
+
 ####################
 ####################
 ### Tuile 31TFK ####
@@ -690,7 +690,7 @@ tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
 
 #Lister les indices souhaités
 
-listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B2_B3_B4","mSR_B2_B3_B4","indclass_NDVI","indclass_NDI45"]
+listeIndices = ["indclass_NDVI","indclass_GNDVI","indclass_NDI45","indclass_NDVIre","indclass_NDII","indclass_NREDI1","indclass_NREDI2","indclass_NREDI3","indclass_PSRI","indclass_MSI","indclass_IRECI","indclass_MTCI","indclass_MCARI"]
 
 #ouvrir les TFE
 
@@ -770,8 +770,7 @@ for i in range (len(listeRep)):
     
     nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
- 
-    
+  
 #caracteristiques de l'image
     
                    
@@ -896,7 +895,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
         
-                    val.append(SR[row][col])
+                    val.append(BSI[row][col])
                     
                 concat = ind + val
                     
@@ -920,7 +919,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(mSR[row][col])
                     
                 concat = ind + val
                     
@@ -942,7 +941,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(BSI_Tian[row][col])
                     
                 concat = ind + val
                     
@@ -965,7 +964,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(CVI[row][col])
                     
                 concat = ind + val
                     
@@ -1057,7 +1056,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                      col = int((point[0] - xOrigin) / pixelWidth)
                      row = int((yOrigin - point[1] ) / pixelHeight)
-                     val.append(SR[row][col])
+                     val.append(NDVI[row][col])
                  
                 concat = ind + val
                  
@@ -1080,7 +1079,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(GNDVI[row][col])
                  
                 concat = ind + val
                  
@@ -1100,7 +1099,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDVIre[row][col])
                     
                 concat = ind + val
                     
@@ -1121,7 +1120,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDI45[row][col])
                     
                 concat = ind + val
                     
@@ -1141,7 +1140,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDII[row][col])
                  
                 concat = ind + val
                      
@@ -1163,7 +1162,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI1[row][col])
                     
                 concat = ind + val
                     
@@ -1188,7 +1187,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI2[row][col])
                     
                 concat = ind + val
                     
@@ -1214,7 +1213,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI3[row][col])
                     
                 concat = ind + val
                     
@@ -1240,7 +1239,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(PSRI[row][col])
                     
                 concat = ind + val
                     
@@ -1263,7 +1262,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MSI[row][col])
                     
                 concat = ind + val
                     
@@ -1287,7 +1286,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(IRECI[row][col])
                     
                 concat = ind + val
                     
@@ -1311,7 +1310,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MTCI[row][col])
                     
                 concat = ind + val
                     
@@ -1335,7 +1334,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MCARI[row][col])
                     
                 concat = ind + val
                     
@@ -1349,6 +1348,9 @@ for i in range (len(listeRep)):
 
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
+
+
+
 ####################
 ####################
 ### Tuile 31TGK ####
@@ -1357,7 +1359,7 @@ tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
 
 #Lister les indices souhaités
 
-listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B2_B3_B4","mSR_B2_B3_B4","indclass_NDVI","indclass_NDI45"]
+listeIndices = ["indclass_NDVI","indclass_GNDVI","indclass_NDI45","indclass_NDVIre","indclass_NDII","indclass_NREDI1","indclass_NREDI2","indclass_NREDI3","indclass_PSRI","indclass_MSI","indclass_IRECI","indclass_MTCI","indclass_MCARI"]
 
 #ouvrir les TFE
 
@@ -1436,8 +1438,8 @@ for i in range (len(listeRep)):
     tuile = nomParties[2]
     
     nomSortieTab = f"{sat}_{tuile}_tableau.csv"
-  
     
+  
 #caracteristiques de l'image
     
                    
@@ -1562,7 +1564,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
         
-                    val.append(SR[row][col])
+                    val.append(BSI[row][col])
                     
                 concat = ind + val
                     
@@ -1586,7 +1588,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(mSR[row][col])
                     
                 concat = ind + val
                     
@@ -1608,7 +1610,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(BSI_Tian[row][col])
                     
                 concat = ind + val
                     
@@ -1631,7 +1633,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(CVI[row][col])
                     
                 concat = ind + val
                     
@@ -1723,7 +1725,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                      col = int((point[0] - xOrigin) / pixelWidth)
                      row = int((yOrigin - point[1] ) / pixelHeight)
-                     val.append(SR[row][col])
+                     val.append(NDVI[row][col])
                  
                 concat = ind + val
                  
@@ -1746,7 +1748,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(GNDVI[row][col])
                  
                 concat = ind + val
                  
@@ -1766,7 +1768,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDVIre[row][col])
                     
                 concat = ind + val
                     
@@ -1787,7 +1789,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDI45[row][col])
                     
                 concat = ind + val
                     
@@ -1807,7 +1809,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDII[row][col])
                  
                 concat = ind + val
                      
@@ -1829,7 +1831,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI1[row][col])
                     
                 concat = ind + val
                     
@@ -1854,7 +1856,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI2[row][col])
                     
                 concat = ind + val
                     
@@ -1880,7 +1882,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI3[row][col])
                     
                 concat = ind + val
                     
@@ -1906,7 +1908,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(PSRI[row][col])
                     
                 concat = ind + val
                     
@@ -1929,7 +1931,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MSI[row][col])
                     
                 concat = ind + val
                     
@@ -1953,7 +1955,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(IRECI[row][col])
                     
                 concat = ind + val
                     
@@ -1977,7 +1979,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MTCI[row][col])
                     
                 concat = ind + val
                     
@@ -2001,7 +2003,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MCARI[row][col])
                     
                 concat = ind + val
                     
@@ -2015,6 +2017,8 @@ for i in range (len(listeRep)):
 
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
+
+
 ####################
 ####################
 ### Tuile 31TGL ####
@@ -2023,7 +2027,7 @@ tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
 
 #Lister les indices souhaités
 
-listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B2_B3_B4","mSR_B2_B3_B4","indclass_NDVI","indclass_NDI45"]
+listeIndices = ["indclass_NDVI","indclass_GNDVI","indclass_NDI45","indclass_NDVIre","indclass_NDII","indclass_NREDI1","indclass_NREDI2","indclass_NREDI3","indclass_PSRI","indclass_MSI","indclass_IRECI","indclass_MTCI","indclass_MCARI"]
 
 #ouvrir les TFE
 
@@ -2104,7 +2108,6 @@ for i in range (len(listeRep)):
     nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
   
-    
 #caracteristiques de l'image
     
                    
@@ -2229,7 +2232,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
         
-                    val.append(SR[row][col])
+                    val.append(BSI[row][col])
                     
                 concat = ind + val
                     
@@ -2253,7 +2256,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(mSR[row][col])
                     
                 concat = ind + val
                     
@@ -2275,7 +2278,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(BSI_Tian[row][col])
                     
                 concat = ind + val
                     
@@ -2298,7 +2301,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(CVI[row][col])
                     
                 concat = ind + val
                     
@@ -2390,7 +2393,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                      col = int((point[0] - xOrigin) / pixelWidth)
                      row = int((yOrigin - point[1] ) / pixelHeight)
-                     val.append(SR[row][col])
+                     val.append(NDVI[row][col])
                  
                 concat = ind + val
                  
@@ -2413,7 +2416,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(GNDVI[row][col])
                  
                 concat = ind + val
                  
@@ -2433,7 +2436,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDVIre[row][col])
                     
                 concat = ind + val
                     
@@ -2454,7 +2457,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDI45[row][col])
                     
                 concat = ind + val
                     
@@ -2474,7 +2477,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDII[row][col])
                  
                 concat = ind + val
                      
@@ -2496,7 +2499,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI1[row][col])
                     
                 concat = ind + val
                     
@@ -2521,7 +2524,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI2[row][col])
                     
                 concat = ind + val
                     
@@ -2547,7 +2550,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI3[row][col])
                     
                 concat = ind + val
                     
@@ -2573,7 +2576,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(PSRI[row][col])
                     
                 concat = ind + val
                     
@@ -2596,7 +2599,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MSI[row][col])
                     
                 concat = ind + val
                     
@@ -2620,7 +2623,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(IRECI[row][col])
                     
                 concat = ind + val
                     
@@ -2644,7 +2647,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MTCI[row][col])
                     
                 concat = ind + val
                     
@@ -2668,7 +2671,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MCARI[row][col])
                     
                 concat = ind + val
                     
@@ -2683,6 +2686,7 @@ for i in range (len(listeRep)):
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
 
+
 ####################
 ####################
 ### Tuile 32TLP ####
@@ -2691,7 +2695,7 @@ tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
 
 #Lister les indices souhaités
 
-listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B2_B3_B4","mSR_B2_B3_B4","indclass_NDVI","indclass_NDI45"]
+listeIndices = ["indclass_NDVI","indclass_GNDVI","indclass_NDI45","indclass_NDVIre","indclass_NDII","indclass_NREDI1","indclass_NREDI2","indclass_NREDI3","indclass_PSRI","indclass_MSI","indclass_IRECI","indclass_MTCI","indclass_MCARI"]
 
 #ouvrir les TFE
 
@@ -2772,7 +2776,6 @@ for i in range (len(listeRep)):
     nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
   
-    
 #caracteristiques de l'image
     
                    
@@ -2897,7 +2900,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
         
-                    val.append(SR[row][col])
+                    val.append(BSI[row][col])
                     
                 concat = ind + val
                     
@@ -2921,7 +2924,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(mSR[row][col])
                     
                 concat = ind + val
                     
@@ -2943,7 +2946,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(BSI_Tian[row][col])
                     
                 concat = ind + val
                     
@@ -2966,7 +2969,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(CVI[row][col])
                     
                 concat = ind + val
                     
@@ -3058,7 +3061,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                      col = int((point[0] - xOrigin) / pixelWidth)
                      row = int((yOrigin - point[1] ) / pixelHeight)
-                     val.append(SR[row][col])
+                     val.append(NDVI[row][col])
                  
                 concat = ind + val
                  
@@ -3081,7 +3084,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(GNDVI[row][col])
                  
                 concat = ind + val
                  
@@ -3101,7 +3104,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDVIre[row][col])
                     
                 concat = ind + val
                     
@@ -3122,7 +3125,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDI45[row][col])
                     
                 concat = ind + val
                     
@@ -3142,7 +3145,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDII[row][col])
                  
                 concat = ind + val
                      
@@ -3164,7 +3167,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI1[row][col])
                     
                 concat = ind + val
                     
@@ -3189,7 +3192,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI2[row][col])
                     
                 concat = ind + val
                     
@@ -3215,7 +3218,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI3[row][col])
                     
                 concat = ind + val
                     
@@ -3241,7 +3244,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(PSRI[row][col])
                     
                 concat = ind + val
                     
@@ -3264,7 +3267,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MSI[row][col])
                     
                 concat = ind + val
                     
@@ -3288,7 +3291,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(IRECI[row][col])
                     
                 concat = ind + val
                     
@@ -3312,7 +3315,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MTCI[row][col])
                     
                 concat = ind + val
                     
@@ -3336,7 +3339,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MCARI[row][col])
                     
                 concat = ind + val
                     
@@ -3350,6 +3353,7 @@ for i in range (len(listeRep)):
 
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
+
 ####################
 ####################
 ### Tuile 32TLQ ####
@@ -3358,7 +3362,7 @@ tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
 
 #Lister les indices souhaités
 
-listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B2_B3_B4","mSR_B2_B3_B4","indclass_NDVI","indclass_NDI45"]
+listeIndices = ["indclass_NDVI","indclass_GNDVI","indclass_NDI45","indclass_NDVIre","indclass_NDII","indclass_NREDI1","indclass_NREDI2","indclass_NREDI3","indclass_PSRI","indclass_MSI","indclass_IRECI","indclass_MTCI","indclass_MCARI"]
 
 #ouvrir les TFE
 
@@ -3438,7 +3442,7 @@ for i in range (len(listeRep)):
     
     nomSortieTab = f"{sat}_{tuile}_tableau.csv"
     
-
+  
 #caracteristiques de l'image
     
                    
@@ -3563,7 +3567,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
         
-                    val.append(SR[row][col])
+                    val.append(BSI[row][col])
                     
                 concat = ind + val
                     
@@ -3587,7 +3591,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(mSR[row][col])
                     
                 concat = ind + val
                     
@@ -3609,7 +3613,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(BSI_Tian[row][col])
                     
                 concat = ind + val
                     
@@ -3632,7 +3636,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(CVI[row][col])
                     
                 concat = ind + val
                     
@@ -3724,7 +3728,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                      col = int((point[0] - xOrigin) / pixelWidth)
                      row = int((yOrigin - point[1] ) / pixelHeight)
-                     val.append(SR[row][col])
+                     val.append(NDVI[row][col])
                  
                 concat = ind + val
                  
@@ -3747,7 +3751,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(GNDVI[row][col])
                  
                 concat = ind + val
                  
@@ -3767,7 +3771,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDVIre[row][col])
                     
                 concat = ind + val
                     
@@ -3788,7 +3792,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDI45[row][col])
                     
                 concat = ind + val
                     
@@ -3808,7 +3812,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDII[row][col])
                  
                 concat = ind + val
                      
@@ -3830,7 +3834,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI1[row][col])
                     
                 concat = ind + val
                     
@@ -3855,7 +3859,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI2[row][col])
                     
                 concat = ind + val
                     
@@ -3881,7 +3885,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI3[row][col])
                     
                 concat = ind + val
                     
@@ -3907,7 +3911,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(PSRI[row][col])
                     
                 concat = ind + val
                     
@@ -3930,7 +3934,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MSI[row][col])
                     
                 concat = ind + val
                     
@@ -3954,7 +3958,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(IRECI[row][col])
                     
                 concat = ind + val
                     
@@ -3978,7 +3982,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MTCI[row][col])
                     
                 concat = ind + val
                     
@@ -4002,7 +4006,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MCARI[row][col])
                     
                 concat = ind + val
                     
@@ -4017,6 +4021,7 @@ for i in range (len(listeRep)):
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
 
+
 ####################
 ####################
 ### Tuile 32TLR ####
@@ -4025,7 +4030,7 @@ tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
 
 #Lister les indices souhaités
 
-listeIndices = ["ND_B2_B3", "SR_B2_B4", "BSI_B2_B3_B4","mSR_B2_B3_B4","indclass_NDVI","indclass_NDI45"]
+listeIndices = ["indclass_NDVI","indclass_GNDVI","indclass_NDI45","indclass_NDVIre","indclass_NDII","indclass_NREDI1","indclass_NREDI2","indclass_NREDI3","indclass_PSRI","indclass_MSI","indclass_IRECI","indclass_MTCI","indclass_MCARI"]
 
 #ouvrir les TFE
 
@@ -4104,7 +4109,8 @@ for i in range (len(listeRep)):
     tuile = nomParties[2]
     
     nomSortieTab = f"{sat}_{tuile}_tableau.csv"
-
+    
+  
 #caracteristiques de l'image
     
                    
@@ -4229,7 +4235,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
         
-                    val.append(SR[row][col])
+                    val.append(BSI[row][col])
                     
                 concat = ind + val
                     
@@ -4253,7 +4259,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(mSR[row][col])
                     
                 concat = ind + val
                     
@@ -4275,7 +4281,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(BSI_Tian[row][col])
                     
                 concat = ind + val
                     
@@ -4298,7 +4304,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
     
-                    val.append(ND[row][col])
+                    val.append(CVI[row][col])
                     
                 concat = ind + val
                     
@@ -4390,7 +4396,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                      col = int((point[0] - xOrigin) / pixelWidth)
                      row = int((yOrigin - point[1] ) / pixelHeight)
-                     val.append(SR[row][col])
+                     val.append(NDVI[row][col])
                  
                 concat = ind + val
                  
@@ -4413,7 +4419,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(GNDVI[row][col])
                  
                 concat = ind + val
                  
@@ -4433,7 +4439,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDVIre[row][col])
                     
                 concat = ind + val
                     
@@ -4454,7 +4460,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDI45[row][col])
                     
                 concat = ind + val
                     
@@ -4474,7 +4480,7 @@ for i in range (len(listeRep)):
                 for point in listeCoordonnees:
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
-                    val.append(SR[row][col])
+                    val.append(NDII[row][col])
                  
                 concat = ind + val
                      
@@ -4496,7 +4502,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI1[row][col])
                     
                 concat = ind + val
                     
@@ -4521,7 +4527,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI2[row][col])
                     
                 concat = ind + val
                     
@@ -4547,7 +4553,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(NREDI3[row][col])
                     
                 concat = ind + val
                     
@@ -4573,7 +4579,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(PSRI[row][col])
                     
                 concat = ind + val
                     
@@ -4596,7 +4602,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MSI[row][col])
                     
                 concat = ind + val
                     
@@ -4620,7 +4626,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(IRECI[row][col])
                     
                 concat = ind + val
                     
@@ -4644,7 +4650,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MTCI[row][col])
                     
                 concat = ind + val
                     
@@ -4668,7 +4674,7 @@ for i in range (len(listeRep)):
                     col = int((point[0] - xOrigin) / pixelWidth)
                     row = int((yOrigin - point[1] ) / pixelHeight)
             
-                    val.append(SR[row][col])
+                    val.append(MCARI[row][col])
                     
                 concat = ind + val
                     
@@ -4681,3 +4687,4 @@ for i in range (len(listeRep)):
    
 
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
+    

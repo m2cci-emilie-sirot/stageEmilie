@@ -56,7 +56,7 @@ for i in range(len(listeRep)):
     
     rep = f"{sat}_{date}_{nomParties[3]}"
    
-    os.makedirs(os.path.join(repSortie,listeRep[i]), exist_ok=True) # creation du dossier sur le disque
+    os.makedirs(os.path.join(repSortie,sat+"_"+date), exist_ok=True) # creation du dossier sur le disque
 
 
 # # Traitement de l'image compressee
@@ -69,7 +69,7 @@ for i in range(len(listeRep)):
         imageParties = img.split("_")
         bande = imageParties[12].split(".")[0]
         nomExtrait = f"{rep}_{bande}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i],nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date,nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -90,7 +90,7 @@ for i in range(len(listeRep)):
         masque_parts = img.split("_")
         masque_name = masque_parts[11]+"_"+masque_parts[12].split(".")[0]
         nomExtrait = f"{rep}_{masque_name}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i], nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date, nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -145,7 +145,7 @@ for i in range(len(listeRep)):
     
     rep = f"{sat}_{date}_{nomParties[3]}"
    
-    os.makedirs(os.path.join(repSortie,listeRep[i]), exist_ok=True) # creation du dossier sur le disque
+    os.makedirs(os.path.join(repSortie,sat+"_"+date), exist_ok=True) # creation du dossier sur le disque
 
 
 # # Traitement de l'image compressee
@@ -158,7 +158,7 @@ for i in range(len(listeRep)):
         imageParties = img.split("_")
         bande = imageParties[12].split(".")[0]
         nomExtrait = f"{rep}_{bande}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i],nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date,nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -179,7 +179,7 @@ for i in range(len(listeRep)):
         masque_parts = img.split("_")
         masque_name = masque_parts[11]+"_"+masque_parts[12].split(".")[0]
         nomExtrait = f"{rep}_{masque_name}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i], nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date, nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -235,7 +235,7 @@ for i in range(len(listeRep)):
     
     rep = f"{sat}_{date}_{nomParties[3]}"
    
-    os.makedirs(os.path.join(repSortie,listeRep[i]), exist_ok=True) # creation du dossier sur le disque
+    os.makedirs(os.path.join(repSortie,sat+"_"+date), exist_ok=True) # creation du dossier sur le disque
 
 
 # # Traitement de l'image compressee
@@ -248,7 +248,7 @@ for i in range(len(listeRep)):
         imageParties = img.split("_")
         bande = imageParties[12].split(".")[0]
         nomExtrait = f"{rep}_{bande}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i],nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date,nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -269,7 +269,7 @@ for i in range(len(listeRep)):
         masque_parts = img.split("_")
         masque_name = masque_parts[11]+"_"+masque_parts[12].split(".")[0]
         nomExtrait = f"{rep}_{masque_name}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i], nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date, nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -325,7 +325,7 @@ for i in range(len(listeRep)):
     
     rep = f"{sat}_{date}_{nomParties[3]}"
    
-    os.makedirs(os.path.join(repSortie,listeRep[i]), exist_ok=True) # creation du dossier sur le disque
+    os.makedirs(os.path.join(repSortie,sat+"_"+date), exist_ok=True) # creation du dossier sur le disque
 
 
 # # Traitement de l'image compressee
@@ -338,7 +338,7 @@ for i in range(len(listeRep)):
         imageParties = img.split("_")
         bande = imageParties[12].split(".")[0]
         nomExtrait = f"{rep}_{bande}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i],nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date,nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -359,7 +359,7 @@ for i in range(len(listeRep)):
         masque_parts = img.split("_")
         masque_name = masque_parts[11]+"_"+masque_parts[12].split(".")[0]
         nomExtrait = f"{rep}_{masque_name}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i], nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date, nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -414,7 +414,7 @@ for i in range(len(listeRep)):
     
     rep = f"{sat}_{date}_{nomParties[3]}"
    
-    os.makedirs(os.path.join(repSortie,listeRep[i]), exist_ok=True) # creation du dossier sur le disque
+    os.makedirs(os.path.join(repSortie,sat+"_"+date), exist_ok=True) # creation du dossier sur le disque
 
 
 # # Traitement de l'image compressee
@@ -427,7 +427,7 @@ for i in range(len(listeRep)):
         imageParties = img.split("_")
         bande = imageParties[12].split(".")[0]
         nomExtrait = f"{rep}_{bande}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i],nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date,nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -448,7 +448,7 @@ for i in range(len(listeRep)):
         masque_parts = img.split("_")
         masque_name = masque_parts[11]+"_"+masque_parts[12].split(".")[0]
         nomExtrait = f"{rep}_{masque_name}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i], nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date, nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -504,7 +504,7 @@ for i in range(len(listeRep)):
     
     rep = f"{sat}_{date}_{nomParties[3]}"
    
-    os.makedirs(os.path.join(repSortie,listeRep[i]), exist_ok=True) # creation du dossier sur le disque
+    os.makedirs(os.path.join(repSortie,sat+"_"+date), exist_ok=True) # creation du dossier sur le disque
 
 
 # # Traitement de l'image compressee
@@ -517,7 +517,7 @@ for i in range(len(listeRep)):
         imageParties = img.split("_")
         bande = imageParties[12].split(".")[0]
         nomExtrait = f"{rep}_{bande}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i],nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date,nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -538,7 +538,7 @@ for i in range(len(listeRep)):
         masque_parts = img.split("_")
         masque_name = masque_parts[11]+"_"+masque_parts[12].split(".")[0]
         nomExtrait = f"{rep}_{masque_name}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i], nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date, nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -593,7 +593,7 @@ for i in range(len(listeRep)):
     
     rep = f"{sat}_{date}_{nomParties[3]}"
    
-    os.makedirs(os.path.join(repSortie,listeRep[i]), exist_ok=True) # creation du dossier sur le disque
+    os.makedirs(os.path.join(repSortie,sat+"_"+date), exist_ok=True) # creation du dossier sur le disque
 
 
 # # Traitement de l'image compressee
@@ -606,7 +606,7 @@ for i in range(len(listeRep)):
         imageParties = img.split("_")
         bande = imageParties[12].split(".")[0]
         nomExtrait = f"{rep}_{bande}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i],nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date,nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
@@ -627,7 +627,7 @@ for i in range(len(listeRep)):
         masque_parts = img.split("_")
         masque_name = masque_parts[11]+"_"+masque_parts[12].split(".")[0]
         nomExtrait = f"{rep}_{masque_name}"
-        fichierExtrait = os.path.join(repSortie, listeRep[i], nomExtrait) # nom + chemin de l'image
+        fichierExtrait = os.path.join(repSortie,sat+"_"+date, nomExtrait) # nom + chemin de l'image
         sortieTif = gdal.Warp(fichierExtrait,
                             f"/vsizip/{repCourant}/{img}", # vsizip + chemin du zip + chemin de l'image dans le zip
                             creationOptions=['COMPRESS=LZW', 'PREDICTOR=2'], # compression du tif
