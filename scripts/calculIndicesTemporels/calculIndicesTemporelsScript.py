@@ -678,7 +678,8 @@ for i in range (len(listeRep)):
      
 
    
-
+tab[tab == -0.0] = np.nan
+tab[tab == 1.0] = np.nan
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
 
@@ -1345,7 +1346,8 @@ for i in range (len(listeRep)):
      
 
    
-
+tab[tab == -0.0] = np.nan
+tab[tab == 1.0] = np.nan
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
 
@@ -2014,7 +2016,8 @@ for i in range (len(listeRep)):
      
 
    
-
+tab[tab == -0.0] = np.nan
+tab[tab == 1.0] = np.nan
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
 
@@ -2682,7 +2685,8 @@ for i in range (len(listeRep)):
      
 
    
-
+tab[tab == -0.0] = np.nan
+tab[tab == 1.0] = np.nan
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
 
@@ -3350,7 +3354,8 @@ for i in range (len(listeRep)):
      
 
    
-
+tab[tab == -0.0] = np.nan
+tab[tab == 1.0] = np.nan
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
 
@@ -4017,7 +4022,8 @@ for i in range (len(listeRep)):
      
 
    
-
+tab[tab == -0.0] = np.nan
+tab[tab == 1.0] = np.nan
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     
 
@@ -4685,6 +4691,7 @@ for i in range (len(listeRep)):
      
 
    
-
+tab[tab == -0.0] = np.nan
+tab[tab == 1.0] = np.nan
 tab.to_csv(os.path.join(repSortie,nomSortieTab), index=False)
     

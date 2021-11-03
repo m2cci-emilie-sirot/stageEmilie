@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="sirote" projectname="" saveUser="sirote" version="3.20.2-Odense" saveDateTime="2021-08-29T11:08:07">
+<qgis saveUserFull="sirote" projectname="" saveUser="sirote" version="3.20.2-Odense" saveDateTime="2021-08-30T12:03:25">
   <homePath path=""/>
   <title></title>
   <autotransaction active="0"/>
@@ -5834,7 +5834,7 @@ def my_form_open(dialog, layer, feature):
       <SelectionColorRedPart type="int">255</SelectionColorRedPart>
     </Gui>
     <Layouts>
-      <lastLayoutExportDir type="QString">/home/sirote/Documents/stageEmilie/memoire/illustrations/masqueNuage.png</lastLayoutExportDir>
+      <lastLayoutExportDir type="QString">/home/sirote/Documents/stageEmilie/memoire/illustrations</lastLayoutExportDir>
     </Layouts>
     <Legend>
       <filterByMap type="bool">false</filterByMap>
@@ -6376,7 +6376,6 @@ def my_form_open(dialog, layer, feature):
           <layer-tree-layer source="../scripts/calculIndicesTemporelsPolygones/TFE/polygones_T31TFJ.shp" legend_exp="" legend_split_behavior="0" patch_size="-1,-1" name="polygones_T31TFJ" providerKey="ogr" id="polygones_T31TFJ_0dfd0346_6cfd_4c43_a60b_04068e4a6a6f" expanded="1" checked="Qt::Checked">
             <customproperties>
               <Option type="Map">
-                <Option name="cached_name" value="polygones TFE" type="QString"/>
                 <Option name="legend/title-label" value="polygones TFE" type="QString"/>
               </Option>
             </customproperties>
@@ -6384,7 +6383,6 @@ def my_form_open(dialog, layer, feature):
           <layer-tree-layer source="../../donnees/tfe_bio_v2/tfe_bio_T31TFJ.shp" legend_exp="" legend_split_behavior="0" patch_size="-1,-1" name="tfe_bio_T31TFJ" providerKey="ogr" id="tfe_bio_T31TFJ_5be8f47e_b55f_4390_adc9_92ca22cd9dfe" expanded="1" checked="Qt::Checked">
             <customproperties>
               <Option type="Map">
-                <Option name="cached_name" value="points TFE" type="QString"/>
                 <Option name="legend/title-label" value="points TFE" type="QString"/>
               </Option>
             </customproperties>

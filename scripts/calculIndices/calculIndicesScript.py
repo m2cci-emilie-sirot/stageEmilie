@@ -6,6 +6,7 @@ Created on Tue Jun  8 16:44:05 2021
 @author: Emilie Sirot d'après le script de Valentin Barbier
 """
 
+#librairies utilisees
 import os
 from osgeo import gdal
 import itertools
@@ -19,14 +20,14 @@ import numpy as np
 ####################
 
  
- 
+ #definition des repertoires d'entree et de sortie des donnees
 repDonnees = r"../applicationMasque/sortie/sortieT31TFJ"
 repSortie = "sortie/sortieT31TFJ"
 
-
+#creation d'une liste des sous-répertoires (les différentes dates de la tuile)
 listeRep = os.listdir(repDonnees)
 
-
+#boucle permettant de parcourir les repertoire de donnees
 for i in range (len(listeRep)):
     repCourant = os.path.join(repDonnees, listeRep[i])#se positionner dans le répertoire d'une date
     fichiersRep = os.listdir(repCourant)#lister les fichiers à savoir les différentes bandes

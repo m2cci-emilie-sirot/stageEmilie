@@ -6,7 +6,7 @@ Created on Fri Apr 23 15:36:50 2021
 @author: Emilie Sirot d'après le script de Pascal Pichelin
 """
 
-#packages à importer
+#librairies utilisees
 
 import os
 from pprint import pprint

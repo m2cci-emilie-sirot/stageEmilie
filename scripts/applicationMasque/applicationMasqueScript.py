@@ -6,7 +6,7 @@ Created on Thu May  6 10:01:24 2021
 @author: Emilie Sirot d'après le script de Valentin Barbier'
 """
 
-
+#librairies utilisees
 import os
 from osgeo import gdal
 import numpy
@@ -17,9 +17,6 @@ import rasterio
 
 gdal.AllRegister()
 
-#se placer dans le répertoire "applicationMasque"
-
-#traitements des images(par bande) par tuile
   
 ####################
 ####################
@@ -31,18 +28,18 @@ gdal.AllRegister()
 #Ouverture fichiers
 
 
-
+#defintion du repertoire d'entree et du repertoire de sortie des donnees
 repDonnees = r"../decoupageEmpriseZip/sortie/sortieT31TFJ"
 repSortie = "sortie/sortieT31TFJ"
 
-#creation liste des sous-répertoires (les différentes dates de la tuile)
+#creation d'une liste des sous-répertoires (les différentes dates de la tuile)
 
 listeRep = os.listdir(repDonnees)
 
-
+#boucle permettant de parcourir les repertoire de donnees
 for i in range (len(listeRep)):
-    repCourant = os.path.join(repDonnees, listeRep[i])#se positionner dans le répertoire d'une date
-    fichiersRep = os.listdir(repCourant)#lister les fichiers à savoir les différentes bandes
+    repCourant = os.path.join(repDonnees, listeRep[i])#se positionne dans le répertoire d'une date
+    fichiersRep = os.listdir(repCourant)#liste les fichiers à savoir les différentes bandes
     
     B2 = [f for f in fichiersRep if 'B2' in f]
     B3 = [f for f in fichiersRep if 'B3' in f]
@@ -62,7 +59,7 @@ for i in range (len(listeRep)):
     
     
     for j in range(len(listeBandes)):
-        nomPartiesImage = os.path.basename(listeBandes[j]).split("_")#séparer les parties du fichier en cours de traitement pour les réutiliser pour la sortie
+        nomPartiesImage = os.path.basename(listeBandes[j]).split("_")#séparer les parties du nom du fichier en cours de traitement pour les réutiliser pour la sortie
         sat = nomPartiesImage[0]
         date = nomPartiesImage[1]
         tuile = nomPartiesImage[2]
