@@ -407,7 +407,7 @@ for index in range(3, nombreIndices):
             
                 
                 
-            elif csvfile.iloc[2,c] == "SUB":
+            if csvfile.iloc[2,c] == "SUB":
                 listeSUB.append(csvfile.iloc[dt,c])
                 
          
